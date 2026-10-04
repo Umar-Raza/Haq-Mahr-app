@@ -6,22 +6,58 @@ export const minimumHaqMahr10Dirhams: Localized<GuideContent> = {
   en: {
     title: "Minimum Haq Mahr: 10 Dirhams of silver",
     description:
-      "What the 10 Dirham minimum for Haq Mahr means, why it is written as 2 Tola 7.5 Masha, the gram figures given by published fatwas, and how the calculator uses them.",
+      "The Hanafi ruling on the minimum Haq Mahr of 10 Dirhams of silver (2 Tola 7.5 Masha, 30.618 g), what happens if less is agreed, the classical texts, and how the calculator uses it.",
     summary:
-      "Published Hanafi fatwas give the minimum Mahr as 10 Dirhams of silver, about 30.618 g. See what the sources say and where they differ.",
+      "In Hanafi fiqh the minimum Mahr is 10 Dirhams of silver, about 30.618 g, even if a smaller amount is agreed. See the texts and where figures differ.",
     intro:
-      "Mahr (also written Mehr or Mahar) is the marriage gift owed to the bride. This guide summarises what the sources listed at the end say about its minimum amount. It is a summary for information, not a fatwa.",
+      "Mahr (also written Mehr or Mahar) is the marriage gift owed to the bride. This guide summarises what the sources listed at the end say about its minimum amount, mainly according to the Hanafi school. It is a summary for information, not a fatwa.",
     sections: [
       {
-        id: "what-the-sources-say",
-        heading: "What the sources say",
+        id: "the-ruling",
+        heading: "The ruling",
+        blocks: [
+          {
+            type: "p",
+            text: "The minimum Mahr is 10 Dirhams, which is 2 Tola 7.5 Masha (30.618 g) of silver. If the couple agree on less than this, 10 Dirhams is still due.",
+          },
+          {
+            type: "ul",
+            items: [
+              "Example: if the minimum, in rupees, is 10,000 but the parties set the Mahr at 5,000, the husband must still pay 10,000.",
+              "Agreeing on less than the minimum does not by itself stop the marriage from being valid, provided the other conditions of a valid nikah are met.",
+              "If more than 10 Dirhams is agreed, the agreed amount is what is due.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "classical-texts",
+        heading: "What the classical texts say",
         blocks: [
           {
             type: "ul",
             items: [
-              "A Hanafi fatwa by Mufti Ebrahim Salejee (MuftiOnline) gives the minimum Mahr as 10 Dirhams of silver, equal to 30.618 g.",
-              "Darul Ifta Birmingham (Fatwa 03336) also gives the minimum as 10 Dirhams. It notes that one Dirham is given as roughly 2.97 g to 3.1 g, so 10 Dirhams comes to about 29.7 g to 31 g.",
-              "A column in Daily Jang's Iqra section (18 May 2018) gives the minimum Mahr as 2 Tola 7.5 Masha of silver, or its value.",
+              "Badai al-Sanai (al-Kasani): if the named Mahr is less than ten, it is completed to ten according to the three imams of the school.",
+              "Tanwir al-Absar with al-Durr al-Mukhtar: 10 Dirhams are due if 10 Dirhams are named, and also if less than that is named.",
+              "Hashiyat al-Tahtawi on al-Durr, quoting al-Nahr: Mahr carries two rights, the woman's (anything above ten up to her mahr al-mithl) and the Shariah's (ten). If she accepts less than ten, the Shariah's right remains, so the minimum must be completed.",
+              "Bahar-e-Shariat: if 10 Dirhams or less is named in the nikah, 10 Dirhams is due; if more is named, the named amount is due.",
+            ],
+          },
+          {
+            type: "note",
+            tone: "info",
+            text: "These texts are quoted as they appear in the fatwa listed under Sources. Volume and page references are given there.",
+          },
+        ],
+      },
+      {
+        id: "what-the-sources-say",
+        heading: "What the sources say about the weight",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              "Fatawa Faqih-e-Millat (Mufti Jalaluddin Amjadi): today's equivalent of 10 Dirhams is 2 Tola 7.5 Masha of silver, which by current weights is 30.618 g.",
             ],
           },
         ],
@@ -32,7 +68,7 @@ export const minimumHaqMahr10Dirhams: Localized<GuideContent> = {
         blocks: [
           {
             type: "p",
-            text: "2 Tola 7.5 Masha is the same weight expressed in the Tola system: 31.5 Masha, or 2.625 Tola. With a Tola of 11.664 g this is 30.618 g, matching the figure in the first fatwa above.",
+            text: "2 Tola 7.5 Masha is the same weight expressed in the Tola system: 31.5 Masha, or 2.625 Tola. With a Tola of 11.664 g this is 30.618 g, matching the figure in the fatwas above.",
           },
           {
             type: "link",
@@ -76,22 +112,58 @@ export const minimumHaqMahr10Dirhams: Localized<GuideContent> = {
   ur: {
     title: "کم از کم حق مہر: 10 درہم چاندی",
     description:
-      "حق مہر کی کم از کم مقدار 10 درہم کا مطلب، اسے 2 تولہ 7.5 ماشہ کیوں لکھا جاتا ہے، شائع شدہ فتاویٰ میں دی گئی گرام کی مقداریں، اور کیلکولیٹر انہیں کیسے استعمال کرتا ہے۔",
+      "کم از کم حق مہر 10 درہم چاندی (2 تولہ 7.5 ماشہ، 30.618 گرام) کا حنفی حکم، اس سے کم مقرر کرنے پر کیا ہوگا، کلاسیکی کتب کی عبارات، اور کیلکولیٹر اسے کیسے استعمال کرتا ہے۔",
     summary:
-      "شائع شدہ حنفی فتاویٰ کے مطابق کم از کم مہر 10 درہم چاندی ہے، تقریباً 30.618 گرام۔ دیکھیں ذرائع کیا کہتے ہیں اور کہاں فرق ہے۔",
+      "فقہِ حنفی میں کم از کم مہر 10 درہم چاندی، تقریباً 30.618 گرام ہے، چاہے اس سے کم طے کیا جائے۔ عبارات اور مقداروں کا فرق دیکھیں۔",
     intro:
-      "مہر نکاح میں دلہن کا وہ حق ہے جو اسے ادا کیا جاتا ہے۔ یہ رہنمائی آخر میں دیے گئے ذرائع کی روشنی میں اس کی کم از کم مقدار کا خلاصہ پیش کرتی ہے۔ یہ صرف معلومات کے لیے خلاصہ ہے، فتویٰ نہیں۔",
+      "مہر نکاح میں دلہن کا وہ حق ہے جو اسے ادا کیا جاتا ہے۔ یہ رہنمائی آخر میں دیے گئے ذرائع کی روشنی میں، بنیادی طور پر حنفی مسلک کے مطابق، اس کی کم از کم مقدار کا خلاصہ پیش کرتی ہے۔ یہ صرف معلومات کے لیے خلاصہ ہے، فتویٰ نہیں۔",
     sections: [
       {
-        id: "what-the-sources-say",
-        heading: "ذرائع کیا کہتے ہیں",
+        id: "the-ruling",
+        heading: "حکم",
+        blocks: [
+          {
+            type: "p",
+            text: "مہر کی کم سے کم مقدار 10 درہم یعنی 2 تولے 7.5 ماشے (30.618 گرام) چاندی ہے۔ اگر فریقین اس سے کم مہر مقرر کریں تب بھی 10 درہم مہر ہی واجب ہوگا۔",
+          },
+          {
+            type: "ul",
+            items: [
+              "مثال: اگر مہر کی کم از کم مقدار روپے میں 10,000 ہو، لیکن فریقین 5,000 مقرر کریں، تو مرد پر 10,000 ادا کرنا لازم ہوگا۔",
+              "شرعی مقدار سے کم مہر مقرر کرنے سے نکاح منعقد ہو جاتا ہے، بشرطیکہ نکاح کے منعقد ہونے کی دیگر تمام شرائط پائی جائیں۔",
+              "اگر 10 درہم سے زیادہ مقرر کیا جائے تو جو مقرر ہوا وہی واجب ہے۔",
+            ],
+          },
+        ],
+      },
+      {
+        id: "classical-texts",
+        heading: "کلاسیکی کتب کیا کہتی ہیں",
         blocks: [
           {
             type: "ul",
             items: [
-              "مفتی ابراہیم صالحجی (مفتی آن لائن) کے ایک حنفی فتوے میں کم از کم مہر 10 درہم چاندی بتایا گیا ہے، جو 30.618 گرام کے برابر ہے۔",
-              "دارالافتاء برمنگھم (فتویٰ 03336) میں بھی کم از کم مقدار 10 درہم بتائی گئی ہے۔ اس کے مطابق ایک درہم تقریباً 2.97 سے 3.1 گرام بیان کیا جاتا ہے، اس لیے 10 درہم تقریباً 29.7 سے 31 گرام بنتے ہیں۔",
-              "روزنامہ جنگ کے صفحہ اقراء (18 مئی 2018) کے ایک مضمون میں کم از کم مہر 2 تولہ 7.5 ماشہ چاندی یا اس کی قیمت بتایا گیا ہے۔",
+              "بدائع الصنائع (علامہ کاسانی): مہر اگر دس سے کم مقرر کیا جائے تو ہمارے تینوں ائمہ کے نزدیک دس تک پورا کیا جائے گا۔",
+              "تنویر الابصار مع الدر المختار: 10 درہم مقرر کیے ہوں یا اس سے کم، دونوں صورتوں میں 10 درہم مہر واجب ہوگا۔",
+              "حاشیۃ الطحطاوی علی الدر (بحوالہ نہر): مہر میں دو حق ہیں: عورت کا حق، یعنی دس سے زائد مہرِ مثل تک، اور شریعت کا حق، یعنی دس۔ عورت دس سے کم پر راضی ہو جائے تب بھی شریعت کا حق باقی رہتا ہے، اس لیے کم از کم مہر کی تکمیل ضروری ہے۔",
+              "بہارِ شریعت: نکاح میں 10 درہم یا اس سے کم مہر باندھا گیا تو 10 درہم واجب، اور زیادہ باندھا ہو تو جو مقرر ہوا واجب۔",
+            ],
+          },
+          {
+            type: "note",
+            tone: "info",
+            text: "یہ عبارات اسی طرح نقل کی گئی ہیں جیسے ذرائع میں درج فتوے میں آئی ہیں۔ جلد اور صفحے کے حوالے وہیں دیکھیں۔",
+          },
+        ],
+      },
+      {
+        id: "what-the-sources-say",
+        heading: "وزن کے بارے میں ذرائع کیا کہتے ہیں",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              "فتاویٰ فقیہ ملت (مفتی جلال الدین امجدی): 10 درہم کی موجودہ حیثیت 2 تولہ 7.5 ماشہ چاندی کے برابر ہے، جو موجودہ وزن کے حساب سے 30.618 گرام ہے۔",
             ],
           },
         ],
@@ -102,7 +174,7 @@ export const minimumHaqMahr10Dirhams: Localized<GuideContent> = {
         blocks: [
           {
             type: "p",
-            text: "2 تولہ 7.5 ماشہ یہی وزن تولے کے نظام میں ہے: 31.5 ماشہ یا 2.625 تولہ۔ 11.664 گرام فی تولہ کے حساب سے یہ 30.618 گرام بنتا ہے، جو اوپر والے پہلے فتوے کی مقدار کے مطابق ہے۔",
+            text: "2 تولہ 7.5 ماشہ یہی وزن تولے کے نظام میں ہے: 31.5 ماشہ یا 2.625 تولہ۔ 11.664 گرام فی تولہ کے حساب سے یہ 30.618 گرام بنتا ہے، جو اوپر بیان کیے گئے فتاویٰ کی مقدار کے مطابق ہے۔",
           },
           {
             type: "link",
@@ -142,22 +214,58 @@ export const minimumHaqMahr10Dirhams: Localized<GuideContent> = {
   ar: {
     title: "الحد الأدنى لحق المهر: 10 دراهم من الفضة",
     description:
-      "معنى الحد الأدنى للمهر بـ10 دراهم، ولماذا يُكتب 2 تولة و7.5 ماشة، والأوزان بالغرام الواردة في الفتاوى المنشورة، وكيف تستخدمها الحاسبة.",
+      "الحكم الحنفي في الحد الأدنى للمهر بـ10 دراهم من الفضة (2 تولة و7.5 ماشة، أي 30.618 غرامًا)، وما يجب إن سُمّي أقل منها، ونصوص الكتب المعتمدة، وكيف تستخدمها الحاسبة.",
     summary:
-      "تذكر فتاوى حنفية منشورة أن أقل المهر 10 دراهم من الفضة، أي نحو 30.618 غرامًا. اطّلع على ما تقوله المصادر وأين تختلف.",
+      "في الفقه الحنفي أقل المهر 10 دراهم من الفضة، أي نحو 30.618 غرامًا، ولو سُمّي أقل منها. اطّلع على النصوص وعلى مواضع اختلاف الأرقام.",
     intro:
-      "المهر (ويُكتب أيضًا مهر أو صداق) هو حق الزوجة في عقد النكاح. يلخّص هذا الدليل ما تذكره المصادر المدرجة في آخره عن حدّه الأدنى. وهو ملخّص للعلم، وليس فتوى.",
+      "المهر (ويُكتب أيضًا مهر أو صداق) هو حق الزوجة في عقد النكاح. يلخّص هذا الدليل ما تذكره المصادر المدرجة في آخره عن حدّه الأدنى، وفق المذهب الحنفي في الأساس. وهو ملخّص للعلم، وليس فتوى.",
     sections: [
       {
-        id: "what-the-sources-say",
-        heading: "ماذا تقول المصادر",
+        id: "the-ruling",
+        heading: "الحكم",
+        blocks: [
+          {
+            type: "p",
+            text: "أقل المهر 10 دراهم، أي 2 تولة و7.5 ماشة (30.618 غرامًا) من الفضة. فإن اتفق الزوجان على أقل من ذلك وجب مع ذلك 10 دراهم.",
+          },
+          {
+            type: "ul",
+            items: [
+              "مثال: إذا كان أقل المهر بالروبية 10,000 وسمّى الطرفان 5,000، لزم الزوج دفع 10,000.",
+              "تسمية أقل من الحد الأدنى لا تمنع بذاتها صحة النكاح، بشرط توافر سائر شروط صحته.",
+              "وإن سُمّي أكثر من 10 دراهم وجب المقدار المسمّى.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "classical-texts",
+        heading: "ما تقوله الكتب المعتمدة",
         blocks: [
           {
             type: "ul",
             items: [
-              "تذكر فتوى حنفية للمفتي إبراهيم صالحجي (MuftiOnline) أن أقل المهر 10 دراهم من الفضة، أي 30.618 غرامًا.",
-              "تذكر دار الإفتاء في برمنغهام (الفتوى 03336) أيضًا أن الحد الأدنى 10 دراهم، وتشير إلى أن الدرهم يُقدَّر بنحو 2.97 إلى 3.1 غرام، فتكون الـ10 دراهم نحو 29.7 إلى 31 غرامًا.",
-              "يذكر مقال في صفحة «اقرأ» بصحيفة جنگ اليومية (18 مايو 2018) أن أقل المهر 2 تولة و7.5 ماشة من الفضة أو قيمتها.",
+              "بدائع الصنائع (الكاساني): إن كان المسمّى أقل من عشرة يُكمَّل إلى عشرة عند أئمة المذهب الثلاثة.",
+              "تنوير الأبصار مع الدر المختار: تجب 10 دراهم إن سمّى 10 دراهم أو سمّى دونها.",
+              "حاشية الطحطاوي على الدر (عن النهر): للمهر حقّان: حق المرأة وهو ما زاد على العشرة إلى مهر مثلها، وحق الشرع وهو العشرة. فإذا رضيت بأقل من عشرة بقي حق الشرع، فوجب تكميلها.",
+              "بهار شريعت: إذا عُقد النكاح بـ10 دراهم أو بأقل منها وجبت 10 دراهم، وإن سُمّي أكثر وجب المسمّى.",
+            ],
+          },
+          {
+            type: "note",
+            tone: "info",
+            text: "نُقلت هذه النصوص كما وردت في الفتوى المذكورة ضمن المصادر، وفيها أرقام المجلدات والصفحات.",
+          },
+        ],
+      },
+      {
+        id: "what-the-sources-say",
+        heading: "ماذا تقول المصادر عن الوزن",
+        blocks: [
+          {
+            type: "ul",
+            items: [
+              "فتاوى فقيه ملت (المفتي جلال الدين أمجدي): الـ10 دراهم تساوي اليوم 2 تولة و7.5 ماشة من الفضة، أي 30.618 غرامًا بحسب الأوزان الحالية.",
             ],
           },
         ],
@@ -168,7 +276,7 @@ export const minimumHaqMahr10Dirhams: Localized<GuideContent> = {
         blocks: [
           {
             type: "p",
-            text: "2 تولة و7.5 ماشة هي الوزن نفسه بنظام التولة: 31.5 ماشة أو 2.625 تولة. وبحساب التولة 11.664 غرامًا تكون 30.618 غرامًا، وهو ما يوافق رقم الفتوى الأولى أعلاه.",
+            text: "2 تولة و7.5 ماشة هي الوزن نفسه بنظام التولة: 31.5 ماشة أو 2.625 تولة. وبحساب التولة 11.664 غرامًا تكون 30.618 غرامًا، وهو ما يوافق رقم الفتاوى المذكورة أعلاه.",
           },
           {
             type: "link",

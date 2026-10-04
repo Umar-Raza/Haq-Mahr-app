@@ -14,7 +14,7 @@ const allNavItems: readonly NavItem[] = [
   { key: "calculator", path: "", ready: true },
   { key: "history", path: "/history", ready: true },
   { key: "guides", path: "/guides", ready: true },
-  { key: "silverRateSources", path: "/silver-rate-sources", ready: false },
+  { key: "silverRateSources", path: "/silver-rate-sources", ready: true },
   { key: "about", path: "/about", ready: true },
 ];
 

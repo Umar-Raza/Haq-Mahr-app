@@ -25,7 +25,7 @@ export function SiteHeader({
       <Container className="flex h-14 items-center justify-between gap-4">
         <Link
           href={localizedHref(locale, "")}
-          className="flex items-center gap-2 text-base font-semibold text-primary"
+          className="flex items-center gap-2 whitespace-nowrap text-base font-semibold text-primary"
         >
           <span
             aria-hidden="true"
@@ -34,7 +34,7 @@ export function SiteHeader({
           {dict.meta.siteName}
         </Link>
 
-        <nav aria-label={dict.nav.label} className="hidden md:block">
+        <nav aria-label={dict.nav.label} className="hidden lg:block">
           <NavLinks locale={locale} items={items} orientation="horizontal" />
         </nav>
 

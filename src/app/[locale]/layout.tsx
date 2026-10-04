@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Geist, Noto_Naskh_Arabic } from "next/font/google";
+import { Geist, Noto_Sans_Arabic, Vazirmatn } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { isLocale, localeDirection, locales } from "@/i18n/config";
@@ -13,9 +13,15 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const notoNaskhArabic = Noto_Naskh_Arabic({
-  variable: "--font-noto-naskh-arabic",
-  subsets: ["arabic"],
+// Arabic: Noto Sans Arabic. Urdu: Vazirmatn. Latin subsets keep digits and Latin names in the same family.
+const notoSansArabic = Noto_Sans_Arabic({
+  variable: "--font-noto-sans-arabic",
+  subsets: ["arabic", "latin"],
+});
+
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["arabic", "latin"],
 });
 
 export const dynamicParams = false;
@@ -50,7 +56,7 @@ export default async function LocaleLayout({
       lang={locale}
       dir={localeDirection[locale]}
       data-theme={LIGHT_THEME}
-      className={`${geistSans.variable} ${notoNaskhArabic.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${notoSansArabic.variable} ${vazirmatn.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -58,7 +64,7 @@ export default async function LocaleLayout({
       </head>
       {/* Browser extensions (e.g. ColorZilla) inject attributes into <body> before hydration. */}
       <body
-        className="flex min-h-full flex-col bg-base-200 font-sans text-base-content"
+        className="flex min-h-full flex-col bg-base-200 text-base-content"
         suppressHydrationWarning
       >
         <a

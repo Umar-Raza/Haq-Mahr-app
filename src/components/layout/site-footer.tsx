@@ -13,10 +13,10 @@ export function SiteFooter({
 }) {
   return (
     <footer className="border-t border-line bg-base-100 print:hidden">
-      <Container className="flex flex-col gap-4 py-8 text-sm text-muted">
+      <Container className="flex flex-col items-center gap-4 py-8 text-center text-sm text-muted">
         <div aria-hidden="true" className="h-px w-12 bg-accent" />
         <nav aria-label={dict.footer.links.label}>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2">
             {footerItems.map((item) => (
               <li key={item.key}>
                 <Link

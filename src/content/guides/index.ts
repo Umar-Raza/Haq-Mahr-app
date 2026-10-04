@@ -4,10 +4,14 @@ import type { Localized } from "../types";
 import { checkingSilverRates } from "./checking-silver-rates";
 import { howToUseTheCalculator } from "./how-to-use-the-calculator";
 import { minimumHaqMahr10Dirhams } from "./minimum-haq-mahr-10-dirhams";
+import { nikahWithoutMahrNamed } from "./nikah-without-mahr-named";
 import { tolaMashaGram } from "./tola-masha-gram";
 import type { GuideContent } from "./types";
 
-export type GuideSource = Omit<MethodologySource, "supports">;
+export type GuideSource = Omit<MethodologySource, "supports"> & {
+  /** Provided by the site owner; the page blocks automated access, so we have not opened it ourselves. */
+  notOpened?: boolean;
+};
 
 const source = (url: string): GuideSource => {
   const found = methodologySources.find((s) => s.url === url);
@@ -15,6 +19,21 @@ const source = (url: string): GuideSource => {
   return { title: found.title, publisher: found.publisher, url: found.url };
 };
 
+// Cites the classical texts (Badai al-Sanai, al-Durr al-Mukhtar, al-Tahtawi, Bahar-e-Shariat,
+// Fatawa Faqih-e-Millat). Behind a bot challenge, so supplied by the owner and not opened by us.
+const FATWAQA_SOURCE: GuideSource = {
+  title: "Meher ki kam se kam miqdar se bhi kam muqarrar kiya to hukum",
+  publisher: "fatwaqa.com",
+  url: "https://www.fatwaqa.com/ur/fatawa/nikah/meher-ki-kam-se-kam-miqdar-se-bhi-kam-muqarrar-kiya-to-hukum",
+  notOpened: true,
+};
+// Fatawa Alamgiri, Fatawa Khaliliya and Bahar-e-Shariat as quoted there; owner-supplied, not opened by us.
+const FATWAQA_NO_MAHR_SOURCE: GuideSource = {
+  title: "Mehr ke baghair nikah",
+  publisher: "fatwaqa.com",
+  url: "https://www.fatwaqa.com/ur/fatawa/nikah/mehr-ke-baghair-nikah",
+  notOpened: true,
+};
 const TOLA_SOURCE = source("https://en.wikipedia.org/wiki/Tola_(unit)");
 // Opened and checked 2026-10-04: states 1 troy ounce = 31.1034768 g.
 const TROY_SOURCE: GuideSource = {
@@ -47,18 +66,17 @@ export const guides: readonly Guide[] = [
     slug: "minimum-haq-mahr-10-dirhams",
     updated: "2026-10-04",
     religious: true,
-    sources: [
-      source(
-        "https://islamqa.org/hanafi/muftionline/130564/minimum-mahar-in-pounds-explained/",
-      ),
-      source(
-        "https://daruliftabirmingham.co.uk/what-is-the-minimum-quantity-of-mehar-in-gram-for-muslim-marriage/",
-      ),
-      source("https://jang.com.pk/news/494011"),
-      TOLA_SOURCE,
-    ],
-    related: ["tola-masha-gram", "how-to-use-the-calculator"],
+    sources: [FATWAQA_SOURCE, TOLA_SOURCE],
+    related: ["nikah-without-mahr-named", "tola-masha-gram"],
     content: minimumHaqMahr10Dirhams,
+  },
+  {
+    slug: "nikah-without-mahr-named",
+    updated: "2026-10-04",
+    religious: true,
+    sources: [FATWAQA_NO_MAHR_SOURCE],
+    related: ["minimum-haq-mahr-10-dirhams", "how-to-use-the-calculator"],
+    content: nikahWithoutMahrNamed,
   },
   {
     slug: "tola-masha-gram",

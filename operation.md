@@ -41,9 +41,89 @@ Newest first. Keep each entry short.
 - **Buttons:** Copy result now uses `btn-outline btn-primary` like Share/WhatsApp (it was missing `btn-primary`). Download PNG stays filled as the primary action (intentional, not a bug). The actions block is `mt-auto`, with the status line above the buttons, so the buttons line up with Clear at the card bottom.
 - **Checks run:** lint, typecheck, 62/62 tests, production build. CDP 46/46 passing (adds the exact equation without a note, 7.6545 → PKR 7.66, 4 how-to steps, matching outline colours). Desktop preview and filled screenshots reviewed.
 
+### 2026-10-04 — Minimum Haq Mahr guide expanded; badge alignment (user request)
+
+- **Guide rewritten** (en/ur/ar) from the fatwa text the user pasted, from fatwaqa.com (the user supplied the link): sections The ruling (10 Dirhams = 2 Tola 7.5 Masha = 30.618 g; less agreed still means 10 Dirhams due; example 10,000 vs 5,000; nikah stays valid if other conditions are met), Classical texts (Badai al-Sanai, al-Durr al-Mukhtar, Hashiyat al-Tahtawi, Bahar-e-Shariat), weights per source (adds Fatawa Faqih-e-Millat, kept the 3 older sources), Tola/grams, differences, calculator use.
+- **Source caveat:** fatwaqa.com is behind a Cloudflare challenge, so we could not open it ourselves. It is listed with `notOpened: true`, and the guide shows "provided by the site owner; not checked by us". Volume and page references were not copied into the guide; it says they are on the source.
+- **Omitted on purpose:** the Fatawa Bahr al-Ulum quote ("3 bhar 1.5 masha"), because a regional unit conversion would be an unsourced claim here.
+- **Alignment:** the "Religious topic" badge moved so every guide heading sits at the same position. On a guide page it is on the "Last updated" line; on the index cards it is in the bottom row next to "Read guide". Measured: all 4 guide h1s at the same top in en/ur/ar, and equal card heading tops.
+- **Checks:** lint, typecheck, 144/144 tests, build, and a CDP alignment check.
+- **Open:** a qualified scholar must review the guide, and the owner should open the fatwaqa page and confirm the quotes.
+
+### 2026-10-04 — Language-switch fade and fonts (user request)
+
+- **Fade:** switching language is a soft client navigation (same root layout), so cross-document view transitions do not apply. `language-switcher.tsx` now fades the page out (180 ms, `html.lang-switching body{opacity:0}`), navigates with `router.push`, and removes the class in an effect when the new `current` locale renders, so the LTR/RTL flip happens while the page is hidden. Plain left-click only (ctrl/cmd/shift/middle keep normal link behaviour), skipped under reduced motion, with a 4 s safety timeout. Measured: opacity 1 to 0, dir flipped at opacity 0, back to 1.
+- **Fonts:** Arabic uses Noto Sans Arabic; Urdu uses Vazirmatn (both next/font/google, subsets arabic and latin, variable weight). Noto Naskh Arabic was removed. Found and fixed a pre-existing bug: the `font-sans` class on `<body>` overrode the language font rules, so the old Arabic/Urdu font was never applied; the rules now target `html:lang(ar)` / `html:lang(ur)` and `font-sans` is dropped from body. Verified in the browser through computed font-family and loaded faces.
+- **Checks:** lint, typecheck, 149/149 tests, build, CDP fade test 9/9 (soft navigation, fade out and in, ctrl+click not intercepted, reduced motion, no errors), and the PNG download still works. Regression: calculator 61/61, history 45/45, content 38/38, FAQ 22/22.
+- **Open:** Vazirmatn is a Persian-oriented design; confirm that the Urdu glyphs look right to a native reader.
+
+### 2026-10-04 — FAQ on the calculator page (user request)
+
+- `components/calculator/faq.tsx` (server component, native `<details>` with DaisyUI collapse) is rendered below the calculator and receipt, above the footer. Eight questions in en/ur/ar in `dictionary.faq`: fatwa or not, weight used, today's rate, per Tola or gram, rounding up, currency conversion, data privacy, a different weight from a scholar. Every answer repeats only facts already in the site (decision.md, guides). It ends with links to the guides and sources pages. Hidden when printing.
+- No FAQPage JSON-LD yet; Phase 7 will decide on structured data.
+- Checks: lint, typecheck, 149/149 tests, build; CDP 22/22 (8 items, below the receipt, no overflow in en/ur/ar, links 200, click and Enter open items, no console errors); calculator suite 61/61.
+
+### 2026-10-04 — New guide: Nikah without a named Mahr; TOC scroll highlight (user request)
+
+- **Guide** `nikah-without-mahr-named` (en/ur/ar, religious): nikah is valid without a named Mahr and Mahr al-Mithl is due. It uses Fatawa Alamgiri, Fatawa Khaliliya and Bahar-e-Shariat as quoted by the fatwa the user supplied (fatwaqa.com/ur/fatawa/nikah/mehr-ke-baghair-nikah). Like the other fatwaqa source it is `notOpened` (Cloudflare), shows the owner-supplied note, and omits volume/page references. It links to the minimum-Mahr guide and says the calculator does not compute Mahr al-Mithl.
+- **TOC:** `components/content/toc-list.tsx` (client, IntersectionObserver) highlights the section being read, and a click activates it. Verified in en/ur: 6/6 sections follow scroll.
+- **Checks:** lint, typecheck, 149/149 tests, build (48 pages), alignment check (all 5 guide headings aligned in en/ur/ar), content suite 38/38.
+- **Open:** scholar review; the owner should open the fatwaqa page and confirm the quotes.
+
+### 2026-10-04 — Older sources removed from the Minimum Haq Mahr guide (user request)
+
+- Removed MuftiOnline, Darul Ifta Birmingham and Daily Jang from that guide: from its Sources box and from the "weights" bullets in en/ur/ar. The guide now cites fatwaqa.com and Wikipedia (Tola). They remain in decision.md for the calculation reference.
+- Checks: lint, typecheck, 144/144 tests, build.
+
+### 2026-10-04 — Methodology box removed from the home page (user request)
+
+- Removed the "How the calculation works" section from `/[locale]`, along with `components/calculator/methodology.tsx` and the `methodology` dictionary keys. The formula, reference weight, rounding and sources are still on the receipt (calculation and method rows), in the guides (Tola/Masha/Gram, Minimum Haq Mahr 10 Dirhams) and in the Disclaimer. The About page text was changed to match.
+- Note: CLAUDE.md asks to "explain methodology in UI". The receipt and the guides now carry that; add a link to the guide on the calculator page if the user wants an explicit pointer.
+- Checks: lint, typecheck, 144/144 unit tests, build (45 pages).
+
+### 2026-10-04 — Phase 6 complete (Silver Rate Sources)
+
+- **Current phase:** Phase 6 done. Phase 7 (SEO, analytics, AdSense readiness) not started. Contact still waits for the user's email.
+- **Countries (user request: at least 10, including PK, IN, US, UK, CA, SA, UAE):** 12 countries and 17 links in `src/content/silver-sources.ts`:
+  - PK: UrduPoint (local market, tola and 10 g) and GoldPriceZ.
+  - IN: IBJA (Silver 999 per kg, AM/PM).
+  - US: JM Bullion and Kitco.
+  - UK: LBMA Silver Price, The Royal Mint, BullionByPost.
+  - CA: Kitco CAD.
+  - AE: Khaleej Times (silver per kg) and GoldPriceZ.
+  - SA, QA, KW, BD, MY: GoldPriceZ.
+  - AU: The Perth Mint.
+- **Verification:** each URL was opened in headless Chrome on 2026-10-04 and showed a silver price or benchmark. UrduPoint and BullionByPost return 403 to scripts, but loaded in the browser.
+- **Rejected sources:**
+  - Kitco per-currency pages for GBP, INR, SAR, AED and PKR return 404.
+  - Dubai Gold & Jewellery Group publishes gold rates only.
+  - APMEX and Silver Gold Bull block automated access, so they could not be verified.
+  - BAJUS (bajus.org) sits behind a Cloudflare challenge and could not be verified. Bangladesh uses GoldPriceZ until someone checks BAJUS in a normal browser.
+  - The All Pakistan Sarafa association has no website; its rates appear in news.
+- **Source kinds** are shown as badges with a legend on the page: localMarket, benchmark, dealer, spotConverter. Spot converters are labelled as "not a local market rate". This is an honest-labelling decision so users know which rate matches their market.
+- **Page:** `/[locale]/silver-rate-sources` (nav item now ready):
+  - Breadcrumbs.
+  - A "before you copy a rate" box (unit, purity, buy or sell, date, no endorsement) linking to the checking-silver-rates guide.
+  - Kinds legend and country jump links.
+  - Country names come from `Intl.DisplayNames`.
+  - Each card shows the kind, name (new tab, `noopener noreferrer`), description in 3 languages, currency, units (`Intl.ListFormat`), host and "Link checked {date}".
+  - The checking-silver-rates guide now links back to this page.
+- **Header:** with 5 nav items the desktop nav wrapped at 768 px. The desktop nav now starts at `lg` (1024 px); the mobile menu is used below that. The logo is `whitespace-nowrap`.
+- **Maintenance:** `npm run check:links` (`scripts/check-silver-links.mjs`) reports OK, BROKEN or CHECK (403/429/503 bot-blocked, so verify in a browser). Last run: 17 links, 0 broken, 2 CHECK (verified in the browser).
+- **Checks run:**
+  - lint, typecheck, production build (45 pages).
+  - 144/144 unit tests (`silver-sources.test.ts`: at least 10 countries, valid region and currency codes, unique https URLs, kinds and units, descriptions in 3 locales).
+  - CDP 19/19: 12 countries and 17 cards in en/ur/ar, safe rel, jump anchors, no mobile overflow, header with no wrapping at 768/1024/1280 in en/ur.
+  - Regression suites: content 38/38, history 45/45, calculator 61/61.
+  - Screenshots reviewed. Fixed: the spot-converter badge was nearly invisible in dark mode; it is now an outline badge.
+- **Open:**
+  - Re-check links periodically.
+  - Verify BAJUS manually.
+  - Native review of the ur/ar descriptions.
+
 ### 2026-10-04 — Phase 5 complete (guides and info pages)
 
-- **Current phase:** Phase 5 done, except that Contact waits for an email. Phase 6 (Silver Rate Sources) not started; the user must choose the countries.
+- **Current phase:** Phase 5 done, except that Contact waits for an email. (Superseded: see the Phase 6 entry.)
 - **User decisions:**
   - No owner name on About ("independent project").
   - Four guides.
@@ -281,12 +361,12 @@ Run the relevant checks before merging/deploying:
 **Done when:** pages are useful, localized, non-placeholder, and reviewed for factual accuracy.
 
 ### Phase 6 — Silver Rate Sources directory
-- [ ] Create country-grouped source data.
-- [ ] Verify every provider name and URL.
-- [ ] Add neutral descriptions and last-reviewed dates.
-- [ ] Add external-link safety attributes.
-- [ ] Add user note to confirm rate unit, purity, location, and timestamp on provider site.
-- [ ] Add skeleton only if source directory data is fetched asynchronously; static source lists need no skeleton.
+- [x] Create country-grouped source data.
+- [x] Verify every provider name and URL.
+- [x] Add neutral descriptions and last-reviewed dates.
+- [x] Add external-link safety attributes.
+- [x] Add user note to confirm rate unit, purity, location, and timestamp on provider site.
+- [x] Add skeleton only if source directory data is fetched asynchronously; static source lists need no skeleton. (Static list, so no skeleton.)
 **Done when:** all links work and no listing claims a live price or endorsement without evidence.
 
 ### Phase 7 — SEO, analytics, AdSense readiness

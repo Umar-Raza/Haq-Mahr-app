@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Calculator } from "@/components/calculator/calculator";
-import { Methodology } from "@/components/calculator/methodology";
+import { Faq } from "@/components/calculator/faq";
 import { ReopenableCalculator } from "@/components/calculator/reopenable-calculator";
 import { Container } from "@/components/layout/container";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -71,18 +71,16 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 
   return (
     <Container className="flex flex-col gap-8 py-10 sm:py-14">
-      <div className="print:hidden">
+      <div className="text-center print:hidden">
         <h1 className="text-3xl font-semibold text-base-content">
           {dict.home.heading}
         </h1>
-        <p className="mt-3 max-w-2xl text-muted">{dict.home.intro}</p>
+        <p className="mx-auto mt-3 max-w-2xl text-muted">{dict.home.intro}</p>
       </div>
       <Suspense fallback={<Calculator {...calculatorProps} />}>
         <ReopenableCalculator {...calculatorProps} />
       </Suspense>
-      <div className="max-w-3xl print:hidden">
-        <Methodology locale={locale} dict={dict.methodology} />
-      </div>
+      <Faq locale={locale} dict={dict.faq} />
     </Container>
   );
 }

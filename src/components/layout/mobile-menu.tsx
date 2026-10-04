@@ -34,7 +34,7 @@ export function MobileMenu({ locale, items, labels }: Props) {
   const close = () => setOpen(false);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={buttonRef}
         type="button"

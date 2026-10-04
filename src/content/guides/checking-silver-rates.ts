@@ -26,6 +26,11 @@ export const checkingSilverRates: Localized<GuideContent> = {
               "Jewellery prices: the price of a finished item can include making charges and taxes, so it is not the same as the metal rate.",
             ],
           },
+          {
+            type: "link",
+            text: "See silver rate sources by country",
+            path: "/silver-rate-sources",
+          },
         ],
       },
       {
@@ -89,6 +94,11 @@ export const checkingSilverRates: Localized<GuideContent> = {
               "زیورات کی قیمت: تیار زیور کی قیمت میں بنوائی اور ٹیکس شامل ہو سکتے ہیں، اس لیے یہ دھات کے ریٹ جیسی نہیں ہوتی۔",
             ],
           },
+          {
+            type: "link",
+            text: "ملک وار چاندی کے ریٹ کے ذرائع دیکھیں",
+            path: "/silver-rate-sources",
+          },
         ],
       },
       {
@@ -151,6 +161,11 @@ export const checkingSilverRates: Localized<GuideContent> = {
               "العملة: أدخل السعر بالعملة التي ذُكر بها. لا تحوّل الحاسبة بين العملات.",
               "أسعار المصوغات: قد يشمل سعر القطعة المصنوعة أجرة الصياغة والضرائب، فلا يساوي سعر المعدن.",
             ],
+          },
+          {
+            type: "link",
+            text: "اطّلع على مصادر أسعار الفضة حسب الدولة",
+            path: "/silver-rate-sources",
           },
         ],
       },

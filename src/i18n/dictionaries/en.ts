@@ -10,6 +10,9 @@ export const en = {
     guidesTitle: "Guides — Haq Mahr Finder",
     guidesDescription:
       "Short, sourced guides on the minimum Haq Mahr, Tola and gram conversions, checking silver rates, and using the calculator.",
+    sourcesTitle: "Silver Rate Sources by Country — Haq Mahr Finder",
+    sourcesDescription:
+      "Curated links to websites that publish silver prices for Pakistan, India, the USA, the UK, Canada, Saudi Arabia, the UAE and more, with unit and currency notes.",
   },
   a11y: {
     skipToContent: "Skip to main content",
@@ -42,27 +45,6 @@ export const en = {
       terms: "Terms of Use",
       contact: "Contact",
     },
-  },
-  methodology: {
-    heading: "How the calculation works",
-    referenceLabel: "Reference weight",
-    reference:
-      "10 Dirhams of silver, expressed as 2 Tola 7.5 Masha: {masha} Masha = {tola} Tola = {grams} g.",
-    formulaLabel: "Formula",
-    formulaTola: "Rate per Tola × {tola}",
-    formulaGram: "Rate per Gram × {gramsExact}",
-    units:
-      "1 Tola = 12 Masha = {gramsPerTola} g (the tola value used for the 30.618 g reference).",
-    roundingLabel: "Rounding",
-    rounding:
-      "The rate is used exactly as you enter it. The final amount is always rounded up to the smallest unit of the selected currency (for example 2 decimals for PKR and 3 for KWD), so the estimate never falls below the exact value. No currency conversion is performed.",
-    differencesLabel: "Differences between sources",
-    differences:
-      "This calculator uses 30.618 g, the figure cited in a Hanafi fatwa. Scholars give slightly different gram values for one Dirham, so other published figures exist; for example, another fatwa gives a range of about 29.7–31 g. If you need a figure for your own situation, please consult a qualified scholar.",
-    sourcesLabel: "Sources (reviewed {date})",
-    newTab: "opens in a new tab",
-    disclaimer:
-      "This is an informational estimate, not a fatwa, a religious ruling, or legal advice.",
   },
   home: {
     heading: "Haq Mahr calculator",
@@ -191,6 +173,8 @@ export const en = {
     onThisPage: "On this page",
     sources: "Sources",
     sourcesNote: "Each source was opened and checked on {date}.",
+    sourceNotOpened:
+      "Provided by the site owner; we could not open this page automatically, so it is not checked by us.",
     newTab: "opens in a new tab",
     reviewTitle: "Review status",
     reviewReligious:
@@ -205,6 +189,100 @@ export const en = {
     ctaBody:
       "Enter today's silver rate to see the value of 10 Dirhams of silver.",
     ctaButton: "Open the calculator",
+  },
+  silverSources: {
+    heading: "Silver Rate Sources",
+    intro:
+      "Websites where you can check the silver price before using the calculator, grouped by country. Each link was opened and checked by us; we do not control these sites.",
+    notesTitle: "Before you copy a rate",
+    kindsTitle: "Types of source",
+    jumpTo: "Jump to a country",
+    currency: "Currency",
+    units: "Units",
+    reviewed: "Link checked {date}",
+    newTab: "opens in a new tab",
+    guideLink: "How to check a silver rate",
+    calculatorLink: "Open the calculator",
+    suggest:
+      "Know a reliable source for your country? Suggestions are welcome.",
+    notes: [
+      "Check the unit (tola, 10 grams, gram, kilogram or ounce) and convert it if needed.",
+      "Check the purity (for example 999 fine silver) and whether it is a buying or selling price.",
+      "Use a rate from the day you need the figure. Prices change during the day.",
+      "Listing a site is not an endorsement, and we cannot guarantee its prices.",
+    ],
+    kinds: {
+      localMarket: {
+        label: "Local market",
+        help: "Rates from the country's own bullion or jewellery market, usually per tola or per 10 grams.",
+      },
+      benchmark: {
+        label: "Official benchmark",
+        help: "A reference price set by an industry body.",
+      },
+      dealer: {
+        label: "Bullion dealer",
+        help: "A dealer's live international spot price.",
+      },
+      spotConverter: {
+        label: "Spot converter",
+        help: "The international spot price converted into local currency. It can differ from local market rates.",
+      },
+    },
+    unitNames: {
+      tola: "Tola",
+      tenGrams: "10 grams",
+      gram: "Gram",
+      kg: "Kilogram",
+      ounce: "Ounce",
+    },
+  },
+  faq: {
+    heading: "Frequently asked questions",
+    guidesLink: "Read all guides",
+    sourcesLink: "Silver rate sources by country",
+    items: [
+      {
+        question: "Is the result a fatwa?",
+        answer:
+          "No. It is an informational estimate based on the silver rate you enter. It is not a fatwa, a religious ruling, or legal advice. For a decision about your own marriage, please consult a qualified scholar.",
+      },
+      {
+        question: "Which weight does the calculator use?",
+        answer:
+          "It uses 10 Dirhams of silver, expressed as 2 Tola 7.5 Masha, which is 30.618 g, with 1 Tola = 11.664 g. Published gram figures for 10 Dirhams vary slightly between sources, and the guides explain this.",
+      },
+      {
+        question: "Does it show today's silver rate?",
+        answer:
+          "No. You enter the rate yourself, so the result is only as current as that rate. The Silver Rate Sources page lists websites by country where you can check it.",
+      },
+      {
+        question: "Should I enter the rate per Tola or per gram?",
+        answer:
+          "Use whichever your source gives. Choose Per Tola or Per Gram to match it; both give the same result. If your source uses another unit, such as kilograms or ounces, convert it first.",
+      },
+      {
+        question: "Why is the amount rounded up?",
+        answer:
+          "The final amount is always rounded up to the smallest unit of the currency (for example 0.01 for PKR), so the estimate never falls below the exact value. The receipt shows the full calculation before rounding.",
+      },
+      {
+        question: "Does it convert between currencies?",
+        answer:
+          "No. The currency is only a label. Enter the rate in the currency you want the result in.",
+      },
+      {
+        question: "Is my data saved or sent anywhere?",
+        answer:
+          "Calculations happen in your browser, and the rate you type is not sent to a server. A calculation is kept only if you choose Save to history, and it stays in your own browser.",
+      },
+      {
+        question: "What if my scholar uses a different weight?",
+        answer:
+          "Scholars and sources give slightly different gram values for one Dirham. If you have been given a different figure, follow your scholar's guidance. The calculator is a convenience, not a replacement.",
+      },
+    ],
   },
 };
 

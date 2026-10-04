@@ -98,7 +98,10 @@
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-arabic:
-    var(--font-noto-naskh-arabic), "Noto Naskh Arabic", "Segoe UI", Tahoma,
+    var(--font-noto-sans-arabic), "Noto Sans Arabic", "Segoe UI", Tahoma,
+    sans-serif;
+  --font-urdu:
+    var(--font-vazirmatn), Vazirmatn, "Noto Sans Arabic", "Segoe UI", Tahoma,
     sans-serif;
   --color-line: var(--hmf-line);
   --color-muted: var(--hmf-muted);
@@ -111,9 +114,13 @@
     font-size: 106.25%;
   }
 
-  html:lang(ur) body,
-  html:lang(ar) body {
+  html:lang(ar) {
     font-family: var(--font-arabic);
+    line-height: 1.8;
+  }
+
+  html:lang(ur) {
+    font-family: var(--font-urdu);
     line-height: 1.8;
   }
 
@@ -146,6 +153,18 @@
     max-width: 480px;
     margin-inline: auto;
     box-shadow: none;
+  }
+}
+
+/* The language switcher adds .lang-switching, navigates, and removes it once the new language
+   has rendered. The fade hides the abrupt LTR/RTL flip. Skipped for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition: opacity 0.2s ease;
+  }
+
+  html.lang-switching body {
+    opacity: 0;
   }
 }
 

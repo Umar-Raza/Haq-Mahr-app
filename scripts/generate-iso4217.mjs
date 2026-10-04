@@ -40,4 +40,6 @@ ${codes.map((c) => `  ${c}: ${units.get(c)},`).join("\n")}
 } as const;
 `,
 );
-console.log(`Wrote ${codes.length} currencies (published ${published}) to ${OUT}`);
+console.log(
+  `Wrote ${codes.length} currencies (published ${published}) to ${OUT}`,
+);

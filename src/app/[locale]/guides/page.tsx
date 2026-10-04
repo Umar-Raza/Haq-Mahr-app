@@ -49,19 +49,21 @@ export default async function GuidesPage({
                 href={localizedHref(locale, `/guides/${guide.slug}`)}
                 className="group flex h-full flex-col items-start gap-3 rounded-box border border-line bg-base-100 p-5 transition-colors hover:border-primary"
               >
-                {guide.religious ? (
-                  <span className="badge badge-soft badge-accent badge-sm">
-                    {t.religiousBadge}
-                  </span>
-                ) : null}
                 <h2 className="text-lg font-semibold group-hover:text-primary">
                   {content.title}
                 </h2>
                 <p className="text-sm leading-7 text-muted">
                   {content.summary}
                 </p>
-                <span className="mt-auto text-sm font-medium text-primary">
-                  {t.readGuide}
+                <span className="mt-auto flex w-full items-center justify-between gap-2">
+                  <span className="text-sm font-medium text-primary">
+                    {t.readGuide}
+                  </span>
+                  {guide.religious ? (
+                    <span className="badge badge-soft badge-accent badge-sm">
+                      {t.religiousBadge}
+                    </span>
+                  ) : null}
                 </span>
               </Link>
             </li>

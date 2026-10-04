@@ -42,6 +42,8 @@
 
 ## Calculation integrity
 
+Update 2026-10-04: the "How the calculation works" box was removed from the home page at the user's request. The methodology now appears on the receipt and in the guides and Disclaimer.
+
 1. Confirm the exact gram equivalent and convention for 10 Dirhams / 2 Tola 7.5 Masha with a reliable scholarly or institutional source before publishing.
 2. State the convention and formula visibly on the calculator and in the guide.
 3. Keep calculation logic unit-tested.
@@ -82,7 +84,13 @@ Receipt actions: a 2×2 grid with icons. Status messages appear as a floating Da
 
 Receipt: equations are wrapped in a Unicode LTR isolate (LRI…PDI) so they read left-to-right inside RTL text, in both the HTML receipt and the PNG. The displayed rate keeps every decimal the user entered.
 
+Fonts (user choice, 2026-10-04): Latin = Geist, Arabic = Noto Sans Arabic, Urdu = Vazirmatn, all via next/font/google. Switching language fades the page out and in (not for reduced motion).
+
 ## Silver-rate directory decisions
+
+- Adopted 2026-10-04 (user: at least 10 countries, including Pakistan, India, USA, UK, Canada, Saudi Arabia and UAE). 12 countries are listed in `src/content/silver-sources.ts`.
+- Each listing is labelled by kind: local market, official benchmark, bullion dealer, or spot converter. Spot converters are marked "not a local market rate", because converted international spot prices can differ from local market rates such as the Pakistani Sarafa per-tola rate.
+- Only links that were opened and showed a silver price are listed. Unverifiable sites (for example BAJUS behind a bot challenge) are left out rather than guessed.
 
 - Add a page such as `/[locale]/silver-rate-sources`.
 - Group links by country/region.

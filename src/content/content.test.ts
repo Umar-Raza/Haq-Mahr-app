@@ -9,6 +9,7 @@ const knownPaths = new Set([
   "",
   "/history",
   "/guides",
+  "/silver-rate-sources",
   ...guides.map((g) => `/guides/${g.slug}`),
   ...Object.keys(infoPages).map((slug) => `/${slug}`),
 ]);

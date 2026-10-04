@@ -32,6 +32,7 @@ Open <http://localhost:3000>. You will be redirected to `/en`, `/ur`, or `/ar` b
 | `npm run format:check`   | Check formatting                                                |
 | `npm run check`          | lint + typecheck + test + build (run before PRs)                |
 | `npm run gen:currencies` | Regenerate the ISO 4217 currency table from SIX Group (network) |
+| `npm run check:links`    | Check that every Silver Rate Sources link still responds (network) |
 
 ## Configuration
 
@@ -62,10 +63,10 @@ src/
     reopenable-calculator.tsx  Applies "Open in calculator" URL params (inside Suspense)
   components/history/
     history-list.tsx Saved calculations: reopen, delete with undo, clear all (client)
-    methodology.tsx  Visible formula, rounding, and sources
   content/
     guides/          Static multilingual guides + registry (sources, related, religious flag)
     pages/           About, Disclaimer, Privacy Policy, Terms, Contact content
+    silver-sources.ts  Curated silver-rate links by country (kind, currency, units, reviewed date)
     site.ts          CONTACT_EMAIL (null hides the Contact page) and info-page revision date
   components/content/
     content-blocks.tsx  Renders typed content blocks; breadcrumbs.tsx; info-page.tsx (shared route)

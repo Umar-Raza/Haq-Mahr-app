@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
+import { TocList } from "@/components/content/toc-list";
 import { ContentSections } from "@/components/content/content-blocks";
 import { Container } from "@/components/layout/container";
 import { getGuide, guides } from "@/content/guides";
@@ -66,16 +67,18 @@ export default async function GuidePage({
       >
         <article className="min-w-0 max-w-3xl">
           <header className="border-b border-line pb-6">
-            {guide.religious ? (
-              <span className="badge badge-soft badge-accent badge-sm mb-3">
-                {t.religiousBadge}
-              </span>
-            ) : null}
             <h1 className="text-3xl font-semibold">{content.title}</h1>
-            <p className="mt-2 text-sm text-muted">
-              {interpolate(t.updated, {
-                date: formatIsoDate(locale, guide.updated),
-              })}
+            <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
+              <span>
+                {interpolate(t.updated, {
+                  date: formatIsoDate(locale, guide.updated),
+                })}
+              </span>
+              {guide.religious ? (
+                <span className="badge badge-soft badge-accent badge-sm">
+                  {t.religiousBadge}
+                </span>
+              ) : null}
             </p>
             <p className="mt-4 text-lg leading-8 text-muted">{content.intro}</p>
           </header>
@@ -122,6 +125,11 @@ export default async function GuidePage({
                       — {source.publisher}
                     </span>
                     <span className="sr-only"> ({t.newTab})</span>
+                    {source.notOpened ? (
+                      <span className="mt-0.5 block text-xs text-warning">
+                        {t.sourceNotOpened}
+                      </span>
+                    ) : null}
                   </li>
                 ))}
               </ul>
@@ -201,35 +209,5 @@ export default async function GuidePage({
         ) : null}
       </div>
     </Container>
-  );
-}
-
-function TocList({
-  headingId,
-  heading,
-  sections,
-}: {
-  headingId: string;
-  heading: string;
-  sections: { id: string; heading: string }[];
-}) {
-  return (
-    <>
-      <h2 id={headingId} className="text-sm font-semibold">
-        {heading}
-      </h2>
-      <ol className="mt-3 grid gap-2 text-sm">
-        {sections.map((section) => (
-          <li key={section.id}>
-            <a
-              href={`#${section.id}`}
-              className="text-muted hover:text-primary"
-            >
-              {section.heading}
-            </a>
-          </li>
-        ))}
-      </ol>
-    </>
   );
 }

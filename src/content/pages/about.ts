@@ -44,7 +44,7 @@ export const about: Localized<PageContent> = {
         blocks: [
           {
             type: "p",
-            text: "The reference weight and the Tola conversion come from published sources that were opened and checked before use. Each source is listed on the calculator page and in the guides, together with the date it was reviewed. Where sources differ, the site says so.",
+            text: "The reference weight and the Tola conversion come from published sources that were opened and checked before use. Each source is listed in the guides, together with the date it was reviewed. Where sources differ, the site says so.",
           },
           {
             type: "link",
@@ -108,7 +108,7 @@ export const about: Localized<PageContent> = {
         blocks: [
           {
             type: "p",
-            text: "حوالہ وزن اور تولے کی تبدیلی شائع شدہ ذرائع سے لی گئی ہے، جنہیں استعمال سے پہلے کھول کر جانچا گیا۔ ہر ذریعہ اس کی جانچ کی تاریخ کے ساتھ کیلکولیٹر کے صفحے اور رہنمائی میں درج ہے۔ جہاں ذرائع میں فرق ہے، وہاں سائٹ یہ بات واضح کرتی ہے۔",
+            text: "حوالہ وزن اور تولے کی تبدیلی شائع شدہ ذرائع سے لی گئی ہے، جنہیں استعمال سے پہلے کھول کر جانچا گیا۔ ہر ذریعہ اس کی جانچ کی تاریخ کے ساتھ رہنمائی کے صفحات میں درج ہے۔ جہاں ذرائع میں فرق ہے، وہاں سائٹ یہ بات واضح کرتی ہے۔",
           },
           {
             type: "link",
@@ -172,7 +172,7 @@ export const about: Localized<PageContent> = {
         blocks: [
           {
             type: "p",
-            text: "الوزن المرجعي وتحويل التولة مأخوذان من مصادر منشورة فُتحت وروجعت قبل استخدامها. وكل مصدر مذكور في صفحة الحاسبة وفي الأدلة مع تاريخ مراجعته. وحيث تختلف المصادر يذكر الموقع ذلك.",
+            text: "الوزن المرجعي وتحويل التولة مأخوذان من مصادر منشورة فُتحت وروجعت قبل استخدامها. وكل مصدر مذكور في الأدلة مع تاريخ مراجعته. وحيث تختلف المصادر يذكر الموقع ذلك.",
           },
           {
             type: "link",

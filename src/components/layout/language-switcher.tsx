@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { localeNames, locales, type Locale } from "@/i18n/config";
 import { switchLocalePath } from "@/lib/routes";
+
+const FADE_CLASS = "lang-switching";
+const FADE_MS = 180;
+// Safety net: never leave the page hidden if navigation fails.
+const FADE_TIMEOUT_MS = 4000;
 
 type Props = {
   current: Locale;
@@ -13,6 +18,7 @@ type Props = {
 
 export function LanguageSwitcher({ current, label }: Props) {
   const pathname = usePathname();
+  const router = useRouter();
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -38,8 +44,39 @@ export function LanguageSwitcher({ current, label }: Props) {
     };
   }, [open]);
 
+  // The new language has rendered (lang and dir changed): fade the page back in.
+  useEffect(() => {
+    document.documentElement.classList.remove(FADE_CLASS);
+  }, [current]);
+
   function close() {
     if (detailsRef.current) detailsRef.current.open = false;
+  }
+
+  // Fade out, then navigate, so the LTR/RTL flip happens while the page is hidden.
+  function switchTo(
+    event: React.MouseEvent<HTMLAnchorElement>,
+    locale: Locale,
+  ) {
+    close();
+    const plainClick =
+      event.button === 0 &&
+      !event.metaKey &&
+      !event.ctrlKey &&
+      !event.shiftKey &&
+      !event.altKey;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (!plainClick || reduce || locale === current) return;
+    event.preventDefault();
+    const root = document.documentElement;
+    root.classList.add(FADE_CLASS);
+    window.setTimeout(
+      () => router.push(switchLocalePath(pathname, locale)),
+      FADE_MS,
+    );
+    window.setTimeout(() => root.classList.remove(FADE_CLASS), FADE_TIMEOUT_MS);
   }
 
   return (
@@ -89,7 +126,7 @@ export function LanguageSwitcher({ current, label }: Props) {
               lang={locale}
               hrefLang={locale}
               aria-current={locale === current ? "true" : undefined}
-              onClick={close}
+              onClick={(event) => switchTo(event, locale)}
             >
               {localeNames[locale]}
             </Link>

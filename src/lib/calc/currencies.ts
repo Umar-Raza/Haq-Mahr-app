@@ -1,5 +1,13 @@
+import { iso4217MinorUnits } from "./iso4217";
+
 // Display/rounding only. The app never converts between currencies.
-export const currencies = [
+// Minor units come from the ISO table, not Intl: engines disagree (Chrome reports PKR as 0, Node as 2).
+export type Currency = keyof typeof iso4217MinorUnits;
+
+export const currencies = Object.keys(iso4217MinorUnits) as Currency[];
+
+/** Shown first in the currency picker. */
+export const commonCurrencies = [
   "PKR",
   "INR",
   "BDT",
@@ -18,20 +26,12 @@ export const currencies = [
   "TRY",
   "EGP",
   "ZAR",
-] as const;
-
-export type Currency = (typeof currencies)[number];
+] as const satisfies readonly Currency[];
 
 export function isCurrency(value: string): value is Currency {
-  return (currencies as readonly string[]).includes(value);
+  return Object.hasOwn(iso4217MinorUnits, value);
 }
 
-/** ISO 4217 minor units as reported by Intl (e.g. PKR 2, KWD 3). */
 export function currencyFractionDigits(currency: Currency): number {
-  return (
-    new Intl.NumberFormat("en", {
-      style: "currency",
-      currency,
-    }).resolvedOptions().maximumFractionDigits ?? 2
-  );
+  return iso4217MinorUnits[currency];
 }

@@ -43,6 +43,18 @@ export function roundHalfUp(value: Decimal, digits: number): Decimal {
   return { units: negative ? -quotient : quotient, scale: digits };
 }
 
+/** Round toward positive infinity (ceiling) to `digits` fractional digits. */
+export function roundUp(value: Decimal, digits: number): Decimal {
+  if (value.scale <= digits) {
+    return { units: rescale(value, digits), scale: digits };
+  }
+  const divisor = pow10(value.scale - digits);
+  // BigInt division truncates toward zero, which is already the ceiling for negatives.
+  let quotient = value.units / divisor;
+  if (value.units > ZERO && value.units % divisor !== ZERO) quotient += ONE;
+  return { units: quotient, scale: digits };
+}
+
 /** Plain string with exactly `scale` fractional digits, e.g. "1234.50". */
 export function toFixedString(value: Decimal): string {
   const negative = value.units < ZERO;

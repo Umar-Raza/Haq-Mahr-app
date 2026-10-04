@@ -3,7 +3,13 @@ import {
   isCurrency,
   type Currency,
 } from "./currencies";
-import { multiply, roundHalfUp, toFixedString, toPlainString } from "./decimal";
+import {
+  multiply,
+  roundHalfUp,
+  roundUp,
+  toFixedString,
+  toPlainString,
+} from "./decimal";
 import { parseRate, type RateError } from "./parse-rate";
 import {
   REFERENCE_GRAMS,
@@ -37,7 +43,7 @@ export type CalculationResult = {
   weightInBasisUnit: string;
   /** rate × weight, unrounded. */
   exactAmount: string;
-  /** Rounded half away from zero to the currency's minor units. */
+  /** Always rounded up (ceiling) to the currency's minor units, so it never falls below the exact value. */
   amount: string;
   fractionDigits: number;
   reference: {
@@ -74,7 +80,7 @@ export function calculateMahr(input: CalculationInput): CalculationOutcome {
       rate: toPlainString(parsed.value),
       weightInBasisUnit: toPlainString(weight),
       exactAmount: toPlainString(exact),
-      amount: toFixedString(roundHalfUp(exact, fractionDigits)),
+      amount: toFixedString(roundUp(exact, fractionDigits)),
       fractionDigits,
       reference: {
         tola: toPlainString(REFERENCE_TOLA),

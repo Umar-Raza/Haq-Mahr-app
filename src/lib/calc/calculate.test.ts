@@ -15,10 +15,11 @@ describe("calculateMahr: per tola", () => {
     expect(result.amount).toBe("6431.25");
   });
 
-  it("rounds half away from zero to currency minor units", () => {
+  it("always rounds up to currency minor units", () => {
     expect(amount("0.2", "tola").amount).toBe("0.53"); // 0.525
     expect(amount("0.6", "tola").amount).toBe("1.58"); // 1.575
-    expect(amount("1.002", "tola").amount).toBe("2.63"); // 2.63025
+    expect(amount("1.002", "tola").amount).toBe("2.64"); // 2.63025, below half
+    expect(amount("55555", "tola").amount).toBe("145831.88"); // 145831.875
   });
 });
 
@@ -30,13 +31,20 @@ describe("calculateMahr: per gram", () => {
     expect(result.amount).toBe("6429.78");
   });
 
-  it("rounds half away from zero", () => {
+  it("rounds up even when the remainder is below half", () => {
     expect(amount("2.5", "gram").amount).toBe("76.55"); // 76.545
-    expect(amount("0.25", "gram").amount).toBe("7.65"); // 7.6545
+    expect(amount("0.25", "gram").amount).toBe("7.66"); // 7.6545
+  });
+
+  it("never rounds below the exact amount", () => {
+    for (const rate of ["0.25", "1.002", "2.5", "55555", "123.4567"]) {
+      const r = amount(rate, "gram");
+      expect(Number(r.amount)).toBeGreaterThanOrEqual(Number(r.exactAmount));
+    }
   });
 
   it("uses each currency's own minor units", () => {
-    expect(amount("0.3", "gram", "KWD").amount).toBe("9.185"); // 9.1854
+    expect(amount("0.3", "gram", "KWD").amount).toBe("9.186"); // 9.1854
     expect(amount("0.3", "gram", "KWD").fractionDigits).toBe(3);
     expect(amount("210", "gram", "USD").amount).toBe("6429.78");
   });

@@ -17,7 +17,8 @@
 | Silver rate | Manual input; no live-rate API in MVP |
 | Currency | Multiple currencies supported for input/display; no silent FX conversion |
 | Receipt | One premium template with localized text |
-| Sharing | PNG download, Web Share where supported, copy result, WhatsApp text/link share, print/browser Save as PDF |
+| Sharing | PNG download, Web Share where supported, copy result, WhatsApp text/link share. Print/PDF button removed by the user on 2026-10-04; the print stylesheet stays, so Ctrl+P prints only the receipt. |
+| Result before input | A preview receipt (known reference weight, method and disclaimer; "—" for rate-dependent values; actions disabled) instead of an empty box. User-approved 2026-10-04. |
 | History | Local browser storage only; no account |
 | Guides | Static, multilingual; no dynamic blog |
 | Additional pages | About, Disclaimer, Privacy Policy, Terms, Contact, Silver Rate Sources |
@@ -54,9 +55,9 @@
 | Reference in grams | **30.618 g**, confirmed by the user on 2026-10-04 as the figure to use for everyone |
 | Tola | 11.664 g (= 30.618 ÷ 2.625); 1 Tola = 12 Masha; 1 Masha = 0.972 g |
 | Formula | per Tola: rate × 2.625; per Gram: rate × 30.618 (the two always agree: 1 Tola = 11.664 g) |
-| Rounding | Rate used exactly (max 4 decimals, max 1,000,000,000). Only the final amount is rounded, half away from zero, to the currency's ISO 4217 minor units via `Intl` (e.g. PKR 2, KWD 3). |
+| Rounding | Rate used exactly (max 4 decimals, max 1,000,000,000). Only the final amount is rounded, **always up (ceiling)**, so the estimate never falls below the exact value (user decision, 2026-10-04; e.g. 7.6541 → 7.66). The receipt shows the exact equation and no rounding note. Rounding is to the currency's ISO 4217 minor units from a fixed table in `currencies.ts` (e.g. PKR 2, KWD/BHD/OMR 3). `Intl` is not used for this, because Chrome reports PKR as 0 while Node reports 2. |
 | Arithmetic | BigInt fixed-point (`src/lib/calc/decimal.ts`); no floating point |
-| Currencies | PKR, INR, BDT, SAR, AED, QAR, KWD, BHD, OMR, USD, GBP, EUR, CAD, AUD, MYR, TRY, EGP, ZAR. Label and rounding only; never converted. |
+| Currencies | All 155 active ISO 4217 currencies (user request, 2026-10-04), generated from the official SIX Group List One (published 2026-09-17) into `src/lib/calc/iso4217.ts` with minor units. Fund codes, metals, SDR and test codes are excluded. Regenerate with `npm run gen:currencies`. The picker shows "Common" first (PKR, INR, BDT, SAR, AED, QAR, KWD, BHD, OMR, USD, GBP, EUR, CAD, AUD, MYR, TRY, EGP, ZAR), then all others sorted by localized name. Label and rounding only; never converted. The Silver Rate Sources countries are a separate, later decision. |
 | Calculation version | `"1"` (`CALCULATION_VERSION`); bump if constants, formula or rounding change |
 
 Note: the modern standard tola is 11.6638038 g (180 grains), which would give 30.6175 g. The project deliberately uses the 11.664 g tola behind the widely cited 30.618 g, per the user's decision. Do not switch back without the user's approval.
@@ -70,7 +71,15 @@ Sources (each opened and checked 2026-10-04):
 
 Known variance: published gram figures for 10 Dirhams differ (about 29.7–31 g in the sources above; other figures exist). The UI states this and recommends consulting a qualified scholar. Urdu and Arabic methodology text needs review by a qualified reviewer before release.
 
-Numerals: methodology numbers and dates use Latin digits (`-u-nu-latn`) in all locales for unambiguous values. Revisit in Phase 3 if the user prefers Arabic-Indic digits for `ar`.
+Numerals: all numbers, amounts and dates use Latin digits (`-u-nu-latn`) in every locale for unambiguous values. This is the default; the user has not yet confirmed it. Money shows the ISO currency code (e.g. "PKR 6,429.78"), not a symbol.
+
+Default selected currency (a label only, never a conversion): **PKR in every locale** (user decision, 2026-10-04; previously `ar` → SAR).
+
+Currency picker: a searchable WAI-ARIA combobox instead of a native `<select>` (user request, 2026-10-04). It searches the code, the localized name and the English name. Common currencies are listed first.
+
+Receipt actions: a 2×2 grid with icons. Status messages appear as a floating DaisyUI toast, so no layout space is reserved (user request, 2026-10-04).
+
+Receipt: equations are wrapped in a Unicode LTR isolate (LRI…PDI) so they read left-to-right inside RTL text, in both the HTML receipt and the PNG. The displayed rate keeps every decimal the user entered.
 
 ## Silver-rate directory decisions
 

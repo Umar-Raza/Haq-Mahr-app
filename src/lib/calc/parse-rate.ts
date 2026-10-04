@@ -31,7 +31,7 @@ const LAKH_GROUPS = /^\d{1,2}(,\d{2})*,\d{3}$/;
 
 export function parseRate(raw: string): ParsedRate {
   const text = toAsciiDigits(raw)
-    .replace(/[\s  ]/g, "")
+    .replace(/\s/g, "")
     .replace(/٫/g, ".")
     .replace(/٬/g, ",");
 

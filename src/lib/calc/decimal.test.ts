@@ -4,6 +4,7 @@ import {
   decimal,
   multiply,
   roundHalfUp,
+  roundUp,
   toFixedString,
   toPlainString,
 } from "./decimal";
@@ -39,6 +40,19 @@ describe("decimal", () => {
     expect(
       toFixedString(roundHalfUp({ units: BigInt(-15), scale: 1 }, 0)),
     ).toBe("-2");
+  });
+
+  it("rounds up (ceiling) for any non-zero remainder", () => {
+    expect(toFixedString(roundUp(decimal("7.6541"), 2))).toBe("7.66");
+    expect(toFixedString(roundUp(decimal("7.6501"), 2))).toBe("7.66");
+    expect(toFixedString(roundUp(decimal("7.6599"), 2))).toBe("7.66");
+    expect(toFixedString(roundUp(decimal("145831.875"), 2))).toBe("145831.88");
+    expect(toFixedString(roundUp(decimal("6429.78"), 2))).toBe("6429.78");
+    expect(toFixedString(roundUp(decimal("6429.7800"), 2))).toBe("6429.78");
+    expect(toFixedString(roundUp(decimal("9.1854"), 3))).toBe("9.186");
+    expect(toFixedString(roundUp({ units: BigInt(-15), scale: 1 }, 0))).toBe(
+      "-1",
+    );
   });
 
   it("pads when rounding to more digits than present", () => {

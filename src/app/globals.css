@@ -123,6 +123,32 @@
   }
 }
 
+/* Print only the receipt; browsers offer "Save as PDF" from the print dialog. */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #receipt,
+  #receipt * {
+    visibility: visible;
+    print-color-adjust: exact;
+  }
+
+  #receipt {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    max-width: 480px;
+    margin-inline: auto;
+    box-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skeleton {
     animation: none;

@@ -2,7 +2,7 @@
 
 ## 1. Product overview
 
-Haq mahr Finder is a responsive, multilingual website that helps visitors estimate the value of a specified Haq mahr silver-weight reference using a manually entered silver rate. It can present the calculation as a polished receipt-style image and let visitors download, share, copy, or print it.
+Haq mahr Finder is a responsive, multilingual website that helps visitors estimate the value of a specified Haq mahr silver-weight reference using a manually entered silver rate. It can present the calculation as a polished receipt-style image and let visitors download, share, or copy it.
 
 The website also provides static educational guides and a curated directory of silver-rate websites by country. The business objective is to build useful organic-search traffic and, subject to policy compliance and approval, monetize through Google AdSense.
 
@@ -92,7 +92,7 @@ The initial calculation reference is 10 Dirhams, described in the project brief 
 - Web Share API when available.
 - Copy formatted result.
 - WhatsApp text/link sharing.
-- Print-friendly output and browser Save as PDF.
+- No Print/PDF button (removed by user decision, 2026-10-04). The print stylesheet still limits browser printing to the receipt.
 
 ### History
 - Local browser storage only.

@@ -20,17 +20,18 @@ Open <http://localhost:3000>. You will be redirected to `/en`, `/ur`, or `/ar` b
 
 ## Scripts
 
-| Script                 | Purpose                                          |
-| ---------------------- | ------------------------------------------------ |
-| `npm run dev`          | Start the development server                     |
-| `npm run build`        | Production build                                 |
-| `npm run start`        | Serve the production build                       |
-| `npm run lint`         | ESLint                                           |
-| `npm run typecheck`    | Generate route types, then `tsc --noEmit`        |
-| `npm run test`         | Unit tests (Vitest)                              |
-| `npm run format`       | Format with Prettier                             |
-| `npm run format:check` | Check formatting                                 |
-| `npm run check`        | lint + typecheck + test + build (run before PRs) |
+| Script                   | Purpose                                                         |
+| ------------------------ | --------------------------------------------------------------- |
+| `npm run dev`            | Start the development server                                    |
+| `npm run build`          | Production build                                                |
+| `npm run start`          | Serve the production build                                      |
+| `npm run lint`           | ESLint                                                          |
+| `npm run typecheck`      | Generate route types, then `tsc --noEmit`                       |
+| `npm run test`           | Unit tests (Vitest)                                             |
+| `npm run format`         | Format with Prettier                                            |
+| `npm run format:check`   | Check formatting                                                |
+| `npm run check`          | lint + typecheck + test + build (run before PRs)                |
+| `npm run gen:currencies` | Regenerate the ISO 4217 currency table from SIX Group (network) |
 
 ## Configuration
 
@@ -54,9 +55,15 @@ src/
     layout/          Header, footer, container, nav, language switcher, mobile menu, theme toggle
     ui/              Shared UI primitives (skeleton)
   components/calculator/
+    calculator.tsx   Calculator form and live result (client)
+    currency-picker.tsx  Searchable currency combobox (client)
+    receipt.tsx      Receipt template (always light "paper")
+    receipt-actions.tsx  PNG download, share, WhatsApp, copy (client)
     methodology.tsx  Visible formula, rounding, and sources
   lib/
     calc/            Pure calculation engine (decimal math, units, input parsing, currencies, sources; tested)
+    receipt/         Receipt model, share text, and canvas PNG renderer
+    format.ts        Locale-aware money/number/date formatting (Latin digits)
     routes.ts        Nav items and locale-aware path helpers (tested)
     theme.ts         Theme names, storage key, pre-paint init script (tested)
   proxy.ts           Redirects unprefixed URLs to a locale (Next.js 16 "proxy", formerly middleware)

@@ -103,7 +103,7 @@ Also manually check:
 - English LTR, Urdu RTL, Arabic RTL
 - light and dark themes
 - mobile and desktop layouts
-- receipt PNG, native-share fallback, WhatsApp, copy, print
+- receipt PNG, native-share fallback, WhatsApp, copy (Print/PDF button removed by user decision)
 - local history persistence and clearing
 - Silver Rate Sources links
 - metadata, canonical, hreflang, sitemap, robots

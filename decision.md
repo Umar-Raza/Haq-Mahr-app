@@ -46,6 +46,32 @@
 4. Clearly label outputs as informational, not a fatwa or legal determination.
 5. Do not imply that the selected silver rate is live or independently verified.
 
+## Calculation reference (adopted 2026-10-04)
+
+| Item | Value |
+|---|---|
+| Reference | 10 Dirhams, expressed as 2 Tola 7.5 Masha = 31.5 Masha = 2.625 Tola |
+| Reference in grams | **30.618 g**, confirmed by the user on 2026-10-04 as the figure to use for everyone |
+| Tola | 11.664 g (= 30.618 ÷ 2.625); 1 Tola = 12 Masha; 1 Masha = 0.972 g |
+| Formula | per Tola: rate × 2.625; per Gram: rate × 30.618 (the two always agree: 1 Tola = 11.664 g) |
+| Rounding | Rate used exactly (max 4 decimals, max 1,000,000,000). Only the final amount is rounded, half away from zero, to the currency's ISO 4217 minor units via `Intl` (e.g. PKR 2, KWD 3). |
+| Arithmetic | BigInt fixed-point (`src/lib/calc/decimal.ts`); no floating point |
+| Currencies | PKR, INR, BDT, SAR, AED, QAR, KWD, BHD, OMR, USD, GBP, EUR, CAD, AUD, MYR, TRY, EGP, ZAR. Label and rounding only; never converted. |
+| Calculation version | `"1"` (`CALCULATION_VERSION`); bump if constants, formula or rounding change |
+
+Note: the modern standard tola is 11.6638038 g (180 grains), which would give 30.6175 g. The project deliberately uses the 11.664 g tola behind the widely cited 30.618 g, per the user's decision. Do not switch back without the user's approval.
+
+Sources (each opened and checked 2026-10-04):
+
+- 1 tola = 12 masha; the standard tola is 180 grains = 11.6638038 g: [Wikipedia, "Tola (unit)"](https://en.wikipedia.org/wiki/Tola_(unit)).
+- Minimum mahr = 30.618 g silver (Hanafi): Mufti Ebrahim Salejee, [MuftiOnline via IslamQA.org](https://islamqa.org/hanafi/muftionline/130564/minimum-mahar-in-pounds-explained/).
+- Minimum mahr = 10 dirhams; 1 dirham ≈ 2.97–3.1 g, so ≈ 29.7–31 g: [Darul Ifta Birmingham, Fatwa 03336 (3 March 2020)](https://daruliftabirmingham.co.uk/what-is-the-minimum-quantity-of-mehar-in-gram-for-muslim-marriage/).
+- Minimum mahr = 2 tola 7.5 masha silver or its value: Maulana Dr. Abdul Razzaq Iskander, [Daily Jang, Iqra, 18 May 2018](https://jang.com.pk/news/494011).
+
+Known variance: published gram figures for 10 Dirhams differ (about 29.7–31 g in the sources above; other figures exist). The UI states this and recommends consulting a qualified scholar. Urdu and Arabic methodology text needs review by a qualified reviewer before release.
+
+Numerals: methodology numbers and dates use Latin digits (`-u-nu-latn`) in all locales for unambiguous values. Revisit in Phase 3 if the user prefers Arabic-Indic digits for `ar`.
+
 ## Silver-rate directory decisions
 
 - Add a page such as `/[locale]/silver-rate-sources`.

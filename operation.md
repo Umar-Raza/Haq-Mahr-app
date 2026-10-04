@@ -13,6 +13,33 @@
 
 Newest first. Keep each entry short.
 
+### 2026-10-04 — Reference changed to 30.618 g (user decision)
+
+- `units.ts`: `GRAMS_PER_TOLA` 11.664, `GRAMS_PER_MASHA` 0.972, `REFERENCE_GRAMS` = 30.618 exact, display digits 3. `CALCULATION_VERSION` stays `"1"` (pre-release; nothing stored yet).
+- Methodology strings (en/ur/ar): reference uses `=` instead of `≈`; the tola line explains 11.664 g; the differences paragraph states the calculator uses 30.618 g.
+- Tests updated: per gram 210 → 6429.78, half-up 76.545 → 76.55, KWD 9.1854 → 9.185, tola/gram equivalence (200/g = 2332.8/tola).
+- **Checks run:** lint, typecheck, 44/44 tests, production build. Dev page shows "2.625 Tola = 30.618 g" and "Rate per Gram × 30.618".
+- `decision.md` → "Calculation reference" updated.
+
+### 2026-10-04 — Phase 2 complete
+
+- **Current phase:** Phase 2 done; Phase 3 (calculator UI and receipt) not started.
+- **Engine:** `src/lib/calc/`:
+  - `decimal.ts`: BigInt fixed-point, `roundHalfUp`.
+  - `units.ts`: tola, masha and reference constants, `RateBasis` tola|gram.
+  - `parse-rate.ts`: input normalization and validation.
+  - `currencies.ts`: 18 ISO codes, minor units via `Intl`.
+  - `calculate.ts`: `calculateMahr()` returns `{ok, result|error}`; `CALCULATION_VERSION = "1"`.
+  - `sources.ts`: methodology links and review date.
+- **Reference and sources:** recorded in `decision.md` → "Calculation reference". 2.625 tola = 30.617484975 g, shown as 30.62 g.
+- **Input rules:**
+  - Accepted: Arabic-Indic and Persian digits, `٫` decimal, `٬`/`,` grouping (Western or lakh only), leading `.`, trailing `.`, leading `+`.
+  - Rejected with a specific error code: empty, negative, zero, exponent/NaN/Infinity/hex, ambiguous grouping (`1,5`), more than 4 decimals, more than 1e9. Error codes: `empty | invalidFormat | negative | zero | tooManyDecimals | tooLarge | unsupportedBasis | unsupportedCurrency`.
+  - Phase 3 needs localized messages for these codes.
+- **Methodology UI:** `src/components/calculator/methodology.tsx` on the home page (reference, formula, units, rounding, source differences, 4 external sources with `rel="noopener noreferrer"`, disclaimer). Strings are in `dictionary.methodology`; `src/i18n/interpolate.ts` fills `{placeholders}`.
+- **Checks run:** lint, typecheck, 43/43 tests (decimal, units consistency, parse-rate valid/invalid, calculate known values/rounding/currency digits/errors), production build. Screenshots of the methodology section in en and ur at 390 and 1100 px. Confirmed 4 external links with `rel="noopener noreferrer"` in `/ar` HTML.
+- **Open items:** Urdu/Arabic methodology text needs scholarly/native review. User should confirm the currency list and the Latin-digit choice.
+
 ### 2026-10-04 — Phase 1 revision (user request)
 
 - **Language switcher** is now one DaisyUI `dropdown` (`<details>`) in the header on all sizes (`language-switcher.tsx`). It closes on select, Escape (focus returns to summary) and outside click. Removed from the mobile menu.
@@ -100,11 +127,11 @@ Run the relevant checks before merging/deploying:
 **Done when:** all three locales render correctly in both themes at mobile and desktop widths.
 
 ### Phase 2 — Calculator engine
-- [ ] Define weight and rate units.
-- [ ] Verify the reference weight with sources.
-- [ ] Implement conversions and decimal-safe amount calculation.
-- [ ] Validate blank, zero, negative, non-finite, and excessively large inputs.
-- [ ] Add unit tests and visible methodology.
+- [x] Define weight and rate units.
+- [x] Verify the reference weight with sources.
+- [x] Implement conversions and decimal-safe amount calculation.
+- [x] Validate blank, zero, negative, non-finite, and excessively large inputs.
+- [x] Add unit tests and visible methodology.
 **Done when:** tests cover known values, rounding, and invalid inputs; output clearly identifies currency and rate basis.
 
 ### Phase 3 — Calculator UI and receipt

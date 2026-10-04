@@ -1,4 +1,4 @@
-# Haq mahr Finder — Product Plan
+ # Haq mahr Finder — Product Plan
 
 ## 1. Product overview
 

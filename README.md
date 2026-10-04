@@ -53,7 +53,10 @@ src/
   components/
     layout/          Header, footer, container, nav, language switcher, mobile menu, theme toggle
     ui/              Shared UI primitives (skeleton)
+  components/calculator/
+    methodology.tsx  Visible formula, rounding, and sources
   lib/
+    calc/            Pure calculation engine (decimal math, units, input parsing, currencies, sources; tested)
     routes.ts        Nav items and locale-aware path helpers (tested)
     theme.ts         Theme names, storage key, pre-paint init script (tested)
   proxy.ts           Redirects unprefixed URLs to a locale (Next.js 16 "proxy", formerly middleware)

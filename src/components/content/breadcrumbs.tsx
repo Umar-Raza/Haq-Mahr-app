@@ -11,7 +11,10 @@ export function Breadcrumbs({
   label: string;
 }) {
   return (
-    <nav aria-label={label} className="breadcrumbs py-0 text-sm text-muted">
+    <nav
+      aria-label={label}
+      className="breadcrumbs overflow-y-hidden py-1 text-sm text-muted"
+    >
       <ul>
         {items.map((item, index) =>
           item.href && index < items.length - 1 ? (

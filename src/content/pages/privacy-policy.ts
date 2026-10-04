@@ -147,7 +147,7 @@ export const privacyPolicy: Localized<PageContent> = {
       },
       {
         id: "sharing",
-        heading: "جب آپ نتیجہ شیئر کریں",
+        heading: "جب آپ نتیجہ شیئر",
         blocks: [
           {
             type: "p",

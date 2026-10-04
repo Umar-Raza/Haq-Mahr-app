@@ -171,7 +171,7 @@ export const ur: Dictionary = {
   content: {
     breadcrumbLabel: "بریڈ کرمب",
     home: "ہوم",
-    updated: "آخری تازہ کاری: {date}",
+    updated: "لاسٹ اپ ڈیٹ: {date}",
     onThisPage: "اس صفحے پر",
     sources: "ذرائع",
     sourcesNote: "ہر ذریعہ {date} کو کھول کر جانچا گیا۔",

@@ -50,6 +50,19 @@ Newest first. Keep each entry short.
 - **Checks:** lint, typecheck, 144/144 tests, build, and a CDP alignment check.
 - **Open:** a qualified scholar must review the guide, and the owner should open the fatwaqa page and confirm the quotes.
 
+### 2026-10-04 — Urdu keeps common English terms, written in Urdu script (user correction)
+
+- **Correction:** the entry below (kept in Latin letters) was a misunderstanding. The user wants common English terms in the Urdu text **transliterated into Urdu script**, e.g. کیلکولیٹر, لنک, ویب سائٹ, لاسٹ اپ ڈیٹ, ہسٹری, ڈاؤن لوڈ, شیئر, کاپی. Done: all Latin spellings were converted in `ur.ts`, the Urdu blocks of the guides and info pages, and the silver sources; the RLM added for the date is gone (not needed with an Urdu label). Labels read PNG ڈاؤن لوڈ کریں, نتیجہ کاپی کریں, ہسٹری میں محفوظ کریں. Only abbreviations remain in Latin (PNG, PKR, GST, AM/PM). Browser tests were restored to the Urdu labels.
+- **Checks:** lint, typecheck, 149/149 tests, build, calculator 61/61, history 45/45, content 38/38, FAQ 22/22, sources 19/19; Urdu guide screenshot reviewed.
+
+### (superseded) Urdu keeps common English terms in English
+
+- **Rule (Urdu only):** words that are widely used in English stay in English instead of an Urdu transliteration. Examples: Last updated, Calculator, History, Download, Share, Copy, WhatsApp, Dark mode, Home, Breadcrumb, Email, and in running text browser, link(s), website(s), cookies, analytics. Applied to `dictionaries/ur.ts`, the Urdu text of the guides, the info pages and the silver sources. Whole labels were rewritten naturally (Download PNG, Copy result, Save to history, Saved in history).
+- **Not changed:** words such as ریٹ, رسید, نتیجہ, حساب, رہنمائی and the religious terms stay Urdu. Arabic is unchanged. Say so if the same rule is wanted for Arabic, or if more words should stay English.
+- **Fixes found while checking:** (1) In an RTL line, `Last updated: 4 اکتوبر` split the date around the English label; an RLM (U+200F) before `{date}` fixes the order. (2) Breadcrumbs showed a stray scroll icon in Urdu because of a 1 px vertical overflow; they now use `overflow-y-hidden py-1`.
+- **Checks:** lint, typecheck, 149/149 tests, build; browser suites updated for the new Urdu labels: calculator 61/61, history 45/45, content 38/38, FAQ 22/22, sources 19/19. Screenshots reviewed (home and a guide in Urdu).
+- **Open:** a native Urdu reviewer should confirm the mixed text reads well.
+
 ### 2026-10-04 — Language-switch fade and fonts (user request)
 
 - **Fade:** switching language is a soft client navigation (same root layout), so cross-document view transitions do not apply. `language-switcher.tsx` now fades the page out (180 ms, `html.lang-switching body{opacity:0}`), navigates with `router.push`, and removes the class in an effect when the new `current` locale renders, so the LTR/RTL flip happens while the page is hidden. Plain left-click only (ctrl/cmd/shift/middle keep normal link behaviour), skipped under reduced motion, with a 4 s safety timeout. Measured: opacity 1 to 0, dir flipped at opacity 0, back to 1.

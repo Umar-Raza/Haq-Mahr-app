@@ -86,6 +86,8 @@ Receipt: equations are wrapped in a Unicode LTR isolate (LRI…PDI) so they read
 
 Fonts (user choice, 2026-10-04): Latin = Geist, Arabic = Noto Sans Arabic, Urdu = Vazirmatn, all via next/font/google. Switching language fades the page out and in (not for reduced motion).
 
+Urdu wording (user, 2026-10-04): common English terms are used in the Urdu text but written in Urdu script, not Latin (for example کیلکولیٹر, لنک, ویب سائٹ, لاسٹ اپ ڈیٹ, ہسٹری, ڈاؤن لوڈ, شیئر, کاپی). Ordinary Urdu words are kept. The Arabic locale is unchanged.
+
 ## Silver-rate directory decisions
 
 - Adopted 2026-10-04 (user: at least 10 countries, including Pakistan, India, USA, UK, Canada, Saudi Arabia and UAE). 12 countries are listed in `src/content/silver-sources.ts`.

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import { renderReceiptPng } from "@/lib/receipt/canvas";
@@ -35,15 +36,25 @@ function receiptFontFamily(): string {
   return el ? getComputedStyle(el).fontFamily : "sans-serif";
 }
 
+type SaveProps = {
+  /** The current calculation is already in history. */
+  saved: boolean;
+  /** Returns false when the browser refuses to store. */
+  onSave: () => boolean;
+  historyHref: string;
+};
+
 /** `model` is null while the receipt is a preview; actions render disabled so the layout does not shift. */
 export function ReceiptActions({
   model,
   fileName,
   texts,
+  save,
 }: {
   model: ReceiptModel | null;
   fileName: string;
   texts: Dictionary["actions"];
+  save: SaveProps;
 }) {
   const [status, setStatus] = useState<Status | null>(null);
   const [busy, setBusy] = useState(false);
@@ -173,6 +184,31 @@ export function ReceiptActions({
           <Icon d="M9 9h10v10H9zM5 15V5h10" />
           {texts.copy}
         </button>
+        {model && save.saved ? (
+          <Link
+            href={save.historyHref}
+            className="btn btn-soft btn-success col-span-2"
+          >
+            <Icon d="M5 12l5 5L20 7" />
+            {texts.saved}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-soft btn-primary col-span-2"
+            onClick={() =>
+              setStatus(
+                save.onSave()
+                  ? { tone: "success", text: texts.savedToast }
+                  : { tone: "error", text: texts.saveFailed },
+              )
+            }
+            disabled={!model}
+          >
+            <Icon d="M6 3h12v18l-6-4-6 4z" />
+            {texts.save}
+          </button>
+        )}
       </div>
 
       {/* Always mounted so screen readers announce updates; floats as a toast so it takes no layout space. */}

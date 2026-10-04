@@ -41,6 +41,57 @@ Newest first. Keep each entry short.
 - **Buttons:** Copy result now uses `btn-outline btn-primary` like Share/WhatsApp (it was missing `btn-primary`). Download PNG stays filled as the primary action (intentional, not a bug). The actions block is `mt-auto`, with the status line above the buttons, so the buttons line up with Clear at the card bottom.
 - **Checks run:** lint, typecheck, 62/62 tests, production build. CDP 46/46 passing (adds the exact equation without a note, 7.6545 → PKR 7.66, 4 how-to steps, matching outline colours). Desktop preview and filled screenshots reviewed.
 
+### 2026-10-04 — Phase 5 complete (guides and info pages)
+
+- **Current phase:** Phase 5 done, except that Contact waits for an email. Phase 6 (Silver Rate Sources) not started; the user must choose the countries.
+- **User decisions:**
+  - No owner name on About ("independent project").
+  - Four guides.
+  - The Contact email will come from the user. Until it is set in `CONTACT_EMAIL` (`src/content/site.ts`), `/[locale]/contact` returns 404 and the footer hides the link, so there is no placeholder. Setting it publishes both.
+- **Content:** typed static content in `src/content/` (`types.ts` blocks: p, ul, ol, note, table, link, email). Rendered by `components/content/content-blocks.tsx`; plain text only, no HTML or markdown.
+  - Guides (`content/guides/`, registry `index.ts` with updated date, `religious` flag, sources and related):
+    - how-to-use-the-calculator
+    - minimum-haq-mahr-10-dirhams (religious; only claims from the 4 decision.md sources)
+    - tola-masha-gram
+    - checking-silver-rates
+  - Info pages (`content/pages/`): about, disclaimer, privacy-policy, terms, contact. `INFO_PAGES_UPDATED_ON` is in `site.ts`.
+  - Privacy claims were checked against the code: only the `hmf-theme` and `hmf-history` localStorage keys, no cookies, no analytics or ads, self-hosted fonts.
+  - New source: Wikipedia "Troy weight" (1 troy oz = 31.1034768 g), opened 2026-10-04.
+- **Routes:**
+  - `/[locale]/guides`
+  - `/[locale]/guides/[slug]` (`generateStaticParams`, `dynamicParams=false`)
+  - Each info page is a 3-line file using `infoPageRoute` / `infoPageMetadata` (`components/content/info-page.tsx`).
+- **Navigation:**
+  - Nav: Guides and About are ready.
+  - Footer links come from `footerItems` in `routes.ts`.
+  - DaisyUI breadcrumbs on every content page (RTL arrows come from DaisyUI).
+- **Guide pages:**
+  - Table of contents when there are 4 or more sections: sticky on desktop, inline on mobile.
+  - Sources box with the review date.
+  - Religious guides add a "Religious topic" badge and a "Review status: not yet reviewed by a qualified scholar" note.
+  - Calculator call-to-action and related guides.
+- **Meta:** unique title and description per page and locale, verified in the browser. Full SEO (canonical, hreflang, sitemap) is still Phase 7.
+- **Checks run:**
+  - lint, typecheck, production build (42 static pages).
+  - 139/139 unit tests. The new `content.test.ts` checks, in every locale: same sections and block types, valid internal links, related slugs, https sources, unique titles and descriptions, and the same numbers in every translation. That last check caught Arabic text writing "عشرة" in words; fixed to digits.
+  - CDP 38/38 (all pages in 3 locales, 200, one h1, lang/dir, no mobile overflow, breadcrumbs, safe external links, TOC anchors, every internal link 200, Contact 404, nav active).
+  - Regression suites: history 45/45, calculator 61/61.
+  - Screenshots reviewed: en guide desktop and sources, ur guide mobile and table, ar index dark, ur footer.
+- **Open:**
+  - Contact email.
+  - Native/scholar review of all ur/ar content, especially the religious guide.
+
+### 2026-10-04 — Phase 4 complete (local history)
+
+- **Current phase:** Phase 4 done; Phase 5 (guides and info pages) not started. (Superseded: see the Phase 5 entry.)
+- **Storage:** `src/lib/history/schema.ts` (pure, tested). Key `hmf-history`, `{ version: 1, entries }`, newest first, max 50. An entry holds only id, savedAt, calculationVersion, rate, basis, currency, unit, amount and fractionDigits (no personal data). Re-saving the same rate+basis+currency+version moves it to the top instead of duplicating it. `parseHistory` never throws: invalid entries are skipped and flagged `corrupted`, and a wrong schema version or bad JSON gives an empty list.
+- **Store:** `src/lib/history/store.ts` uses `useSyncExternalStore` (other tabs sync via the `storage` event). Server snapshot = loading, which shows a skeleton until hydration. Blocked storage = "unavailable". `writeHistory` returns false on quota/blocked errors.
+- **Saving:** an explicit full-width "Save to history" button under the 2×2 actions grid (no auto-save). Once saved it becomes a "Saved in history" link to the history page. Toast on success or failure.
+- **Page:** `/[locale]/history` (nav item "History", `noindex, follow`). It shows a storage/privacy note, cards (amount, rate, saved date, an older-method warning when `calculationVersion` differs), "Open in calculator", Delete with an Undo toast (restores the entry to its old position), and Clear all behind a DaisyUI `<dialog>` confirmation. There is also an empty state.
+- **Reopen:** `/{locale}?rate=&basis=&currency=&unit=`. `ReopenableCalculator` reads `useSearchParams` inside `<Suspense>` with a plain `<Calculator>` fallback, so the page stays prerendered without layout shift. Params are validated, then removed from the URL. It recalculates with the current method.
+- **Checks run:** lint, typecheck, 91/91 unit tests (17 new), production build. New CDP suite 45/45: save, dedupe, nav active, reopen (client nav and direct URL), bad params ignored, delete + undo + focus, dialog Escape and confirm, empty state, corrupted and partial data, blocked storage, ur/ar RTL, no console errors. The Phase 3 CDP suite is still 61/61 (grid check updated for the Save row). Screenshots: en list, ur mobile, en saved state.
+- **Open:** Urdu and Arabic history strings need native review.
+
 ### 2026-10-04 — Phase 3 revision (user feedback)
 
 - **Equal heights:** the form and result are now sibling cards in a stretched grid (`h-full`). Clear is a full-width outline button pinned to the form bottom (`mt-auto`). Verified that the cards have equal height and top at 1280 px.
@@ -51,7 +102,7 @@ Newest first. Keep each entry short.
 
 ### 2026-10-04 — Phase 3 complete
 
-- **Current phase:** Phase 3 done; Phase 4 (local history) not started.
+- **Current phase:** Phase 3 done; Phase 4 (local history) not started. (Superseded: see the Phase 4 entry.)
 - **UI:** `src/components/calculator/`:
   - `calculator.tsx` (client): form + state. Basis and unit are DaisyUI `join` radios. Rate input is `inputMode=decimal`, `dir=ltr`, right-aligned in RTL. Results are live, with no loading state. Errors show once the field is touched or non-empty. Clear resets and refocuses. A `sr-only role=status` announces the amount.
   - `receipt.tsx`: `#receipt`, forced `data-theme="hmf-light"`.
@@ -215,18 +266,18 @@ Run the relevant checks before merging/deploying:
 **Done when:** receipt is legible in all languages, including RTL, and all unsupported share actions have a useful fallback.
 
 ### Phase 4 — Local history
-- [ ] Versioned local-storage schema.
-- [ ] Save recent calculations.
-- [ ] Reopen, delete one, clear all.
-- [ ] Handle unavailable/corrupted storage.
-- [ ] Explain that browser clearing may remove history.
+- [x] Versioned local-storage schema.
+- [x] Save recent calculations.
+- [x] Reopen, delete one, clear all.
+- [x] Handle unavailable/corrupted storage.
+- [x] Explain that browser clearing may remove history.
 **Done when:** history works without authentication and never stores personal identity data.
 
 ### Phase 5 — Guides and informational pages
-- [ ] Static guide content in English, Urdu, Arabic.
-- [ ] About, Disclaimer, Privacy, Terms, Contact.
-- [ ] Internal links and breadcrumbs.
-- [ ] Content source/reviewer notes for religious claims.
+- [x] Static guide content in English, Urdu, Arabic.
+- [x] About, Disclaimer, Privacy, Terms, Contact. (Contact is built but hidden until the owner gives an email; see the Status log.)
+- [x] Internal links and breadcrumbs.
+- [x] Content source/reviewer notes for religious claims.
 **Done when:** pages are useful, localized, non-placeholder, and reviewed for factual accuracy.
 
 ### Phase 6 — Silver Rate Sources directory

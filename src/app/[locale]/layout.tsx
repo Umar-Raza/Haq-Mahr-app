@@ -71,7 +71,7 @@ export default async function LocaleLayout({
         <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}
         </main>
-        <SiteFooter dict={dict} />
+        <SiteFooter locale={locale} dict={dict} />
       </body>
     </html>
   );

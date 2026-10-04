@@ -4,6 +4,12 @@ export const en = {
     homeTitle: "Haq Mahr Finder — Haq Mahr Calculator",
     homeDescription:
       "Estimate the value of the Haq Mahr silver-weight reference using a silver rate you enter yourself.",
+    historyTitle: "Saved calculations — Haq Mahr Finder",
+    historyDescription:
+      "Your saved Haq Mahr calculations, stored only in this browser. Reopen, delete, or clear them at any time.",
+    guidesTitle: "Guides — Haq Mahr Finder",
+    guidesDescription:
+      "Short, sourced guides on the minimum Haq Mahr, Tola and gram conversions, checking silver rates, and using the calculator.",
   },
   a11y: {
     skipToContent: "Skip to main content",
@@ -12,6 +18,7 @@ export const en = {
   nav: {
     label: "Main",
     calculator: "Calculator",
+    history: "History",
     guides: "Guides",
     silverRateSources: "Silver Rate Sources",
     about: "About",
@@ -26,6 +33,15 @@ export const en = {
     disclaimer:
       "Results are informational estimates only. They are not a fatwa, a religious ruling, or legal advice.",
     rights: "Haq Mahr Finder",
+    links: {
+      label: "Site information",
+      guides: "Guides",
+      about: "About",
+      disclaimer: "Disclaimer",
+      privacy: "Privacy Policy",
+      terms: "Terms of Use",
+      contact: "Contact",
+    },
   },
   methodology: {
     heading: "How the calculation works",
@@ -126,6 +142,69 @@ export const en = {
     copyFailed: "Could not copy automatically. Please copy the text manually.",
     shareFallback:
       "Sharing is not available on this device, so the result was copied instead.",
+    save: "Save to history",
+    saved: "Saved in history",
+    savedToast: "Saved to history in this browser.",
+    saveFailed:
+      "This browser is not allowing storage, so the calculation could not be saved.",
+  },
+  history: {
+    heading: "Saved calculations",
+    intro:
+      "Calculations you save with “Save to history” appear here, newest first.",
+    storageTitle: "Stored only in this browser",
+    storageNote:
+      "History is kept in this browser's local storage on this device. It is not sent to any server and is not synced to other devices. Clearing site data, using a private window, or the browser's own cleanup can remove it.",
+    privacyNote:
+      "Only the rate, currency, unit, result and date are saved. No names or personal details.",
+    limitNote: "Up to {limit} recent calculations are kept.",
+    unavailable:
+      "This browser is blocking local storage (for example in some private modes), so history cannot be shown or saved here.",
+    corrupted:
+      "Some saved history could not be read and was skipped. Saving a new calculation will replace the unreadable data.",
+    emptyTitle: "No saved calculations yet",
+    emptyBody:
+      "Enter a silver rate in the calculator, then choose “Save to history”.",
+    goToCalculator: "Go to calculator",
+    count: "{count} saved",
+    savedOn: "Saved {date}",
+    olderMethod:
+      "Saved with method version {version}. Open it to recalculate with the current method.",
+    open: "Open in calculator",
+    deleteOne: "Delete",
+    deleteLabel: "Delete the calculation saved {date}",
+    deleted: "Calculation deleted.",
+    undo: "Undo",
+    clearAll: "Clear all",
+    clearTitle: "Clear all saved calculations?",
+    clearBody:
+      "This removes every saved calculation from this browser. It cannot be undone.",
+    clearConfirm: "Clear all",
+    cancel: "Cancel",
+    cleared: "History cleared.",
+    writeFailed: "The browser did not allow the change to be saved.",
+  },
+  content: {
+    breadcrumbLabel: "Breadcrumb",
+    home: "Home",
+    updated: "Last updated {date}",
+    onThisPage: "On this page",
+    sources: "Sources",
+    sourcesNote: "Each source was opened and checked on {date}.",
+    newTab: "opens in a new tab",
+    reviewTitle: "Review status",
+    reviewReligious:
+      "This guide only summarises the sources listed here. It has not yet been reviewed by a qualified scholar, so please treat it as general information.",
+    religiousBadge: "Religious topic",
+    related: "Related guides",
+    readGuide: "Read guide",
+    guidesHeading: "Guides",
+    guidesIntro:
+      "Short, sourced guides on Haq Mahr, silver weights and using the calculator.",
+    ctaTitle: "Ready to calculate?",
+    ctaBody:
+      "Enter today's silver rate to see the value of 10 Dirhams of silver.",
+    ctaButton: "Open the calculator",
   },
 };
 

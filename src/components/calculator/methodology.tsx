@@ -1,6 +1,7 @@
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import { interpolate } from "@/i18n/interpolate";
+import { formatIsoDate } from "@/lib/format-date";
 import { roundHalfUp, toFixedString, toPlainString } from "@/lib/calc/decimal";
 import {
   METHODOLOGY_REVIEWED_ON,
@@ -31,10 +32,7 @@ export function Methodology({
   locale: Locale;
   dict: Dictionary["methodology"];
 }) {
-  const reviewed = new Intl.DateTimeFormat(`${locale}-u-nu-latn`, {
-    dateStyle: "long",
-    timeZone: "UTC",
-  }).format(new Date(`${METHODOLOGY_REVIEWED_ON}T00:00:00Z`));
+  const reviewed = formatIsoDate(locale, METHODOLOGY_REVIEWED_ON);
 
   return (
     <section

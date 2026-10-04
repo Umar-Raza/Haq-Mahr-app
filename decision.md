@@ -19,9 +19,10 @@
 | Receipt | One premium template with localized text |
 | Sharing | PNG download, Web Share where supported, copy result, WhatsApp text/link share. Print/PDF button removed by the user on 2026-10-04; the print stylesheet stays, so Ctrl+P prints only the receipt. |
 | Result before input | A preview receipt (known reference weight, method and disclaimer; "—" for rate-dependent values; actions disabled) instead of an empty box. User-approved 2026-10-04. |
-| History | Local browser storage only; no account |
+| History | Local browser storage only; no account. Saved only by an explicit "Save to history" button (no auto-save). Max 50 entries, versioned schema, page `/[locale]/history` (noindex). Reopen uses URL params. Delete has undo; Clear all asks for confirmation. (2026-10-04) |
 | Guides | Static, multilingual; no dynamic blog |
-| Additional pages | About, Disclaimer, Privacy Policy, Terms, Contact, Silver Rate Sources |
+| Additional pages | About, Disclaimer, Privacy Policy, Terms, Contact, Silver Rate Sources. About shows no owner name ("independent project"), per the user on 2026-10-04. Contact shows an email the user will provide; until then the page is not published (no placeholder). |
+| Guides (MVP set) | 4 guides chosen by the user on 2026-10-04: how to use the calculator; Tola, Masha and Gram; minimum Haq Mahr (10 Dirhams); checking a silver rate. The religious guide cites only verified sources and shows "not yet reviewed by a qualified scholar" until a review happens. |
 | Backend | None in MVP |
 | Monetization | AdSense-ready placements; integrate only after policy review/approval |
 | Deployment | Vercel-compatible Next.js deployment |

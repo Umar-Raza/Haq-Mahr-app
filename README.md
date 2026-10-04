@@ -58,11 +58,21 @@ src/
     calculator.tsx   Calculator form and live result (client)
     currency-picker.tsx  Searchable currency combobox (client)
     receipt.tsx      Receipt template (always light "paper")
-    receipt-actions.tsx  PNG download, share, WhatsApp, copy (client)
+    receipt-actions.tsx  PNG download, share, WhatsApp, copy, save to history (client)
+    reopenable-calculator.tsx  Applies "Open in calculator" URL params (inside Suspense)
+  components/history/
+    history-list.tsx Saved calculations: reopen, delete with undo, clear all (client)
     methodology.tsx  Visible formula, rounding, and sources
+  content/
+    guides/          Static multilingual guides + registry (sources, related, religious flag)
+    pages/           About, Disclaimer, Privacy Policy, Terms, Contact content
+    site.ts          CONTACT_EMAIL (null hides the Contact page) and info-page revision date
+  components/content/
+    content-blocks.tsx  Renders typed content blocks; breadcrumbs.tsx; info-page.tsx (shared route)
   lib/
     calc/            Pure calculation engine (decimal math, units, input parsing, currencies, sources; tested)
     receipt/         Receipt model, share text, and canvas PNG renderer
+    history/         Versioned local-storage schema (pure, tested) and browser store hook
     format.ts        Locale-aware money/number/date formatting (Latin digits)
     routes.ts        Nav items and locale-aware path helpers (tested)
     theme.ts         Theme names, storage key, pre-paint init script (tested)

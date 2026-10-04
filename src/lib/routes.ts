@@ -1,5 +1,6 @@
 import { isLocale, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
+import { CONTACT_EMAIL } from "@/content/site";
 
 export type NavKey = Exclude<
   keyof Dictionary["nav"],
@@ -11,12 +12,29 @@ type NavItem = { key: NavKey; path: string; ready: boolean };
 // Flip `ready` when a page ships so the nav never links to a 404.
 const allNavItems: readonly NavItem[] = [
   { key: "calculator", path: "", ready: true },
-  { key: "guides", path: "/guides", ready: false },
+  { key: "history", path: "/history", ready: true },
+  { key: "guides", path: "/guides", ready: true },
   { key: "silverRateSources", path: "/silver-rate-sources", ready: false },
-  { key: "about", path: "/about", ready: false },
+  { key: "about", path: "/about", ready: true },
 ];
 
 export const navItems = allNavItems.filter((item) => item.ready);
+
+export type FooterKey = Exclude<keyof Dictionary["footer"]["links"], "label">;
+
+type FooterItem = { key: FooterKey; path: string; ready: boolean };
+
+const allFooterItems: readonly FooterItem[] = [
+  { key: "guides", path: "/guides", ready: true },
+  { key: "about", path: "/about", ready: true },
+  { key: "disclaimer", path: "/disclaimer", ready: true },
+  { key: "privacy", path: "/privacy-policy", ready: true },
+  { key: "terms", path: "/terms", ready: true },
+  // Hidden until the owner publishes a contact email (src/content/site.ts).
+  { key: "contact", path: "/contact", ready: CONTACT_EMAIL !== null },
+];
+
+export const footerItems = allFooterItems.filter((item) => item.ready);
 
 export function localizedHref(locale: Locale, path: string): string {
   return `/${locale}${path}`;

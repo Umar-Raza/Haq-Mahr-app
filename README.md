@@ -50,6 +50,12 @@ src/
     negotiate.ts     Accept-Language and pathname locale detection (pure, tested)
     dictionaries/    User-facing strings per locale (en is the source type)
     get-dictionary.ts Server-only dictionary lookup
+  components/
+    layout/          Header, footer, container, nav, language switcher, mobile menu, theme toggle
+    ui/              Shared UI primitives (skeleton)
+  lib/
+    routes.ts        Nav items and locale-aware path helpers (tested)
+    theme.ts         Theme names, storage key, pre-paint init script (tested)
   proxy.ts           Redirects unprefixed URLs to a locale (Next.js 16 "proxy", formerly middleware)
 ```
 

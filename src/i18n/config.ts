@@ -12,6 +12,12 @@ export const localeDirection: Record<Locale, Direction> = {
   ar: "rtl",
 };
 
+export const localeNames: Record<Locale, string> = {
+  en: "English",
+  ur: "اردو",
+  ar: "العربية",
+};
+
 export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }

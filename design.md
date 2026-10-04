@@ -60,7 +60,8 @@ Use DaisyUI theme variables/custom themes rather than scattering raw hex values 
 
 - Brand wordmark: Haq mahr Finder.
 - Main links: Calculator, Guides, Silver Rate Sources, About.
-- Language selector: English / اردو / العربية.
+- Language selector: a single dropdown toggle in the header on every screen size (globe icon; the current language name is shown from `sm` up), listing English / اردو / العربية.
+- Use DaisyUI components for interactive controls (`btn`, `menu`, `dropdown`, `swap`) so they keep DaisyUI's hover and press feedback; theme `--depth` is 1.
 - Theme toggle with accessible label.
 - Mobile menu must be keyboard-operable and close after navigation.
 - Header should not consume excessive vertical space on mobile.

@@ -1,6 +1,134 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+  themes: false;
+}
+
+@custom-variant dark (&:where([data-theme="hmf-dark"], [data-theme="hmf-dark"] *));
+
+/* Palette from design.md. Accent gold fails text contrast on light surfaces: use it for decoration only. */
+@plugin "daisyui/theme" {
+  name: "hmf-light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f7f8f5;
+  --color-base-300: #eef2ee;
+  --color-base-content: #17231f;
+  --color-primary: #176b55;
+  --color-primary-content: #ffffff;
+  --color-secondary: #115542;
+  --color-secondary-content: #ffffff;
+  --color-accent: #c6a15b;
+  --color-accent-content: #17231f;
+  --color-neutral: #17231f;
+  --color-neutral-content: #f7f8f5;
+  --color-info: #176b55;
+  --color-info-content: #ffffff;
+  --color-success: #237a55;
+  --color-success-content: #ffffff;
+  --color-warning: #a66b16;
+  --color-warning-content: #ffffff;
+  --color-error: #b54747;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Success and warning are not specified in design.md for dark mode; these are lightened variants. */
+@plugin "daisyui/theme" {
+  name: "hmf-dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: dark;
+  --color-base-100: #17231f;
+  --color-base-200: #101a17;
+  --color-base-300: #20302a;
+  --color-base-content: #f1f5f2;
+  --color-primary: #65b99a;
+  --color-primary-content: #101a17;
+  --color-secondary: #8fcfb6;
+  --color-secondary-content: #101a17;
+  --color-accent: #d7b875;
+  --color-accent-content: #101a17;
+  --color-neutral: #20302a;
+  --color-neutral-content: #f1f5f2;
+  --color-info: #65b99a;
+  --color-info-content: #101a17;
+  --color-success: #6cc59a;
+  --color-success-content: #101a17;
+  --color-warning: #e0a64b;
+  --color-warning-content: #101a17;
+  --color-error: #f18a82;
+  --color-error-content: #101a17;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+:root,
+[data-theme="hmf-light"] {
+  --hmf-line: #dce4de;
+  --hmf-muted: #65736c;
+}
+
+[data-theme="hmf-dark"] {
+  --hmf-line: #304239;
+  --hmf-muted: #a9b8af;
+}
+
+/* DaisyUI defaults the active menu item to neutral (near-black); use the brand emerald. */
+.menu {
+  --menu-active-bg: var(--color-primary);
+  --menu-active-fg: var(--color-primary-content);
+}
 
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic:
+    var(--font-noto-naskh-arabic), "Noto Naskh Arabic", "Segoe UI", Tahoma,
+    sans-serif;
+  --color-line: var(--hmf-line);
+  --color-muted: var(--hmf-muted);
+}
+
+@layer base {
+  /* Arabic-script glyphs render visually smaller than Latin at the same size. */
+  html:lang(ur),
+  html:lang(ar) {
+    font-size: 106.25%;
+  }
+
+  html:lang(ur) body,
+  html:lang(ar) body {
+    font-family: var(--font-arabic);
+    line-height: 1.8;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }

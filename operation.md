@@ -9,6 +9,42 @@
 5. Update the status/checklists as work is completed.
 6. Do not mark a phase complete until its acceptance criteria pass.
 
+## Status log
+
+Newest first. Keep each entry short.
+
+### 2026-10-04 — Phase 1 revision (user request)
+
+- **Language switcher** is now one DaisyUI `dropdown` (`<details>`) in the header on all sizes (`language-switcher.tsx`). It closes on select, Escape (focus returns to summary) and outside click. Removed from the mobile menu.
+- **DaisyUI feel:** `--depth` changed 0 → 1 in both themes (it had disabled the button shadow and press effect). Nav uses DaisyUI `menu` / `menu-horizontal`, with the active item from `aria-current` and the menu active colour overridden to primary. Theme toggle is a `<label class="btn">` + `sr-only` checkbox + `swap swap-rotate` icon. It is not a button with `aria-pressed`, because DaisyUI suppresses the press effect on `[aria-pressed=true]`.
+- **Checks run:** lint, typecheck, 14/14 tests, production build. CDP browser script 34/34 passing (adds dropdown open/Escape/outside-click/switch, RTL dropdown inside viewport, menu closes on link click). Screenshots of the dropdown (ur mobile light, en desktop dark) and the mobile menu (ar dark).
+- `design.md` §5 updated to match.
+
+### 2026-10-04 — Phase 1 complete
+
+- **Current phase:** Phase 1 done; Phase 2 (calculator engine) not started. Blocker for Phase 2: user must confirm the gram value / source for 2 Tola 7.5 Masha.
+- **Theme:** DaisyUI custom themes `hmf-light` / `hmf-dark` in `src/app/globals.css` (built-in themes disabled). Extra tokens: `border-line`, `text-muted`. `dark:` variant keys off `data-theme`. Accent gold is decoration only (fails text contrast on light). Dark success/warning (`#6cc59a`, `#e0a64b`) are my picks; `design.md` does not specify them.
+- **Theme persistence:** `src/lib/theme.ts` (`hmf-theme` in localStorage; falls back to OS preference). Inline `<head>` script sets `data-theme` before paint; `ThemeToggle` uses `useSyncExternalStore` and re-applies after the dev Strict Mode remount.
+- **Shell:** `src/components/layout/` has `site-header`, `site-footer`, `container`, `nav-links`, `language-switcher`, `mobile-menu` (Escape closes and returns focus; closes on link click), `theme-toggle`. Skip link + `<main id="main">` live in the layout.
+- **Nav:** `src/lib/routes.ts` `allNavItems[].ready`. Only ready pages render, so there are no 404 links. Flip `ready` when Guides / Silver Rate Sources / About ship.
+- **Fonts:** Geist (Latin) and Noto Naskh Arabic (ur/ar). Root font-size is 106.25% for ur/ar.
+- **Skeleton:** `src/components/ui/skeleton.tsx` (`Skeleton` + `LoadingRegion` with role=status). Animation is disabled under reduced motion.
+- **Dev-only page:** `/[locale]/design-system` (404 in production, noindex). English-only by design.
+- **Checks run:** lint, typecheck, 14/14 tests, production build. Screenshots at 360/390/768/1280 in light and dark for en/ur/ar. CDP browser script: 25/25 passing (theme toggle and persistence, OS fallback, mobile menu open/Escape/focus return, language switch from the menu, skip link, aria-current, no horizontal overflow at 360px, no console errors).
+- **Not checked:** real screen reader; Safari/Firefox.
+
+### 2026-10-04 — Phase 0 complete
+
+- **Current phase:** Phase 0 done; Phase 1 (design system and shell) not started.
+- **Stack:** Next.js 16.3.8 (Turbopack), React 19.2, Tailwind 4, DaisyUI 5, Vitest 5, Prettier 3, Node 22.
+- **Next 16 notes:** `middleware` is now `src/proxy.ts`. Read `node_modules/next/dist/docs/` before using Next APIs (see `AGENTS.md`).
+- **Routing:** root layout is `src/app/[locale]/layout.tsx` (sets `lang`/`dir`, `dynamicParams = false`). `proxy.ts` redirects unprefixed URLs using Accept-Language.
+- **i18n:** `src/i18n/` has `config.ts` (locales, direction), `negotiate.ts` (tested), `dictionaries/{en,ur,ar}.ts` (`en` is the type source), `get-dictionary.ts` (server-only).
+- **Scripts:** `lint`, `typecheck` (`next typegen && tsc`), `test`, `format`, `check` (all + build).
+- **Decisions:** `@types/node` pinned to ^22 (Vitest 5 peer requirement). `<body suppressHydrationWarning>` because the ColorZilla extension injects `cz-shortcut-listen`.
+- **Checks run:** lint, typecheck, 7/7 tests, production build, and curl checks of redirects, 404s, `lang`/`dir` and titles. Not yet checked in a browser at different widths or themes.
+- **Open items:** Urdu/Arabic strings need native review. `npm audit` reports 5 high vulnerabilities (not addressed). Reference weight (2 Tola 7.5 Masha in grams) needs a source before Phase 2. Silver-rate source countries still to be chosen by the user.
+
 ## Development workflow
 
 ### Before coding
@@ -55,12 +91,12 @@ Run the relevant checks before merging/deploying:
 **Done when:** clean install, lint/typecheck, and production build succeed.
 
 ### Phase 1 — Design system and shell
-- [ ] Implement color tokens from `design.md`.
-- [ ] Header, navigation, footer, mobile menu.
-- [ ] Theme toggle with local preference.
-- [ ] Language switcher and `dir` handling.
-- [ ] Shared page container and responsive spacing.
-- [ ] Accessible skeleton component.
+- [x] Implement color tokens from `design.md`.
+- [x] Header, navigation, footer, mobile menu.
+- [x] Theme toggle with local preference.
+- [x] Language switcher and `dir` handling.
+- [x] Shared page container and responsive spacing.
+- [x] Accessible skeleton component.
 **Done when:** all three locales render correctly in both themes at mobile and desktop widths.
 
 ### Phase 2 — Calculator engine

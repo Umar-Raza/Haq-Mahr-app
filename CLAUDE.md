@@ -115,3 +115,8 @@ Also manually check:
 - Report tests actually run and their outcomes.
 - Do not claim completion for checks that were not executed.
 - If requirements conflict, follow `decision.md` and ask before changing scope.
+- Keep the docs current so future sessions can start from them instead of re-reading code:
+  - After any work: tick checklists and add a short dated entry to "Status log" in `operation.md` (what changed, key files, checks run, open items).
+  - When the user changes scope or a decision: update `decision.md` (and `design.md` / `project plain.md` if affected) in the same turn.
+  - Start each session by reading the "Status log" in `operation.md` before exploring code.
+  - Keep entries brief; do not duplicate what the code or git history already shows.

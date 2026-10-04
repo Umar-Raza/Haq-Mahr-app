@@ -7,6 +7,28 @@ export const ar: Dictionary = {
     homeDescription:
       "قدّر قيمة وزن الفضة المرجعي لحق المهر باستخدام سعر الفضة الذي تُدخله بنفسك.",
   },
+  a11y: {
+    skipToContent: "انتقل إلى المحتوى الرئيسي",
+    loading: "جارٍ التحميل…",
+  },
+  nav: {
+    label: "الرئيسية",
+    calculator: "الحاسبة",
+    guides: "الأدلة",
+    silverRateSources: "مصادر أسعار الفضة",
+    about: "من نحن",
+    openMenu: "فتح القائمة",
+    closeMenu: "إغلاق القائمة",
+    language: "اللغة",
+  },
+  theme: {
+    darkMode: "الوضع الداكن",
+  },
+  footer: {
+    disclaimer:
+      "النتائج تقديرات معلوماتية فقط، وليست فتوى ولا حكمًا شرعيًا ولا استشارة قانونية.",
+    rights: "حاسبة حق المهر",
+  },
   home: {
     heading: "حاسبة حق المهر",
     intro:

@@ -42,8 +42,6 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
               "Estimated value: the rate multiplied by the reference weight, always rounded up to the currency's smallest unit (for example 0.01 for PKR).",
               "Silver rate: the rate exactly as you entered it.",
               "Reference weight: 10 Dirhams shown in Tola, Masha or grams. Change the unit with “Show reference weight in”; the amount does not change.",
-              "Calculation: the full multiplication before rounding, so anyone can check it.",
-              "Method: the reference used and the calculation version.",
             ],
           },
           {
@@ -60,10 +58,10 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ul",
             items: [
-              "Download PNG saves an image of the receipt.",
+              "Download saves an image of the receipt (PNG).",
               "Share opens your device's share sheet where available. If the device cannot share, the result text is copied instead.",
               "WhatsApp opens WhatsApp with the result text ready to send.",
-              "Copy result copies the same text to your clipboard.",
+              "Copy offers two versions: Formatted, with every detail on its own line, or Short, a single line with the amount and the rate.",
             ],
           },
         ],
@@ -131,8 +129,6 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
               "اندازاً مالیت: ریٹ ضرب حوالہ وزن، جو ہمیشہ کرنسی کی سب سے چھوٹی اکائی تک اوپر کی طرف گول کیا جاتا ہے (مثلاً PKR میں 0.01)۔",
               "چاندی کا ریٹ: بالکل وہی ریٹ جو آپ نے درج کیا۔",
               "حوالہ وزن: 10 درہم، تولہ، ماشہ یا گرام میں۔ اکائی ”حوالہ جاتی وزن اس اکائی میں دکھائیں“ سے بدلیں؛ رقم نہیں بدلتی۔",
-              "حساب: گول کرنے سے پہلے کی پوری ضرب، تاکہ کوئی بھی اسے جانچ سکے۔",
-              "طریقہ: استعمال شدہ حوالہ اور حساب کا ورژن۔",
             ],
           },
           {
@@ -149,10 +145,10 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ul",
             items: [
-              "PNG ڈاؤن لوڈ کریں سے رسید کی تصویر محفوظ ہوتی ہے۔",
+              "ڈاؤن لوڈ کریں سے رسید کی تصویر (PNG) محفوظ ہوتی ہے۔",
               "شیئر جہاں ممکن ہو آپ کی ڈیوائس کا شیئر مینو کھولتا ہے۔ اگر ڈیوائس شیئر نہ کر سکے تو نتیجے کا متن کاپی ہو جاتا ہے۔",
               "واٹس ایپ نتیجے کے متن کے ساتھ واٹس ایپ کھولتا ہے۔",
-              "نتیجہ کاپی کریں وہی متن کلپ بورڈ پر کاپی کرتا ہے۔",
+              "کاپی کریں میں دو انتخاب ہیں: تفصیلی، جس میں ہر تفصیل الگ لائن میں ہوتی ہے، یا مختصر، جس میں رقم اور ریٹ ایک لائن میں ہوتے ہیں۔",
             ],
           },
         ],
@@ -220,8 +216,6 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
               "القيمة التقديرية: السعر مضروبًا في الوزن المرجعي، مقرّبًا دائمًا إلى الأعلى لأصغر وحدة في العملة (مثل 0.01 للروبية الباكستانية).",
               "سعر الفضة: السعر كما أدخلته تمامًا.",
               "الوزن المرجعي: 10 دراهم بالتولة أو الماشة أو الغرام. غيّر الوحدة من «اعرض الوزن المرجعي بوحدة»؛ ولا يتغيّر المبلغ.",
-              "الحساب: عملية الضرب كاملة قبل التقريب، ليتمكن أي شخص من التحقق منها.",
-              "الطريقة: المرجع المستخدم وإصدار الحساب.",
             ],
           },
           {
@@ -238,10 +232,10 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ul",
             items: [
-              "تنزيل PNG يحفظ صورة للإيصال.",
+              "تنزيل يحفظ صورة للإيصال (PNG).",
               "مشاركة تفتح قائمة المشاركة في جهازك حيث تتوفر. وإن تعذّرت المشاركة يُنسخ نص النتيجة بدلًا من ذلك.",
               "واتساب يفتح واتساب ونص النتيجة جاهز للإرسال.",
-              "نسخ النتيجة ينسخ النص نفسه إلى الحافظة.",
+              "نسخ يتيح نسختين: مفصّل، وفيه كل تفصيل في سطر مستقل، أو مختصر، وهو سطر واحد بالمبلغ والسعر.",
             ],
           },
         ],

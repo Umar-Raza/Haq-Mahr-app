@@ -289,7 +289,7 @@ export function Calculator({
 
       <section
         aria-labelledby={`${ids}-result-heading`}
-        className="flex h-full flex-col rounded-box border border-line bg-base-100 p-5 sm:p-6"
+        className="flex h-full flex-col rounded-box border border-line bg-base-100 p-5 [--receipt-notch:var(--color-base-100)] sm:p-6"
       >
         <h2
           id={`${ids}-result-heading`}

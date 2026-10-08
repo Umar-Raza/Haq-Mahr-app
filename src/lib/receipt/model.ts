@@ -1,16 +1,14 @@
 import { localeDirection, type Direction, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import { interpolate } from "@/i18n/interpolate";
-import {
-  CALCULATION_VERSION,
-  type CalculationResult,
-} from "@/lib/calc/calculate";
+import type { CalculationResult } from "@/lib/calc/calculate";
 import { toPlainString } from "@/lib/calc/decimal";
 import {
   REFERENCE_GRAMS,
   REFERENCE_MASHA,
   REFERENCE_TOLA,
 } from "@/lib/calc/units";
+import { SITE_DOMAIN, SITE_URL } from "@/content/site";
 import { formatDateTime, formatDecimal, formatMoney } from "@/lib/format";
 
 export const weightUnits = ["tola", "masha", "gram"] as const;
@@ -27,6 +25,8 @@ export type ReceiptModel = {
   amount: string;
   rows: ReceiptRow[];
   disclaimer: string;
+  /** Shown in the receipt footer. */
+  domain: string;
 };
 
 type Texts = {
@@ -61,20 +61,9 @@ export function buildReceiptModel(
     },
   );
 
-  // LTR isolate keeps the equation in reading order inside RTL text (HTML and canvas).
-  const calculation = `${LRI}${formatDecimal(locale, result.rate)} × ${formatDecimal(
-    locale,
-    result.weightInBasisUnit,
-  )} = ${formatDecimal(locale, result.exactAmount)}${PDI}`;
-
   const rows: ReceiptRow[] = [
     { label: t.rateLabel, value: rate },
     { label: t.weightLabel, value: weightValue },
-    { label: t.calculationLabel, value: calculation },
-    {
-      label: t.methodLabel,
-      value: interpolate(t.method, { version: result.version }),
-    },
     { label: t.issuedLabel, value: formatDateTime(locale, issuedAt) },
   ];
 
@@ -87,6 +76,7 @@ export function buildReceiptModel(
     amount: money(result.amount),
     rows,
     disclaimer: t.disclaimer,
+    domain: SITE_DOMAIN,
   };
 }
 
@@ -137,28 +127,33 @@ export function buildPreviewModel(
           grams: toPlainString(REFERENCE_GRAMS),
         }),
       },
-      { label: t.calculationLabel, value: PLACEHOLDER },
-      {
-        label: t.methodLabel,
-        value: interpolate(t.method, { version: CALCULATION_VERSION }),
-      },
       { label: t.issuedLabel, value: PLACEHOLDER },
     ],
     disclaimer: t.disclaimer,
+    domain: SITE_DOMAIN,
   };
 }
 
-const LRI = String.fromCodePoint(0x2066);
-const PDI = String.fromCodePoint(0x2069);
+const RULE = "─".repeat(18);
 
-export function buildShareText(model: ReceiptModel, url?: string): string {
+/** Formatted text: title, one line per receipt row, rules, disclaimer and the site address. */
+export function buildFormattedText(model: ReceiptModel): string {
   return [
-    `${model.brand} — ${model.title}`,
+    model.title,
+    model.brand,
+    RULE,
     `${model.amountLabel}: ${model.amount}`,
     ...model.rows.map((row) => `${row.label}: ${row.value}`),
+    RULE,
     model.disclaimer,
-    ...(url ? [url] : []),
+    SITE_URL,
   ].join("\n");
+}
+
+/** Short text: a single line with the amount, the rate used and the site address. */
+export function buildShortText(model: ReceiptModel): string {
+  const rate = model.rows[0]?.value ?? "";
+  return `${model.title}: ${model.amount} (${rate}) · ${SITE_URL}`;
 }
 
 export function whatsappHref(text: string): string {

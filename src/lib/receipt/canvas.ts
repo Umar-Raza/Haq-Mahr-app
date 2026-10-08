@@ -6,6 +6,7 @@ const COLORS = {
   paper: "#ffffff",
   line: "#dce4de",
   primary: "#176b55",
+  primaryTint: "#eef5f2",
   onPrimary: "#ffffff",
   accent: "#c6a15b",
   text: "#17231f",
@@ -19,6 +20,10 @@ const PAD = 32;
 const RADIUS = 20;
 const HEADER_H = 92;
 const CONTENT_W = WIDTH - 2 * (MARGIN + PAD);
+const PANEL_PAD = 20;
+const NOTCH_R = 11;
+
+type Align = "start" | "end" | "center";
 
 type Op =
   | {
@@ -27,9 +32,11 @@ type Op =
       y: number;
       font: string;
       color: string;
-      align: "start" | "end";
+      align: Align;
+      maxWidth?: number;
     }
-  | { kind: "rule"; y: number; color: string; width: number };
+  | { kind: "dash"; y: number }
+  | { kind: "panel"; y: number; h: number };
 
 function wrap(
   ctx: CanvasRenderingContext2D,
@@ -53,6 +60,25 @@ function wrap(
   return lines;
 }
 
+function dashedLine(
+  ctx: CanvasRenderingContext2D,
+  x1: number,
+  x2: number,
+  y: number,
+  width: number,
+  dash: [number, number],
+) {
+  ctx.save();
+  ctx.strokeStyle = COLORS.line;
+  ctx.lineWidth = width;
+  ctx.setLineDash(dash);
+  ctx.beginPath();
+  ctx.moveTo(x1, y);
+  ctx.lineTo(x2, y);
+  ctx.stroke();
+  ctx.restore();
+}
+
 export async function renderReceiptPng(
   model: ReceiptModel,
   fontFamily: string,
@@ -72,45 +98,115 @@ export async function renderReceiptPng(
   if (!ctx) throw new Error("Canvas 2D context unavailable");
 
   const ops: Op[] = [];
-  let y = MARGIN + HEADER_H + 34;
+  const left = MARGIN + PAD;
+  const right = WIDTH - MARGIN - PAD;
 
-  const text = (
-    value: string,
-    f: string,
-    color: string,
-    lineHeight: number,
-    align: "start" | "end" = "start",
-  ) => {
-    for (const line of wrap(ctx, value, f, CONTENT_W)) {
-      ops.push({ kind: "text", text: line, y, font: f, color, align });
-      y += lineHeight;
-    }
-  };
-
-  text(model.amountLabel, font(400, 15), COLORS.muted, 26);
+  // Amount panel.
+  let y = MARGIN + HEADER_H + 28;
+  const panelTop = y;
+  y += PANEL_PAD + 14;
+  const inner = CONTENT_W - 2 * PANEL_PAD;
+  for (const line of wrap(ctx, model.amountLabel, font(400, 15), inner)) {
+    ops.push({
+      kind: "text",
+      text: line,
+      y,
+      font: font(400, 15),
+      color: COLORS.muted,
+      align: "start",
+      maxWidth: inner,
+    });
+    y += 22;
+  }
   let amountSize = 36;
   ctx.font = font(700, amountSize);
-  while (amountSize > 20 && ctx.measureText(model.amount).width > CONTENT_W) {
+  while (amountSize > 20 && ctx.measureText(model.amount).width > inner) {
     amountSize -= 2;
     ctx.font = font(700, amountSize);
   }
-  y += amountSize - 18;
-  text(model.amount, font(700, amountSize), COLORS.primary, amountSize + 8);
+  y += amountSize - 10;
+  ops.push({
+    kind: "text",
+    text: model.amount,
+    y,
+    font: font(700, amountSize),
+    color: COLORS.primary,
+    align: "start",
+    maxWidth: inner,
+  });
+  y += PANEL_PAD;
+  ops.push({ kind: "panel", y: panelTop, h: y - panelTop });
 
-  y += 6;
-  ops.push({ kind: "rule", y, color: COLORS.line, width: 1 });
-  y += 30;
+  // Detail rows: label at the start, value at the end; stacked when they do not fit.
+  y += 12;
+  const labelFont = font(400, 14);
+  const valueFont = font(600, 16);
+  model.rows.forEach((row, index) => {
+    ctx.font = labelFont;
+    const labelW = ctx.measureText(row.label).width;
+    ctx.font = valueFont;
+    const valueW = ctx.measureText(row.value).width;
+    y += 26;
+    if (labelW + valueW + 24 <= CONTENT_W) {
+      ops.push({
+        kind: "text",
+        text: row.label,
+        y,
+        font: labelFont,
+        color: COLORS.muted,
+        align: "start",
+      });
+      ops.push({
+        kind: "text",
+        text: row.value,
+        y,
+        font: valueFont,
+        color: COLORS.text,
+        align: "end",
+      });
+    } else {
+      ops.push({
+        kind: "text",
+        text: row.label,
+        y,
+        font: labelFont,
+        color: COLORS.muted,
+        align: "start",
+      });
+      for (const line of wrap(ctx, row.value, valueFont, CONTENT_W)) {
+        y += 24;
+        ops.push({
+          kind: "text",
+          text: line,
+          y,
+          font: valueFont,
+          color: COLORS.text,
+          align: "start",
+        });
+      }
+    }
+    y += 16;
+    if (index < model.rows.length - 1) ops.push({ kind: "dash", y });
+  });
 
-  for (const row of model.rows) {
-    text(row.label, font(400, 13), COLORS.muted, 20);
-    text(row.value, font(600, 16), COLORS.text, 24);
-    y += 12;
+  // Disclaimer.
+  y += 14;
+  for (const line of wrap(ctx, model.disclaimer, font(400, 13), CONTENT_W)) {
+    y += 20;
+    ops.push({
+      kind: "text",
+      text: line,
+      y,
+      font: font(400, 13),
+      color: COLORS.muted,
+      align: "start",
+    });
   }
 
-  ops.push({ kind: "rule", y, color: COLORS.line, width: 1 });
-  y += 26;
-  text(model.disclaimer, font(400, 13), COLORS.muted, 20);
-  const height = y + PAD - 10 + MARGIN;
+  // Perforation and footer with the site address.
+  const tearY = y + 30;
+  const footerY = tearY + 40;
+  const height = footerY + 26 + MARGIN;
 
   canvas.width = WIDTH * SCALE;
   canvas.height = Math.ceil(height * SCALE);
@@ -118,8 +214,6 @@ export async function renderReceiptPng(
   ctx.direction = model.dir;
   ctx.textBaseline = "alphabetic";
 
-  const left = MARGIN + PAD;
-  const right = WIDTH - MARGIN - PAD;
   const startX = model.dir === "rtl" ? right : left;
   const endX = model.dir === "rtl" ? left : right;
 
@@ -160,17 +254,74 @@ export async function renderReceiptPng(
     3,
   );
 
-  for (const op of ops) {
-    if (op.kind === "rule") {
-      ctx.fillStyle = op.color;
-      ctx.fillRect(left, op.y, right - left, op.width);
+  // Panels are backgrounds: paint them before any text that sits on top.
+  const ordered = [
+    ...ops.filter((op) => op.kind === "panel"),
+    ...ops.filter((op) => op.kind !== "panel"),
+  ];
+  for (const op of ordered) {
+    if (op.kind === "panel") {
+      ctx.fillStyle = COLORS.primaryTint;
+      ctx.beginPath();
+      ctx.roundRect(left, op.y, CONTENT_W, op.h, 14);
+      ctx.fill();
       continue;
     }
+    if (op.kind === "dash") {
+      dashedLine(ctx, left, right, op.y, 1, [4, 4]);
+      continue;
+    }
+    const inPanel = op.maxWidth !== undefined;
+    const x =
+      op.align === "center"
+        ? WIDTH / 2
+        : op.align === "start"
+          ? startX +
+            (inPanel ? (model.dir === "rtl" ? -PANEL_PAD : PANEL_PAD) : 0)
+          : endX;
     ctx.font = op.font;
     ctx.fillStyle = op.color;
     ctx.textAlign = op.align;
-    ctx.fillText(op.text, op.align === "start" ? startX : endX, op.y);
+    ctx.fillText(op.text, x, op.y);
   }
+
+  // Tear line with semicircle notches cut into both edges.
+  dashedLine(ctx, left, right, tearY, 2, [6, 5]);
+  for (const cx of [MARGIN, WIDTH - MARGIN]) {
+    ctx.fillStyle = COLORS.page;
+    ctx.beginPath();
+    ctx.arc(cx, tearY, NOTCH_R, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = COLORS.line;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(
+      cx,
+      tearY,
+      NOTCH_R,
+      cx === MARGIN ? -Math.PI / 2 : Math.PI / 2,
+      cx === MARGIN ? Math.PI / 2 : (3 * Math.PI) / 2,
+    );
+    ctx.stroke();
+  }
+
+  // Footer: accent diamond + domain, centred. The domain is always LTR.
+  ctx.font = font(600, 15);
+  ctx.direction = "ltr";
+  const domainW = ctx.measureText(model.domain).width;
+  const diamond = 8;
+  const gap = 10;
+  const total = diamond + gap + domainW;
+  const x0 = WIDTH / 2 - total / 2;
+  ctx.save();
+  ctx.translate(x0 + diamond / 2, footerY - 5);
+  ctx.rotate(Math.PI / 4);
+  ctx.fillStyle = COLORS.accent;
+  ctx.fillRect(-diamond / 2, -diamond / 2, diamond, diamond);
+  ctx.restore();
+  ctx.fillStyle = COLORS.primary;
+  ctx.textAlign = "left";
+  ctx.fillText(model.domain, x0 + diamond + gap, footerY);
 
   return new Promise((resolve, reject) =>
     canvas.toBlob(

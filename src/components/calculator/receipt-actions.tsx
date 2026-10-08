@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import { renderReceiptPng } from "@/lib/receipt/canvas";
 import {
-  buildShareText,
+  buildFormattedText,
+  buildShortText,
   whatsappHref,
   type ReceiptModel,
 } from "@/lib/receipt/model";
+import { CopyMenu, type CopyKind } from "./copy-menu";
 import { RECEIPT_ID } from "./receipt";
 
 type Status = { tone: "success" | "error"; text: string };
@@ -58,8 +60,8 @@ export function ReceiptActions({
 }) {
   const [status, setStatus] = useState<Status | null>(null);
   const [busy, setBusy] = useState(false);
-  // model only exists after user input, so this never runs during server rendering.
-  const shareText = model ? buildShareText(model, window.location.href) : "";
+  // Share and WhatsApp send the formatted text; Copy lets the user choose.
+  const shareText = model ? buildFormattedText(model) : "";
   const disabled = !model || busy;
 
   useEffect(() => {
@@ -92,12 +94,15 @@ export function ReceiptActions({
     setStatus({ tone: "success", text: texts.downloaded });
   }
 
-  async function onCopy(fallbackMessage?: string) {
+  async function onCopy(kind: CopyKind, fallbackMessage?: string) {
     if (!model) return;
-    const ok = await copyText(shareText);
+    const text =
+      kind === "short" ? buildShortText(model) : buildFormattedText(model);
+    const ok = await copyText(text);
+    const done = kind === "short" ? texts.copiedShort : texts.copied;
     setStatus(
       ok
-        ? { tone: "success", text: fallbackMessage ?? texts.copied }
+        ? { tone: "success", text: fallbackMessage ?? done }
         : { tone: "error", text: texts.copyFailed },
     );
   }
@@ -105,7 +110,7 @@ export function ReceiptActions({
   async function onShare() {
     if (!model) return;
     if (typeof navigator.share !== "function") {
-      await onCopy(texts.shareFallback);
+      await onCopy("formatted", texts.shareFallback);
       return;
     }
     setBusy(true);
@@ -126,7 +131,7 @@ export function ReceiptActions({
       }
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return;
-      await onCopy(texts.shareFallback);
+      await onCopy("formatted", texts.shareFallback);
     }
   }
 
@@ -175,15 +180,22 @@ export function ReceiptActions({
             {texts.whatsapp}
           </button>
         )}
-        <button
-          type="button"
-          className="btn btn-outline btn-primary"
-          onClick={() => onCopy()}
-          disabled={!model}
-        >
-          <Icon d="M9 9h10v10H9zM5 15V5h10" />
-          {texts.copy}
-        </button>
+        {model ? (
+          <CopyMenu
+            texts={texts}
+            icon={<Icon d={COPY_ICON} />}
+            onCopy={(kind) => void onCopy(kind)}
+          />
+        ) : (
+          <button
+            type="button"
+            className="btn btn-outline btn-primary"
+            disabled
+          >
+            <Icon d={COPY_ICON} />
+            {texts.copy}
+          </button>
+        )}
         {model && save.saved ? (
           <Link
             href={save.historyHref}
@@ -226,6 +238,8 @@ export function ReceiptActions({
     </section>
   );
 }
+
+const COPY_ICON = "M9 9h10v10H9zM5 15V5h10";
 
 const CHAT_ICON =
   "M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z";

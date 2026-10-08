@@ -82,7 +82,7 @@ Currency picker: a searchable WAI-ARIA combobox instead of a native `<select>` (
 
 Receipt actions: a 2×2 grid with icons. Status messages appear as a floating DaisyUI toast, so no layout space is reserved (user request, 2026-10-04).
 
-Receipt: equations are wrapped in a Unicode LTR isolate (LRI…PDI) so they read left-to-right inside RTL text, in both the HTML receipt and the PNG. The displayed rate keeps every decimal the user entered.
+Receipt (revised 2026-10-08, user request): rows are Silver rate, Reference weight and Generated only (Calculation and Method removed). Footer shows the domain haq-mahr-finder.app (`SITE_DOMAIN`). The displayed rate keeps every decimal the user entered. Download button reads "Download" (no "PNG"). Copy offers Formatted (multi-line) and Short (one line); both end with https://haq-mahr-finder.app. Share and WhatsApp use the formatted text.
 
 Fonts (user choice, 2026-10-04): Latin = Geist, Arabic = Noto Sans Arabic, Urdu = Vazirmatn, all via next/font/google. Switching language fades the page out and in (not for reduced motion).
 

@@ -4,18 +4,16 @@ import { en } from "@/i18n/dictionaries/en";
 import { calculateMahr } from "@/lib/calc/calculate";
 import {
   PLACEHOLDER,
+  buildFormattedText,
   buildPreviewModel,
   buildReceiptModel,
-  buildShareText,
+  buildShortText,
   whatsappHref,
 } from "./model";
 
-// Normalize Intl no-break spaces and drop bidi isolates for readable comparisons.
+// Normalize Intl no-break spaces for readable comparisons.
 const NBSP = String.fromCodePoint(0xa0);
-const LRI = String.fromCodePoint(0x2066);
-const PDI = String.fromCodePoint(0x2069);
-const nbsp = (s: string) =>
-  s.replaceAll(NBSP, " ").replaceAll(LRI, "").replaceAll(PDI, "");
+const nbsp = (s: string) => s.replaceAll(NBSP, " ");
 const issuedAt = new Date("2026-10-04T10:30:00Z");
 
 function result(rate: string, basis: "tola" | "gram", currency = "PKR") {
@@ -42,11 +40,25 @@ describe("buildReceiptModel", () => {
     );
     expect(rows["Silver rate"]).toBe("PKR 210.00 per gram");
     expect(rows["Reference weight"]).toBe("30.618 g");
-    expect(rows["Calculation"]).toBe("210 × 30.618 = 6,429.78");
-    expect(rows["Method"]).toContain("30.618 g");
   });
 
-  it("shows the exact equation without a rounding note, and the amount rounded up", () => {
+  it("shows only rate, reference weight and date, plus the site domain", () => {
+    const model = buildReceiptModel(
+      "en",
+      enTexts,
+      result("210", "gram"),
+      "gram",
+      issuedAt,
+    );
+    expect(model.rows.map((r) => r.label)).toEqual([
+      en.receipt.rateLabel,
+      en.receipt.weightLabel,
+      en.receipt.issuedLabel,
+    ]);
+    expect(model.domain).toBe("haq-mahr-finder.app");
+  });
+
+  it("rounds the amount up", () => {
     const model = buildReceiptModel(
       "en",
       enTexts,
@@ -54,10 +66,6 @@ describe("buildReceiptModel", () => {
       "tola",
       issuedAt,
     );
-    const calc = nbsp(
-      model.rows.find((r) => r.label === "Calculation")?.value ?? "",
-    );
-    expect(calc).toBe("0.25 × 30.618 = 7.6545");
     expect(nbsp(model.amount)).toBe("PKR 7.66");
     expect(model.rows.find((r) => r.label === "Reference weight")?.value).toBe(
       "2.625 Tola",
@@ -74,18 +82,6 @@ describe("buildReceiptModel", () => {
     );
     expect(model.rows[1].value).toBe("31.5 Masha");
     expect(nbsp(model.rows[0].value)).toBe("PKR 2,450.00 per Tola");
-  });
-
-  it("wraps the equation in an LTR isolate", () => {
-    const model = buildReceiptModel(
-      "ur",
-      { siteName: "x", receipt: en.receipt },
-      result("210", "gram"),
-      "gram",
-      issuedAt,
-    );
-    expect(model.rows[2].value.startsWith(LRI)).toBe(true);
-    expect(model.rows[2].value.endsWith(PDI)).toBe(true);
   });
 
   it("never rounds the displayed rate below what was entered", () => {
@@ -130,8 +126,8 @@ describe("buildPreviewModel", () => {
     expect(preview.rows[0].value).toBe(PLACEHOLDER);
     expect(preview.rows[1].value).toBe("30.618 g");
     expect(preview.rows[2].value).toBe(PLACEHOLDER);
-    expect(preview.rows[3].value).toContain("30.618 g");
     expect(preview.disclaimer).toBe(en.receipt.disclaimer);
+    expect(preview.domain).toBe("haq-mahr-finder.app");
   });
 
   it("follows the selected unit", () => {
@@ -142,19 +138,32 @@ describe("buildPreviewModel", () => {
 });
 
 describe("share helpers", () => {
-  it("builds plain text with every receipt line and the page URL", () => {
-    const model = buildReceiptModel(
-      "en",
-      enTexts,
-      result("210", "gram"),
-      "gram",
-      issuedAt,
+  const model = buildReceiptModel(
+    "en",
+    enTexts,
+    result("210", "gram"),
+    "gram",
+    issuedAt,
+  );
+
+  it("builds formatted text: one line per detail, rules, disclaimer and site URL", () => {
+    const lines = nbsp(buildFormattedText(model)).split("\n");
+    expect(lines[0]).toBe("Haq Mahr estimate");
+    expect(lines[1]).toBe("Haq Mahr Finder");
+    expect(lines[2]).toMatch(/^─+$/);
+    expect(lines).toContain("Estimated value: PKR 6,429.78");
+    expect(lines).toContain("Silver rate: PKR 210.00 per gram");
+    expect(lines).toContain("Reference weight: 30.618 g");
+    expect(lines).toContain(en.receipt.disclaimer);
+    expect(lines.at(-1)).toBe("https://haq-mahr-finder.app");
+  });
+
+  it("builds a single short line with amount, rate and site URL", () => {
+    const text = nbsp(buildShortText(model));
+    expect(text).not.toContain("\n");
+    expect(text).toBe(
+      "Haq Mahr estimate: PKR 6,429.78 (PKR 210.00 per gram) · https://haq-mahr-finder.app",
     );
-    const text = nbsp(buildShareText(model, "https://example.test/en"));
-    expect(text.split("\n")[0]).toBe("Haq Mahr Finder — Haq Mahr estimate");
-    expect(text).toContain("Estimated value: PKR 6,429.78");
-    expect(text).toContain(en.receipt.disclaimer);
-    expect(text.endsWith("https://example.test/en")).toBe(true);
   });
 
   it("encodes text for the WhatsApp click-to-chat link", () => {

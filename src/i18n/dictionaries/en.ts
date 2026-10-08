@@ -104,23 +104,26 @@ export const en = {
     weightTola: "{value} Tola",
     weightMasha: "{value} Masha",
     weightGram: "{value} g",
-    calculationLabel: "Calculation",
-    methodLabel: "Method",
-    method: "10 Dirhams = 2 Tola 7.5 Masha = 30.618 g · v{version}",
     issuedLabel: "Generated",
     disclaimer:
       "Informational estimate based on a silver rate entered by the user. Not a fatwa, a religious ruling, or legal advice. Verify the current silver rate before relying on this figure.",
   },
   actions: {
     heading: "Save or share",
-    download: "Download PNG",
+    download: "Download",
     share: "Share",
     whatsapp: "WhatsApp",
-    copy: "Copy result",
+    copy: "Copy",
     newTab: "opens in a new tab",
     downloaded: "Receipt image downloaded.",
     imageFailed: "The receipt image could not be created.",
     copied: "Result copied.",
+    copyMenu: "Choose what to copy",
+    copyFormatted: "Formatted",
+    copyFormattedHint: "Every detail on separate lines",
+    copyShort: "Short",
+    copyShortHint: "One line: amount and rate",
+    copiedShort: "Short result copied.",
     copyFailed: "Could not copy automatically. Please copy the text manually.",
     shareFallback:
       "Sharing is not available on this device, so the result was copied instead.",
@@ -265,7 +268,7 @@ export const en = {
       {
         question: "Why is the amount rounded up?",
         answer:
-          "The final amount is always rounded up to the smallest unit of the currency (for example 0.01 for PKR), so the estimate never falls below the exact value. The receipt shows the full calculation before rounding.",
+          "The final amount is always rounded up to the smallest unit of the currency (for example 0.01 for PKR), so the estimate never falls below the exact value. The receipt shows the rate and the reference weight it uses.",
       },
       {
         question: "Does it convert between currencies?",

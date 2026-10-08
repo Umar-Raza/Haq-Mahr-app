@@ -59,7 +59,8 @@ src/
     calculator.tsx   Calculator form and live result (client)
     currency-picker.tsx  Searchable currency combobox (client)
     receipt.tsx      Receipt template (always light "paper")
-    receipt-actions.tsx  PNG download, share, WhatsApp, copy, save to history (client)
+    receipt-actions.tsx  Download (PNG), share, WhatsApp, copy, save to history (client)
+    copy-menu.tsx    Copy dropdown: formatted or short text (client)
     reopenable-calculator.tsx  Applies "Open in calculator" URL params (inside Suspense)
   components/history/
     history-list.tsx Saved calculations: reopen, delete with undo, clear all (client)

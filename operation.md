@@ -50,6 +50,31 @@ Newest first. Keep each entry short.
 - **Checks:** lint, typecheck, 144/144 tests, build, and a CDP alignment check.
 - **Open:** a qualified scholar must review the guide, and the owner should open the fatwaqa page and confirm the quotes.
 
+### 2026-10-08 — Receipt redesign, domain, Download label, two copy formats (user request)
+
+- **Receipt rows:** Calculation and Method were removed (HTML, PNG, share text). It now shows Silver rate, Reference weight and Generated. The `calculationLabel`, `methodLabel` and `method` strings and the LRI/PDI equation code are gone.
+- **Layout** (`receipt.tsx`, mirrored in `lib/receipt/canvas.ts`):
+  - The amount sits in a tinted panel.
+  - Detail rows are label at the start, value at the end, with dashed separators. In the PNG they stack when they do not fit.
+  - The disclaimer takes the extra height (`mt-auto`).
+  - A perforated tear line has semicircle notches. The notch colour comes from the parent card via `--receipt-notch`, so it matches dark mode too.
+  - The footer has an accent diamond and the domain.
+- **Domain:** `SITE_DOMAIN = "haq-mahr-finder.app"` and `SITE_URL` live in `src/content/site.ts`. They are shown in the receipt footer and appended to the copied and shared text, replacing `window.location.href`.
+- **Download button:** labelled "Download" / "ڈاؤن لوڈ کریں" / "تنزيل" (no "PNG"). The file is still a PNG.
+- **Copy:** a dropdown (`copy-menu.tsx`, opens upwards, closes on choose, Escape or outside click) with two options:
+  - Formatted (`buildFormattedText`): title, brand, rule, one line per detail, rule, disclaimer, URL.
+  - Short (`buildShortText`): one line with the amount, the rate and the URL.
+  Share and WhatsApp send the formatted text.
+- **Text updates:** the FAQ rounding answer and the how-to guide (en/ur/ar) were updated to match.
+- **Bug fixed:** the PNG painted the amount panel over its text; panels are now drawn first.
+- **Checks run:**
+  - lint, typecheck, 150/150 unit tests, build.
+  - New CDP receipt test 16/16 (no Calculation/Method, domain, Download label, copy menu, both clipboard texts, Escape, PNG en/ur, no errors).
+  - New smoke suite 24/24 (all 39 pages 200; en/ur/ar preview disabled; amount; grid; no overflow; WhatsApp text; share fallback; history save; FAQ wording).
+  - Screenshots reviewed: en light and dark, ur mobile, PNG en and ur, copy menu.
+- **Note:** the earlier CDP suites (calculator 61, history 45, content 38, FAQ 22, sources 19) were lost when the temp scratchpad was cleared; the smoke suite replaces their key flows.
+- **Open:** `haq-mahr-finder.app` must actually be registered and deployed before launch, or the receipts point at a dead address.
+
 ### 2026-10-04 — Urdu keeps common English terms, written in Urdu script (user correction)
 
 - **Correction:** the entry below (kept in Latin letters) was a misunderstanding. The user wants common English terms in the Urdu text **transliterated into Urdu script**, e.g. کیلکولیٹر, لنک, ویب سائٹ, لاسٹ اپ ڈیٹ, ہسٹری, ڈاؤن لوڈ, شیئر, کاپی. Done: all Latin spellings were converted in `ur.ts`, the Urdu blocks of the guides and info pages, and the silver sources; the RLM added for the date is gone (not needed with an Urdu label). Labels read PNG ڈاؤن لوڈ کریں, نتیجہ کاپی کریں, ہسٹری میں محفوظ کریں. Only abbreviations remain in Latin (PNG, PKR, GST, AM/PM). Browser tests were restored to the Urdu labels.

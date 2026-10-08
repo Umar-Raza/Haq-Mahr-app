@@ -13,6 +13,31 @@
 
 Newest first. Keep each entry short.
 
+### 2026-10-08 — Copy pass: en/ar aligned with the owner's Urdu edits (user request)
+
+- **Why:** the owner rewrote parts of `ur.ts` because it read as AI-generated and asked for en/ar to follow the same style, in the voice of a human translator.
+- **Owner's direction (from the ur diff):** drop "estimate" wording in favour of plain "Haq Mahr" or "calculation"; shorter home intro without the weight figures; use common loanwords (سورس، کلیئر، ڈسکلیمر، راؤنڈ).
+- **Receipt labels in all 3 locales:**
+  - Title: Haq Mahr / حق مہر / حق المهر.
+  - Amount: Amount / رقم / المبلغ.
+  - Issued: Date / تاریخ / التاريخ.
+- **Form labels:**
+  - `basisLabel`: "Rate is" / «السعر محسوب».
+  - `unitLabel`: "Show weight in" / "وزن کس اکائی میں دکھائیں" / «اعرض الوزن بـ».
+- **en and ar:** rewritten throughout. Contractions in en; calques removed (e.g. "only as current as", "a convenience, not a replacement", "Ready to calculate?"). Arabic `nav.label` was «الرئيسية» ("Home") and is now «القائمة الرئيسية».
+- **ur:**
+  - Owner's edits kept.
+  - Fixed typos: "کلیئز" → "کلیئر", a double space, and a leftover "ذریعہ" in the FAQ.
+  - Rewrote stiff lines: currency help, history corrupted/olderMethod, sourceNotOpened, CTA, sources intro/notes, FAQ weight, freshness and scholar answers.
+- **Guides:**
+  - `how-to-use-the-calculator.ts`: label references updated in 3 locales; fixed the Urdu "شیئر کریں کرنا".
+  - `checking-silver-rates.ts`: description updated.
+- **Not touched:** Disclaimer/About pages keep "estimate" (legal wording), and the long religious guides need owner and scholar review.
+- **Checks:**
+  - lint, typecheck, 150/150 tests (model test updated for the new labels), and the build pass.
+  - CDP smoke test 24/24 and receipt test 16/16 pass.
+  - Screenshots checked: en desktop and ur mobile.
+
 ### 2026-10-04 — Searchable currency picker + 2×2 actions
 
 - **Picker:** `src/components/calculator/currency-picker.tsx` (client), a WAI-ARIA combobox.

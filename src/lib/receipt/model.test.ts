@@ -148,10 +148,10 @@ describe("share helpers", () => {
 
   it("builds formatted text: one line per detail, rules, disclaimer and site URL", () => {
     const lines = nbsp(buildFormattedText(model)).split("\n");
-    expect(lines[0]).toBe("Haq Mahr estimate");
+    expect(lines[0]).toBe("Haq Mahr");
     expect(lines[1]).toBe("Haq Mahr Finder");
     expect(lines[2]).toMatch(/^─+$/);
-    expect(lines).toContain("Estimated value: PKR 6,429.78");
+    expect(lines).toContain("Amount: PKR 6,429.78");
     expect(lines).toContain("Silver rate: PKR 210.00 per gram");
     expect(lines).toContain("Reference weight: 30.618 g");
     expect(lines).toContain(en.receipt.disclaimer);
@@ -162,7 +162,7 @@ describe("share helpers", () => {
     const text = nbsp(buildShortText(model));
     expect(text).not.toContain("\n");
     expect(text).toBe(
-      "Haq Mahr estimate: PKR 6,429.78 (PKR 210.00 per gram) · https://haq-mahr-finder.app",
+      "Haq Mahr: PKR 6,429.78 (PKR 210.00 per gram) · https://haq-mahr-finder.app",
     );
   });
 

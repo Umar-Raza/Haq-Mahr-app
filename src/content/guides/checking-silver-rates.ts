@@ -7,7 +7,7 @@ export const checkingSilverRates: Localized<GuideContent> = {
     description:
       "A checklist for reading a silver rate correctly: unit, purity, buying or selling price, date and currency, before entering it in the Haq Mahr calculator.",
     summary:
-      "Check the unit, purity, buy or sell price, date and currency of a silver rate so your Haq Mahr estimate is based on the right number.",
+      "Check the unit, purity, buy or sell price, date and currency of a silver rate so your Haq Mahr is worked out from the right number.",
     intro:
       "The calculator is only as accurate as the rate you enter. Silver rates are published in many forms, and two numbers that look different can describe the same price. Use this checklist before you type a rate.",
     sections: [
@@ -75,7 +75,7 @@ export const checkingSilverRates: Localized<GuideContent> = {
     description:
       "چاندی کا ریٹ درست پڑھنے کی فہرست: اکائی، خالص پن، خرید یا فروخت کی قیمت، تاریخ اور کرنسی، حق مہر کیلکولیٹر میں درج کرنے سے پہلے۔",
     summary:
-      "چاندی کے ریٹ کی اکائی، خالص پن، خرید یا فروخت کی قیمت، تاریخ اور کرنسی جانچیں تاکہ آپ کا حق مہر کا اندازہ درست عدد پر ہو۔",
+      "چاندی کے ریٹ کی اکائی، خالص پن، خرید یا فروخت کی قیمت، تاریخ اور کرنسی جانچیں تاکہ آپ کا حق مہر درست ریٹ پر نکلے۔",
     intro:
       "کیلکولیٹر اتنا ہی درست ہے جتنا آپ کا درج کیا ہوا ریٹ۔ چاندی کے ریٹ کئی صورتوں میں شائع ہوتے ہیں، اور دو مختلف نظر آنے والے اعداد ایک ہی قیمت ہو سکتے ہیں۔ ریٹ لکھنے سے پہلے یہ فہرست دیکھ لیں۔",
     sections: [
@@ -143,7 +143,7 @@ export const checkingSilverRates: Localized<GuideContent> = {
     description:
       "قائمة للتحقق من قراءة سعر الفضة بشكل صحيح: الوحدة والعيار وسعر الشراء أو البيع والتاريخ والعملة، قبل إدخاله في حاسبة حق المهر.",
     summary:
-      "تحقّق من وحدة سعر الفضة وعياره وسعر الشراء أو البيع وتاريخه وعملته، ليكون تقدير حق المهر مبنيًا على الرقم الصحيح.",
+      "تحقّق من وحدة سعر الفضة وعياره وسعر الشراء أو البيع وتاريخه وعملته، ليكون حساب حق المهر مبنيًا على الرقم الصحيح.",
     intro:
       "دقة الحاسبة بقدر دقة السعر الذي تُدخله. تُنشر أسعار الفضة بصيغ كثيرة، وقد يدل رقمان مختلفان في الظاهر على السعر نفسه. راجع هذه القائمة قبل كتابة السعر.",
     sections: [

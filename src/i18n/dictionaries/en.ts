@@ -2,17 +2,16 @@ export const en = {
   meta: {
     siteName: "Haq Mahr Finder",
     homeTitle: "Haq Mahr Finder — Haq Mahr Calculator",
-    homeDescription:
-      "Estimate the value of the Haq Mahr silver-weight reference using a silver rate you enter yourself.",
+    homeDescription: "Work out the Haq Mahr from the silver rate you enter.",
     historyTitle: "Saved calculations — Haq Mahr Finder",
     historyDescription:
-      "Your saved Haq Mahr calculations, stored only in this browser. Reopen, delete, or clear them at any time.",
+      "Your saved Haq Mahr calculations, kept only in this browser. Open, delete or clear them whenever you like.",
     guidesTitle: "Guides — Haq Mahr Finder",
     guidesDescription:
-      "Short, sourced guides on the minimum Haq Mahr, Tola and gram conversions, checking silver rates, and using the calculator.",
+      "Short guides, with sources, on the minimum Haq Mahr, converting Tola and grams, checking silver rates and using the calculator.",
     sourcesTitle: "Silver Rate Sources by Country — Haq Mahr Finder",
     sourcesDescription:
-      "Curated links to websites that publish silver prices for Pakistan, India, the USA, the UK, Canada, Saudi Arabia, the UAE and more, with unit and currency notes.",
+      "Links to websites that publish silver prices for Pakistan, India, the USA, the UK, Canada, Saudi Arabia, the UAE and more, with notes on units and currency.",
   },
   a11y: {
     skipToContent: "Skip to main content",
@@ -34,7 +33,7 @@ export const en = {
   },
   footer: {
     disclaimer:
-      "Results are informational estimates only. They are not a fatwa, a religious ruling, or legal advice.",
+      "Results are for information only. They are not a fatwa, a religious ruling or legal advice.",
     rights: "Haq Mahr Finder",
     links: {
       label: "Site information",
@@ -48,55 +47,52 @@ export const en = {
   },
   home: {
     heading: "Haq Mahr calculator",
-    intro:
-      "Estimate the value of 10 Dirhams of silver (2 Tola 7.5 Masha = 30.618 g) using a silver rate you enter yourself.",
+    intro: "Find the Shar'i Haq Mahr from the silver rate you enter.",
   },
   calculator: {
     formHeading: "Enter the silver rate",
     rateLabel: "Silver rate",
-    rateHelpTola:
-      "The current price of 1 Tola of silver, as shown by your source.",
-    rateHelpGram:
-      "The current price of 1 gram of silver, as shown by your source.",
-    basisLabel: "Rate basis",
+    rateHelpTola: "Today's price for 1 Tola of silver, as given by your source.",
+    rateHelpGram: "Today's price for 1 gram of silver, as given by your source.",
+    basisLabel: "Rate is",
     basisTola: "Per Tola",
     basisGram: "Per Gram",
     currencyLabel: "Currency",
     currencyCommon: "Common currencies",
     currencyAll: "All currencies",
     currencySearch: "Search by code or name",
-    currencyNoResults: "No matching currency.",
+    currencyNoResults: "No currency found.",
     currencyHelp:
-      "Used as a label only. Amounts are never converted between currencies.",
-    unitLabel: "Show reference weight in",
+      "The currency is just a label. Amounts are never converted.",
+    unitLabel: "Show weight in",
     unitTola: "Tola",
     unitMasha: "Masha",
     unitGram: "Gram",
     howToHeading: "How to use",
     howToSteps: [
-      "Find today's silver rate from a trusted source.",
+      "Get today's silver rate from a source you trust.",
       "Choose Per Tola or Per Gram, then enter the rate.",
-      "Pick the currency the rate is in.",
-      "Download, share, or copy the receipt.",
+      "Pick the currency of the rate.",
+      "Download, share or copy the receipt.",
     ],
     reset: "Clear",
     resultHeading: "Result",
-    emptyResult: "Enter a silver rate to see the estimate.",
+    emptyResult: "Enter a silver rate to see the Haq Mahr.",
     errors: {
       empty: "Enter the silver rate.",
       invalidFormat:
         "Enter a number such as 2450 or 2,450.50. Use a dot for decimals.",
-      negative: "The rate cannot be negative.",
-      zero: "The rate must be greater than zero.",
-      tooManyDecimals: "Use at most 4 decimal places.",
-      tooLarge: "The rate is too large. The maximum is 1,000,000,000.",
-      unsupportedBasis: "Choose a rate basis.",
+      negative: "The rate can't be negative.",
+      zero: "The rate must be more than zero.",
+      tooManyDecimals: "Use no more than 4 digits after the decimal point.",
+      tooLarge: "That rate is too high. The maximum is 1,000,000,000.",
+      unsupportedBasis: "Choose Per Tola or Per Gram.",
       unsupportedCurrency: "Choose a currency from the list.",
     },
   },
   receipt: {
-    title: "Haq Mahr estimate",
-    amountLabel: "Estimated value",
+    title: "Haq Mahr",
+    amountLabel: "Amount",
     rateLabel: "Silver rate",
     ratePerTola: "{rate} per Tola",
     ratePerGram: "{rate} per gram",
@@ -104,9 +100,9 @@ export const en = {
     weightTola: "{value} Tola",
     weightMasha: "{value} Masha",
     weightGram: "{value} g",
-    issuedLabel: "Generated",
+    issuedLabel: "Date",
     disclaimer:
-      "Informational estimate based on a silver rate entered by the user. Not a fatwa, a religious ruling, or legal advice. Verify the current silver rate before relying on this figure.",
+      "Calculated from the silver rate you entered, for information only. This is not a fatwa, a religious ruling or legal advice. Please check the current silver rate before you rely on it.",
   },
   actions: {
     heading: "Save or share",
@@ -116,37 +112,37 @@ export const en = {
     copy: "Copy",
     newTab: "opens in a new tab",
     downloaded: "Receipt image downloaded.",
-    imageFailed: "The receipt image could not be created.",
+    imageFailed: "Couldn't create the receipt image.",
     copied: "Result copied.",
-    copyMenu: "Choose what to copy",
+    copyMenu: "What would you like to copy?",
     copyFormatted: "Formatted",
-    copyFormattedHint: "Every detail on separate lines",
+    copyFormattedHint: "Each detail on its own line",
     copyShort: "Short",
     copyShortHint: "One line: amount and rate",
-    copiedShort: "Short result copied.",
-    copyFailed: "Could not copy automatically. Please copy the text manually.",
+    copiedShort: "Short version copied.",
+    copyFailed: "Couldn't copy automatically. Please copy the text yourself.",
     shareFallback:
-      "Sharing is not available on this device, so the result was copied instead.",
+      "Sharing isn't available on this device, so the result was copied instead.",
     save: "Save to history",
     saved: "Saved in history",
     savedToast: "Saved to history in this browser.",
     saveFailed:
-      "This browser is not allowing storage, so the calculation could not be saved.",
+      "This browser isn't allowing storage, so the calculation wasn't saved.",
   },
   history: {
     heading: "Saved calculations",
     intro:
-      "Calculations you save with “Save to history” appear here, newest first.",
-    storageTitle: "Stored only in this browser",
+      "Calculations you save with “Save to history” show up here, newest first.",
+    storageTitle: "Kept only in this browser",
     storageNote:
-      "History is kept in this browser's local storage on this device. It is not sent to any server and is not synced to other devices. Clearing site data, using a private window, or the browser's own cleanup can remove it.",
+      "History is kept in this browser's local storage on this device. It isn't sent to any server and doesn't sync to your other devices. It can be lost if you clear site data, use a private window, or the browser deletes it on its own.",
     privacyNote:
       "Only the rate, currency, unit, result and date are saved. No names or personal details.",
     limitNote: "Up to {limit} recent calculations are kept.",
     unavailable:
-      "This browser is blocking local storage (for example in some private modes), so history cannot be shown or saved here.",
+      "This browser is blocking local storage (some private modes do this), so history can't be shown or saved here.",
     corrupted:
-      "Some saved history could not be read and was skipped. Saving a new calculation will replace the unreadable data.",
+      "Part of your saved history couldn't be read, so it was skipped. Saving a new calculation will replace it.",
     emptyTitle: "No saved calculations yet",
     emptyBody:
       "Enter a silver rate in the calculator, then choose “Save to history”.",
@@ -154,7 +150,7 @@ export const en = {
     count: "{count} saved",
     savedOn: "Saved {date}",
     olderMethod:
-      "Saved with method version {version}. Open it to recalculate with the current method.",
+      "Saved with an older method (version {version}). Open it to recalculate with the current one.",
     open: "Open in calculator",
     deleteOne: "Delete",
     deleteLabel: "Delete the calculation saved {date}",
@@ -163,11 +159,11 @@ export const en = {
     clearAll: "Clear all",
     clearTitle: "Clear all saved calculations?",
     clearBody:
-      "This removes every saved calculation from this browser. It cannot be undone.",
+      "This removes every saved calculation from this browser. You can't undo it.",
     clearConfirm: "Clear all",
     cancel: "Cancel",
     cleared: "History cleared.",
-    writeFailed: "The browser did not allow the change to be saved.",
+    writeFailed: "The browser didn't let us save that change.",
   },
   content: {
     breadcrumbLabel: "Breadcrumb",
@@ -175,28 +171,27 @@ export const en = {
     updated: "Last updated {date}",
     onThisPage: "On this page",
     sources: "Sources",
-    sourcesNote: "Each source was opened and checked on {date}.",
+    sourcesNote: "We opened and checked each source on {date}.",
     sourceNotOpened:
-      "Provided by the site owner; we could not open this page automatically, so it is not checked by us.",
+      "This link was added by the site owner. We couldn't open the page ourselves, so we haven't checked it.",
     newTab: "opens in a new tab",
     reviewTitle: "Review status",
     reviewReligious:
-      "This guide only summarises the sources listed here. It has not yet been reviewed by a qualified scholar, so please treat it as general information.",
+      "This guide only summarises the sources listed here. A qualified scholar hasn't reviewed it yet, so please treat it as general information.",
     religiousBadge: "Religious topic",
     related: "Related guides",
     readGuide: "Read guide",
     guidesHeading: "Guides",
     guidesIntro:
-      "Short, sourced guides on Haq Mahr, silver weights and using the calculator.",
-    ctaTitle: "Ready to calculate?",
-    ctaBody:
-      "Enter today's silver rate to see the value of 10 Dirhams of silver.",
+      "Short guides, with sources, on Haq Mahr, silver weights and using the calculator.",
+    ctaTitle: "Work out your Haq Mahr",
+    ctaBody: "Enter today's silver rate to see what 10 Dirhams of silver comes to.",
     ctaButton: "Open the calculator",
   },
   silverSources: {
     heading: "Silver Rate Sources",
     intro:
-      "Websites where you can check the silver price before using the calculator, grouped by country. Each link was opened and checked by us; we do not control these sites.",
+      "Check the silver price on one of these websites before you use the calculator. They're grouped by country, and we opened and checked every link ourselves. We don't run any of these sites.",
     notesTitle: "Before you copy a rate",
     kindsTitle: "Types of source",
     jumpTo: "Jump to a country",
@@ -206,13 +201,12 @@ export const en = {
     newTab: "opens in a new tab",
     guideLink: "How to check a silver rate",
     calculatorLink: "Open the calculator",
-    suggest:
-      "Know a reliable source for your country? Suggestions are welcome.",
+    suggest: "Know a reliable source for your country? Let us know.",
     notes: [
-      "Check the unit (tola, 10 grams, gram, kilogram or ounce) and convert it if needed.",
-      "Check the purity (for example 999 fine silver) and whether it is a buying or selling price.",
-      "Use a rate from the day you need the figure. Prices change during the day.",
-      "Listing a site is not an endorsement, and we cannot guarantee its prices.",
+      "Check the unit (tola, 10 grams, gram, kilogram or ounce) and convert it if you need to.",
+      "Check the purity (for example 999 fine silver) and whether it's a buying or selling price.",
+      "Use the rate for the day you're calculating. Prices change during the day.",
+      "A site being listed here isn't an endorsement, and we can't guarantee its prices.",
     ],
     kinds: {
       localMarket: {
@@ -229,7 +223,7 @@ export const en = {
       },
       spotConverter: {
         label: "Spot converter",
-        help: "The international spot price converted into local currency. It can differ from local market rates.",
+        help: "The international spot price in your local currency. It can differ from local market rates.",
       },
     },
     unitNames: {
@@ -248,42 +242,42 @@ export const en = {
       {
         question: "Is the result a fatwa?",
         answer:
-          "No. It is an informational estimate based on the silver rate you enter. It is not a fatwa, a religious ruling, or legal advice. For a decision about your own marriage, please consult a qualified scholar.",
+          "No. It's a calculation based on the silver rate you enter, for information only. It isn't a fatwa, a religious ruling or legal advice. For a decision about your own nikah, please ask a qualified scholar.",
       },
       {
         question: "Which weight does the calculator use?",
         answer:
-          "It uses 10 Dirhams of silver, expressed as 2 Tola 7.5 Masha, which is 30.618 g, with 1 Tola = 11.664 g. Published gram figures for 10 Dirhams vary slightly between sources, and the guides explain this.",
+          "10 Dirhams of silver, which is 2 Tola 7.5 Masha, or 30.618 g (taking 1 Tola as 11.664 g). Different sources give slightly different gram figures for 10 Dirhams; the guides explain why.",
       },
       {
         question: "Does it show today's silver rate?",
         answer:
-          "No. You enter the rate yourself, so the result is only as current as that rate. The Silver Rate Sources page lists websites by country where you can check it.",
+          "No. You enter the rate yourself, so the result is only as up to date as that rate. The Silver Rate Sources page lists websites in each country where you can check it.",
       },
       {
         question: "Should I enter the rate per Tola or per gram?",
         answer:
-          "Use whichever your source gives. Choose Per Tola or Per Gram to match it; both give the same result. If your source uses another unit, such as kilograms or ounces, convert it first.",
+          "Whichever your source gives. Choose Per Tola or Per Gram to match; both give the same result. If your source uses another unit, such as kilograms or ounces, convert it first.",
       },
       {
         question: "Why is the amount rounded up?",
         answer:
-          "The final amount is always rounded up to the smallest unit of the currency (for example 0.01 for PKR), so the estimate never falls below the exact value. The receipt shows the rate and the reference weight it uses.",
+          "The final amount is always rounded up to the currency's smallest unit (for example 0.01 for PKR), so it never comes out below the exact value. The receipt shows the rate and the reference weight used.",
       },
       {
         question: "Does it convert between currencies?",
         answer:
-          "No. The currency is only a label. Enter the rate in the currency you want the result in.",
+          "No. The currency is just a label. Enter the rate in the currency you want the result in.",
       },
       {
         question: "Is my data saved or sent anywhere?",
         answer:
-          "Calculations happen in your browser, and the rate you type is not sent to a server. A calculation is kept only if you choose Save to history, and it stays in your own browser.",
+          "The calculation happens in your browser, and the rate you type isn't sent to any server. A calculation is only kept if you choose “Save to history”, and even then it stays in your own browser.",
       },
       {
         question: "What if my scholar uses a different weight?",
         answer:
-          "Scholars and sources give slightly different gram values for one Dirham. If you have been given a different figure, follow your scholar's guidance. The calculator is a convenience, not a replacement.",
+          "Scholars and sources give slightly different gram values for one Dirham. If you've been given a different figure, follow your scholar. The calculator is there to help, not to replace their guidance.",
       },
     ],
   },

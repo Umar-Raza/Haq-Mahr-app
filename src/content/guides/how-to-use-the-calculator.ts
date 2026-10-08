@@ -19,7 +19,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
             type: "ol",
             items: [
               "Find today's silver rate from a source you trust, and note whether it is quoted per Tola or per gram.",
-              "Under “Rate basis”, choose Per Tola or Per Gram to match that quote.",
+              "Under “Rate is”, choose Per Tola or Per Gram to match that quote.",
               "Type the rate as a plain number, for example 5555 or 245.50. Commas are fine; currency symbols are not needed.",
               "Pick the currency the rate is quoted in. The search box accepts a code (PKR), a country's currency name, or part of it.",
               "Read the result on the receipt. It updates as you type, so there is nothing to submit.",
@@ -39,9 +39,9 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ul",
             items: [
-              "Estimated value: the rate multiplied by the reference weight, always rounded up to the currency's smallest unit (for example 0.01 for PKR).",
+              "Amount: the rate multiplied by the reference weight, always rounded up to the currency's smallest unit (for example 0.01 for PKR).",
               "Silver rate: the rate exactly as you entered it.",
-              "Reference weight: 10 Dirhams shown in Tola, Masha or grams. Change the unit with “Show reference weight in”; the amount does not change.",
+              "Reference weight: 10 Dirhams shown in Tola, Masha or grams. Change the unit with “Show weight in”; the amount does not change.",
             ],
           },
           {
@@ -86,7 +86,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
             items: [
               "Rates can have up to 4 decimal places.",
               "Clear resets the rate so you can start again.",
-              "The result is an informational estimate, not a fatwa or legal ruling. If you are unsure which figure applies to you, ask a qualified scholar.",
+              "The result is for information only. It is not a fatwa or a legal ruling. If you are unsure which figure applies to you, ask a qualified scholar.",
             ],
           },
         ],
@@ -96,11 +96,11 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
   ur: {
     title: "حق مہر کیلکولیٹر استعمال کرنے کا طریقہ",
     description:
-      "حق مہر فائنڈر کیلکولیٹر کی مرحلہ وار رہنمائی: چاندی کا ریٹ درج کرنا، کرنسی اور اکائی منتخب کرنا، اور رسید محفوظ یا شیئر کریں کرنا۔",
+      "حق مہر فائنڈر کیلکولیٹر کی مرحلہ وار رہنمائی: چاندی کا ریٹ درج کرنا، کرنسی اور اکائی منتخب کرنا، اور رسید محفوظ یا شیئر کرنا۔",
     summary:
       "آج کا چاندی کا ریٹ درج کریں، رسید دیکھیں، پھر اسے ڈاؤن لوڈ، شیئر یا محفوظ کریں۔ ایک منٹ سے کم وقت لگتا ہے۔",
     intro:
-      "یہ کیلکولیٹر 10 درہم چاندی (2 تولہ 7.5 ماشہ، یعنی 30.618 گرام) کی قیمت اس ریٹ سے نکالتا ہے جو آپ خود درج کرتے ہیں۔ کوئی ریٹ خودکار طور پر نہیں لیا جاتا، اس لیے نتیجہ اتنا ہی تازہ ہوتا ہے جتنا آپ کا درج کیا ہوا ریٹ۔",
+      "یہ کیلکولیٹر 10 درہم چاندی (2 تولہ 7.5 ماشہ، یعنی 30.618 گرام) کی قیمت اس ریٹ سے نکالتا ہے جو آپ خود درج کرتے ہیں۔ کوئی ریٹ خودکار طور پر نہیں لیا جاتا، اس لیے نتیجہ اسی ریٹ کے مطابق ہوتا ہے جو آپ درج کرتے ہیں۔",
     sections: [
       {
         id: "steps",
@@ -109,7 +109,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ol",
             items: [
-              "کسی قابلِ اعتماد ذریعے سے آج کا چاندی کا ریٹ معلوم کریں، اور دیکھیں کہ ریٹ فی تولہ ہے یا فی گرام۔",
+              "کسی قابلِ اعتماد سورس سے آج کا چاندی کا ریٹ معلوم کریں، اور دیکھیں کہ ریٹ فی تولہ ہے یا فی گرام۔",
               "”ریٹ کس حساب سے“ میں اسی کے مطابق فی تولہ یا فی گرام منتخب کریں۔",
               "ریٹ سادہ عدد کی صورت میں لکھیں، مثلاً 5555 یا 245.50۔ کوما لگا سکتے ہیں؛ کرنسی کا نشان لکھنے کی ضرورت نہیں۔",
               "وہ کرنسی منتخب کریں جس میں ریٹ بتایا گیا ہے۔ تلاش کے خانے میں کوڈ (PKR) یا کرنسی کا نام یا اس کا کچھ حصہ لکھ سکتے ہیں۔",
@@ -126,9 +126,9 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ul",
             items: [
-              "اندازاً مالیت: ریٹ ضرب حوالہ وزن، جو ہمیشہ کرنسی کی سب سے چھوٹی اکائی تک اوپر کی طرف گول کیا جاتا ہے (مثلاً PKR میں 0.01)۔",
+              "رقم: ریٹ ضرب حوالہ جاتی وزن، جسے ہمیشہ کرنسی کی سب سے چھوٹی اکائی تک اوپر کی طرف راؤنڈ کیا جاتا ہے (مثلاً PKR میں 0.01)۔",
               "چاندی کا ریٹ: بالکل وہی ریٹ جو آپ نے درج کیا۔",
-              "حوالہ وزن: 10 درہم، تولہ، ماشہ یا گرام میں۔ اکائی ”حوالہ جاتی وزن اس اکائی میں دکھائیں“ سے بدلیں؛ رقم نہیں بدلتی۔",
+              "حوالہ جاتی وزن: 10 درہم، تولہ، ماشہ یا گرام میں۔ اکائی ”وزن کس اکائی میں دکھائیں“ سے بدلیں؛ رقم نہیں بدلتی۔",
             ],
           },
           {
@@ -159,7 +159,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
         blocks: [
           {
             type: "p",
-            text: "کسی حساب کو اس براؤزر میں رکھنے کے لیے ”ہسٹری میں محفوظ کریں“ منتخب کریں۔ ہسٹری کے صفحے پر آپ اسے دوبارہ کیلکولیٹر میں کھول سکتے ہیں، حذف کر سکتے ہیں یا سب صاف کر سکتے ہیں۔ ہسٹری صرف آپ کی ڈیوائس پر رہتی ہے اور براؤزر کا ڈیٹا صاف کرنے سے مٹ سکتی ہے۔",
+            text: "کسی حساب کو اس براؤزر میں رکھنے کے لیے ”ہسٹری میں محفوظ کریں“ منتخب کریں۔ ہسٹری کے صفحے پر آپ اسے دوبارہ کیلکولیٹر میں کھول سکتے ہیں، حذف کر سکتے ہیں یا سب کلیئر کر سکتے ہیں۔ ہسٹری صرف آپ کی ڈیوائس پر رہتی ہے اور براؤزر کا ڈیٹا کلیئر کرنے سے مٹ سکتی ہے۔",
           },
           { type: "link", text: "ہسٹری پر جائیں", path: "/history" },
         ],
@@ -172,8 +172,8 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
             type: "ul",
             items: [
               "ریٹ میں زیادہ سے زیادہ 4 اعشاری ہندسے ہو سکتے ہیں۔",
-              "صاف کریں سے ریٹ مٹ جاتا ہے تاکہ آپ نئے سرے سے شروع کر سکیں۔",
-              "نتیجہ صرف معلوماتی اندازہ ہے، فتویٰ یا قانونی فیصلہ نہیں۔ اگر یقین نہ ہو کہ آپ کے لیے کون سی مقدار درست ہے تو کسی مستند عالم سے رجوع کریں۔",
+              "کلیئر کریں سے ریٹ مٹ جاتا ہے تاکہ آپ نئے سرے سے شروع کر سکیں۔",
+              "نتیجہ صرف معلومات کے لیے ہے، فتویٰ یا قانونی فیصلہ نہیں۔ اگر یقین نہ ہو کہ آپ کے لیے کون سی مقدار درست ہے تو کسی مستند عالم سے رجوع کریں۔",
             ],
           },
         ],
@@ -187,7 +187,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
     summary:
       "أدخل سعر الفضة اليوم، وراجع الإيصال، ثم نزّله أو شاركه أو احفظه. لا يستغرق ذلك أكثر من دقيقة.",
     intro:
-      "تحسب هذه الأداة قيمة 10 دراهم من الفضة (2 تولة و7.5 ماشة، أي 30.618 غرامًا) بناءً على سعر فضة تُدخله بنفسك. لا يُجلب أي سعر تلقائيًا، لذا تكون النتيجة حديثة بقدر حداثة السعر الذي تكتبه.",
+      "تحسب هذه الأداة قيمة 10 دراهم من الفضة (2 تولة و7.5 ماشة، أي 30.618 غرامًا) بناءً على سعر فضة تُدخله بنفسك. لا يُجلب أي سعر تلقائيًا، فالنتيجة تتبع السعر الذي تكتبه.",
     sections: [
       {
         id: "steps",
@@ -197,7 +197,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
             type: "ol",
             items: [
               "اعرف سعر الفضة اليوم من مصدر تثق به، ولاحظ هل السعر للتولة أم للغرام.",
-              "في «أساس السعر» اختر «لكل تولة» أو «لكل غرام» بحسب ذلك.",
+              "في «السعر محسوب» اختر «لكل تولة» أو «لكل غرام» بحسب ذلك.",
               "اكتب السعر رقمًا بسيطًا، مثل 5555 أو 245.50. يمكن استخدام الفواصل، ولا حاجة إلى رمز العملة.",
               "اختر العملة التي ذُكر بها السعر. يقبل مربع البحث رمز العملة (PKR) أو اسمها أو جزءًا منه.",
               "اقرأ النتيجة في الإيصال. تتحدّث أثناء الكتابة، فلا حاجة إلى زر إرسال.",
@@ -213,9 +213,9 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
           {
             type: "ul",
             items: [
-              "القيمة التقديرية: السعر مضروبًا في الوزن المرجعي، مقرّبًا دائمًا إلى الأعلى لأصغر وحدة في العملة (مثل 0.01 للروبية الباكستانية).",
+              "المبلغ: السعر مضروبًا في الوزن المرجعي، مقرّبًا دائمًا إلى الأعلى لأصغر وحدة في العملة (مثل 0.01 للروبية الباكستانية).",
               "سعر الفضة: السعر كما أدخلته تمامًا.",
-              "الوزن المرجعي: 10 دراهم بالتولة أو الماشة أو الغرام. غيّر الوحدة من «اعرض الوزن المرجعي بوحدة»؛ ولا يتغيّر المبلغ.",
+              "الوزن المرجعي: 10 دراهم بالتولة أو الماشة أو الغرام. غيّر الوحدة من «اعرض الوزن بـ»؛ ولا يتغيّر المبلغ.",
             ],
           },
           {
@@ -260,7 +260,7 @@ export const howToUseTheCalculator: Localized<GuideContent> = {
             items: [
               "يمكن أن يحتوي السعر على 4 منازل عشرية كحد أقصى.",
               "زر «مسح» يزيل السعر لتبدأ من جديد.",
-              "النتيجة تقدير للعلم فقط، وليست فتوى ولا حكمًا قانونيًا. إن لم تكن متأكدًا من المقدار الذي ينطبق عليك فاسأل عالمًا مؤهلًا.",
+              "النتيجة للعلم فقط، وليست فتوى ولا حكمًا قانونيًا. إن لم تكن متأكدًا من المقدار الذي ينطبق عليك فاسأل عالمًا مؤهلًا.",
             ],
           },
         ],

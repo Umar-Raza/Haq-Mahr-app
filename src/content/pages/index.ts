@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from "../site";
+import { isContactPublished } from "../site";
 import type { Localized, PageContent } from "../types";
 import { about } from "./about";
 import { contact } from "./contact";
@@ -18,5 +18,5 @@ export type InfoPageSlug = keyof typeof infoPages;
 
 /** A page that would only show a placeholder is not published. */
 export function isInfoPagePublished(slug: InfoPageSlug): boolean {
-  return slug !== "contact" || CONTACT_EMAIL !== null;
+  return slug !== "contact" || isContactPublished;
 }

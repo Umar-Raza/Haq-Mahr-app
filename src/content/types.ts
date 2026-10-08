@@ -9,7 +9,9 @@ export type Block =
   /** Internal link to another page of this site, e.g. "" (calculator) or "/history". */
   | { type: "link"; text: string; path: string }
   /** Renders the published contact email (see src/content/site.ts). */
-  | { type: "email"; label: string };
+  | { type: "email"; label: string }
+  /** Renders the published WhatsApp number as a click-to-chat link. */
+  | { type: "whatsapp"; label: string };
 
 export type Section = { id: string; heading: string; blocks: Block[] };
 

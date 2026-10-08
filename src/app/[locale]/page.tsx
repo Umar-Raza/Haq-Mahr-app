@@ -4,6 +4,7 @@ import { Calculator } from "@/components/calculator/calculator";
 import { Faq } from "@/components/calculator/faq";
 import { ReopenableCalculator } from "@/components/calculator/reopenable-calculator";
 import { Container } from "@/components/layout/container";
+import { QaziCta } from "@/components/qazi/qazi-cta";
 import { isLocale, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -80,6 +81,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <Suspense fallback={<Calculator {...calculatorProps} />}>
         <ReopenableCalculator {...calculatorProps} />
       </Suspense>
+      <QaziCta locale={locale} texts={dict.qazi} />
       <Faq locale={locale} dict={dict.faq} />
     </Container>
   );

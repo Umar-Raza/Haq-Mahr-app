@@ -1,6 +1,6 @@
 import { isLocale, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/en";
-import { CONTACT_EMAIL } from "@/content/site";
+import { isContactPublished, isQaziPublished } from "@/content/site";
 
 export type NavKey = Exclude<
   keyof Dictionary["nav"],
@@ -16,6 +16,8 @@ const allNavItems: readonly NavItem[] = [
   { key: "guides", path: "/guides", ready: true },
   { key: "silverRateSources", path: "/silver-rate-sources", ready: true },
   { key: "about", path: "/about", ready: true },
+  // Hidden until the owner sets the booking WhatsApp number (src/content/site.ts).
+  { key: "onlineQazi", path: "/online-qazi", ready: isQaziPublished },
 ];
 
 export const navItems = allNavItems.filter((item) => item.ready);
@@ -30,8 +32,9 @@ const allFooterItems: readonly FooterItem[] = [
   { key: "disclaimer", path: "/disclaimer", ready: true },
   { key: "privacy", path: "/privacy-policy", ready: true },
   { key: "terms", path: "/terms", ready: true },
-  // Hidden until the owner publishes a contact email (src/content/site.ts).
-  { key: "contact", path: "/contact", ready: CONTACT_EMAIL !== null },
+  { key: "onlineQazi", path: "/online-qazi", ready: isQaziPublished },
+  // Hidden until the owner publishes an email or WhatsApp number (src/content/site.ts).
+  { key: "contact", path: "/contact", ready: isContactPublished },
 ];
 
 export const footerItems = allFooterItems.filter((item) => item.ready);

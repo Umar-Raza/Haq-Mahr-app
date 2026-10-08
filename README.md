@@ -64,11 +64,19 @@ src/
     reopenable-calculator.tsx  Applies "Open in calculator" URL params (inside Suspense)
   components/history/
     history-list.tsx Saved calculations: reopen, delete with undo, clear all (client)
+  components/qazi/
+    booking-form.tsx   Online Qazi booking form: builds a WhatsApp message (client)
+    country-picker.tsx Searchable country combobox, modelled on currency-picker (client)
+    qazi-cta.tsx       Home-page banner linking to /online-qazi
+  lib/qazi/
+    countries.ts       ISO 3166-1 codes, common-country shortlist, ITU-T calling codes (tested)
+    country-search.ts  Search/filter for the country combobox (tested)
+    booking.ts         Validation + WhatsApp message builder, pure (tested)
   content/
     guides/          Static multilingual guides + registry (sources, related, religious flag)
     pages/           About, Disclaimer, Privacy Policy, Terms, Contact content
     silver-sources.ts  Curated silver-rate links by country (kind, currency, units, reviewed date)
-    site.ts          CONTACT_EMAIL (null hides the Contact page) and info-page revision date
+    site.ts          CONTACT_EMAIL / CONTACT_WHATSAPP / QAZI_WHATSAPP (null hides Contact and Online Qazi) and info-page revision date
   components/content/
     content-blocks.tsx  Renders typed content blocks; breadcrumbs.tsx; info-page.tsx (shared route)
   lib/

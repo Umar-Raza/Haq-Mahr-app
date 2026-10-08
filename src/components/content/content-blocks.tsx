@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
-import { CONTACT_EMAIL } from "@/content/site";
+import { CONTACT_EMAIL, CONTACT_WHATSAPP } from "@/content/site";
+import { whatsappChatHref } from "@/lib/qazi/booking";
 import type { Block, Section } from "@/content/types";
 import { localizedHref } from "@/lib/routes";
 
@@ -90,6 +91,21 @@ function BlockView({ block, locale }: { block: Block; locale: Locale }) {
             dir="ltr"
           >
             {CONTACT_EMAIL}
+          </a>
+        </p>
+      ) : null;
+    case "whatsapp":
+      return CONTACT_WHATSAPP ? (
+        <p className="flex flex-wrap items-center gap-2">
+          <span className="font-medium">{block.label}</span>
+          <a
+            href={whatsappChatHref(CONTACT_WHATSAPP)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link link-primary"
+            dir="ltr"
+          >
+            +{CONTACT_WHATSAPP}
           </a>
         </p>
       ) : null;

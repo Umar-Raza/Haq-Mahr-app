@@ -12,7 +12,7 @@ export const privacyPolicy: Localized<PageContent> = {
     sections: [
       {
         id: "no-account",
-        heading: "No account, no forms",
+        heading: "No account needed",
         blocks: [
           {
             type: "p",
@@ -60,11 +60,15 @@ export const privacyPolicy: Localized<PageContent> = {
       },
       {
         id: "sharing",
-        heading: "When you share a result",
+        heading: "When you share a result or book a Qazi",
         blocks: [
           {
             type: "p",
             text: "If you use Share or WhatsApp, the result text or image is passed to the app or service you choose. That service's own privacy policy then applies. Nothing is shared unless you choose to share it.",
+          },
+          {
+            type: "p",
+            text: "The Qazi booking form works the same way. Your details are not sent to our server; WhatsApp opens with them written in a message, and they reach us only if you send that message. We use them only to reply to your booking request.",
           },
         ],
       },
@@ -99,7 +103,7 @@ export const privacyPolicy: Localized<PageContent> = {
     sections: [
       {
         id: "no-account",
-        heading: "نہ اکاؤنٹ، نہ فارم",
+        heading: "اکاؤنٹ کی ضرورت نہیں",
         blocks: [
           {
             type: "p",
@@ -147,11 +151,15 @@ export const privacyPolicy: Localized<PageContent> = {
       },
       {
         id: "sharing",
-        heading: "جب آپ نتیجہ شیئر",
+        heading: "جب آپ نتیجہ شیئر کریں یا قاضی بک کریں",
         blocks: [
           {
             type: "p",
             text: "اگر آپ شیئر یا واٹس ایپ استعمال کریں تو نتیجے کا متن یا تصویر آپ کی منتخب کردہ ایپ یا سروس کو دی جاتی ہے، اور اس پر اس سروس کی اپنی پرائیویسی پالیسی لاگو ہوتی ہے۔ آپ کے منتخب کیے بغیر کچھ شیئر نہیں ہوتا۔",
+          },
+          {
+            type: "p",
+            text: "قاضی کی بکنگ کا فارم بھی اسی طرح کام کرتا ہے۔ آپ کی تفصیلات ہمارے سرور پر نہیں جاتیں؛ واٹس ایپ ان تفصیلات کے میسج کے ساتھ کھلتا ہے، اور یہ ہم تک تب ہی پہنچتی ہیں جب آپ وہ میسج بھیجیں۔ ہم انہیں صرف آپ کی بکنگ کا جواب دینے کے لیے استعمال کرتے ہیں۔",
           },
         ],
       },
@@ -186,7 +194,7 @@ export const privacyPolicy: Localized<PageContent> = {
     sections: [
       {
         id: "no-account",
-        heading: "بلا حساب ولا نماذج",
+        heading: "لا حاجة إلى حساب",
         blocks: [
           {
             type: "p",
@@ -234,11 +242,15 @@ export const privacyPolicy: Localized<PageContent> = {
       },
       {
         id: "sharing",
-        heading: "عند مشاركة نتيجة",
+        heading: "عند مشاركة نتيجة أو حجز مأذون",
         blocks: [
           {
             type: "p",
             text: "إذا استخدمت المشاركة أو واتساب، يُمرَّر نص النتيجة أو صورتها إلى التطبيق أو الخدمة التي تختارها، وتسري عندئذ سياسة الخصوصية الخاصة بها. لا يُشارك شيء ما لم تختر مشاركته.",
+          },
+          {
+            type: "p",
+            text: "ونموذج حجز المأذون يعمل بالطريقة نفسها: لا تُرسل بياناتك إلى خادمنا، بل يُفتح واتساب وهي مكتوبة في رسالة، ولا تصلنا إلا إذا أرسلت تلك الرسالة. ولا نستخدمها إلا للرد على طلب الحجز.",
           },
         ],
       },

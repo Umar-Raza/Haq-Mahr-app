@@ -13,6 +13,62 @@
 
 Newest first. Keep each entry short.
 
+### 2026-10-08 — Online Qazi form v3: City removed, Date/Email required, searchable Country, calling-code picker (user request)
+
+- **City field removed entirely**, along with `majorCities` (the curated-suggestions dataset from the earlier country/city work is gone; `countries.ts` now only holds `countryCodes`, `commonCountryCodes` and the new `callingCodes`).
+- **Preferred date is now required** (new `dateRequired` error; the "(Optional)" badge is gone from its label). **Preferred time stays optional**, unchanged.
+- **Email is now required** (new `emailRequired` error, badge removed). Format/length checks (`emailInvalid`, `tooLong`) are unchanged.
+- **Country field is now a searchable combobox** (`components/qazi/country-picker.tsx`), not a plain `<select>` — same WAI-ARIA combobox pattern as the calculator's `CurrencyPicker` (search input, listbox, arrow keys, Home/End, Escape, outside-click). Filtering logic lives in `lib/qazi/country-search.ts` (`filterCountryGroups`, re-exports `normalizeSearch` from the currency search module — that function was already generic, not currency-specific).
+- **WhatsApp number gained a country-code select**, built from the same `countryGroups` data (Common/All optgroups), each option showing "<Country name> <+dial>". Defaults to Pakistan (+92), consistent with the site's existing PKR default. `BookingInput.whatsapp` is now just the local subscriber number (4–12 digits once spaces/dashes/parens are stripped); the dial code is looked up from the new `callingCodes` map and prefixed only in the composed WhatsApp message.
+- **`lib/qazi/countries.ts` — `callingCodes`:** ITU-T E.164 calling codes for all 242 `countryCodes` entries, one each (tested: exact 1:1 coverage, every value matches `+d{1,4}`). Standard public reference data; a handful of rarely-dialled small-territory codes are worth a spot check before launch.
+- **Placeholders added** to every free-text input: husband's name, bride's name, email, WhatsApp local number, note. (Date/Time are native pickers — the `placeholder` attribute isn't meaningful there, so they were left as-is.)
+- **Checks:** lint (one `jsx-a11y` warning fixed — `aria-invalid` isn't valid on a `role=button`, removed from `CountryPicker`'s trigger), typecheck, 170/170 tests (new `countries.test.ts` coverage check, new `country-search.test.ts` mirroring the currency-search tests, `booking.test.ts` rewritten), build. CDP test (23/24; the one "failure" was the test's own over-broad text search matching "Vatican City" in the country list, confirmed by inspection — not a bug, no code change): City field gone, Date/Email labels have no "(Optional)", Time/WhatsApp still do, all 5 placeholders present, searching "pak" in the country combobox narrows to Pakistan only, the WhatsApp dial select defaults to Pakistan +92 with an aria-label and lists 200+ countries, an empty submit flags exactly husband/bride/date/email, a minimal valid submit's message omits WhatsApp/time lines, and switching the dial-code country to the UK produces "WhatsApp: +44 7700 900123". Urdu mobile: no overflow, correct labels. Screenshots: en desktop, ur mobile.
+
+### 2026-10-08 — Online Qazi form: renamed/added fields (user request)
+
+- **"Your name" → two fields:** Husband's name + Bride's name, both required (`husbandNameRequired`/`brideNameRequired` errors replace the old shared `nameRequired`).
+- **Language field removed:** "Language for the nikah" and its 3 options are gone from the form, the `BookingInput`, and the WhatsApp message. `bookingLanguages`/`BookingLanguage` were deleted from `lib/qazi/booking.ts`.
+- **Time added, optional:** a new `type="time"` field next to Date, in its own row. Date stays optional as before (unchanged; the user's phrasing on this point was ambiguous, so the existing behaviour — optional — was kept for both and is called out in this entry for the user to correct if that's not what was meant).
+- **Email added, optional:** validated only when non-empty (basic `name@domain.tld` pattern → `emailInvalid`), `dir="ltr"` input.
+- **WhatsApp (the visitor's own number) added, optional:** validated only when non-empty, tolerant of spaces/dashes/parentheses, 7–15 digits with an optional "+" → `phoneInvalid`. Not reformatted — sent exactly as typed. This is separate from `QAZI_WHATSAPP`, the business number the message is sent *to*.
+- **Country:** unchanged from the 2026-10-08 country/city work earlier today (still a complete ISO dropdown).
+- **Message order:** Husband's name, Bride's name, City, Country, (Preferred date), (Preferred time), (Email), (WhatsApp), (Note) — parenthesised lines are omitted when left empty.
+- **Found and fixed a bidi bug while reviewing this work:** the first draft of `whatsappHelp`'s example number ("+92 300 1234567") was written with its three space-separated groups in reverse source order, relying on the RTL paragraph's bidi reordering to display it correctly — a fragile trick, inconsistent with the codebase's existing pattern of an explicit `dir="ltr"` wrapper (e.g. the receipt's domain). Replaced with the number in natural order wrapped in Unicode LRI/PDI isolate characters (U+2066/U+2069), confirmed by screenshot in Urdu.
+- **Checks:** lint, typecheck, 164/164 tests (`booking.test.ts` rewritten for the new fields), build. CDP test (19/19): no Language field/select, both name fields present, Email/WhatsApp/Time all optional, empty submit flags exactly the 4 required fields and focuses the first one, an invalid email/phone blocks submit without opening WhatsApp, a valid submit's message contains every filled field and omits empty ones (confirmed no "Preferred date:" line when date was left blank, no "Language:" line at all), Urdu labels and LTR-dir email/phone inputs, no mobile overflow, no console errors. Screenshots: en desktop (filled), ur mobile, and a close-up confirming the WhatsApp example number's bidi fix.
+
+### 2026-10-08 — Online Qazi: Country dropdown + City suggestions (user request)
+
+- **Why:** the owner asked for the Online Qazi form's single "City and country" text field to become separate dropdowns, with a complete country list.
+- **Decision (asked the owner, since "complete" city data is not feasible offline without a database, which CLAUDE.md forbids):** Country is a complete dropdown; City is a text input with datalist suggestions for a curated set of countries, but always accepts free text. Chosen over "dropdown only" (would block visitors whose city isn't listed) and "country dropdown, no city help" (loses the suggestion UX).
+- **`lib/qazi/countries.ts` (new):**
+  - `countryCodes`: 242 ISO 3166-1 alpha-2 codes. Names are not stored; they're resolved at render time with `Intl.DisplayNames`, per locale — same approach as the Silver Rate Sources page. 6 uninhabited/research-only territories (Antarctica, Bouvet Island, Heard & McDonald Islands, French Southern Territories, UM, South Georgia) are left out as not relevant to a booking.
+  - `commonCountryCodes`: the 12 countries already covered by Silver Rate Sources (PK, IN, BD, SA, AE, QA, KW, MY, US, GB, CA, AU), listed first in the dropdown.
+  - `majorCities`: curated major cities (well-known city names, not a sourced claim) for ~40 countries — the common 12 plus other Muslim-majority countries and major Western diaspora destinations. Not exhaustive; documented here so it isn't mistaken for a complete directory.
+  - Tested in `countries.test.ts`: no duplicate codes, every code resolves via `Intl.DisplayNames`, every `majorCities` entry has non-empty unique city names.
+- **Form (`components/qazi/booking-form.tsx`):**
+  - New native `<select>` for Country, grouped "Common countries" / "All countries" (optgroups), options built server-side in `online-qazi/page.tsx` (mirrors the home page's `currencyGroups` pattern, so ICU text matches between server and client render).
+  - City input gains `list=` pointing at a `<datalist>` of `majorCities[country]` when the chosen country has curated cities; otherwise no datalist, and the field is always plain free text either way.
+  - `BookingInput.city` split into `city` + `country: CountryCode | ""`; `country` is required (new `countryRequired` error). The WhatsApp message gets a separate "Country: <localized name>" line.
+- **Strings:** `qazi.countryLabel/countryPlaceholder/countryCommon/countryAll`, `errors.countryRequired`, `message.country` in all 3 locales. `cityLabel` is now just "City"/"شہر"/"المدينة" (country is separate); `cityHelp` now explains the suggestions.
+- **Checks:** lint, typecheck, 161/161 tests (adds `countries.test.ts`, updates `booking.test.ts`), build. CDP test (13/14 automated + 1 verified manually — the one failure was the test script setting the native select's value without a change event, not an app bug): optgroup structure (12 common / 230 other), Pakistan → Lahore/Karachi/Islamabad suggested, free text still accepted, a country with no curated cities has no datalist, empty-country submit blocked (confirmed on a fresh page load), the WhatsApp message carries "Country: Pakistan", and Urdu shows localized country names (پاکستان) with no mobile overflow. Screenshots: en dark desktop, ur mobile.
+
+### 2026-10-08 — Online Qazi booking page + Contact with WhatsApp (user request)
+
+- **Online Qazi (`/online-qazi`):** `app/[locale]/online-qazi/page.tsx`, `components/qazi/booking-form.tsx` (client) and `qazi-cta.tsx` (home banner).
+  - The form collects name, city/country, an optional date (today or later), the language and an optional note.
+  - On submit it opens `wa.me/<QAZI_WHATSAPP>` with a pre-written message in the page's language. Nothing goes to a server.
+  - Pure logic is in `lib/qazi/booking.ts` (validation, message, `whatsappChatHref`), with 7 tests.
+  - Strings are in the `qazi` dictionary key. The meta title and description are `meta.qaziTitle` and `meta.qaziDescription`.
+  - Links: a nav item (`onlineQazi`), a footer link and the home CTA.
+- **Contact:** a new `whatsapp` content block. The copy was rewritten in plain language (en/ur/ar). The page is published when `CONTACT_EMAIL` or `CONTACT_WHATSAPP` is set (`isContactPublished`).
+- **Gating:** `site.ts` holds `CONTACT_EMAIL`, `CONTACT_WHATSAPP` and `QAZI_WHATSAPP` (defaults to the contact number). **All are null until the owner provides them**, so both pages return 404 and their links are hidden.
+- **Privacy policy:** the heading "No account, no forms" is now "No account needed"; added a paragraph on the booking form; fixed the truncated Urdu heading. `INFO_PAGES_UPDATED_ON` is now 2026-10-08.
+- **Checks:**
+  - lint, typecheck, 157/157 tests and the build pass.
+  - A CDP test (31/31) ran with temporary test values (`test@example.com`, `920000000000`), which were reverted afterwards. It covered: pages 200 in 3 locales, validation and focus, past date, the WhatsApp link and en/ur message text, no overflow on ur mobile, the 1024 px nav on one line in en/ur/ar, the home CTA, footer links, contact email and WhatsApp links (rel and LTR), the privacy text, and no console errors.
+  - After reverting, a rebuild shows 404s and no links; smoke test 24/24.
+- **Published (same day):** the owner provided the email umardev92@gmail.com and WhatsApp 03270029087, stored as 923270029087. `QAZI_WHATSAPP` uses the same number. The build passes; /contact and /online-qazi return 200 in all 3 locales; the home CTA and links are visible.
+
 ### 2026-10-08 — Copy pass: en/ar aligned with the owner's Urdu edits (user request)
 
 - **Why:** the owner rewrote parts of `ur.ts` because it read as AI-generated and asked for en/ar to follow the same style, in the voice of a human translator.
